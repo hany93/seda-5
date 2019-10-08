@@ -168,11 +168,21 @@ import routes from "routes.js";
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-1.jpg";
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 import logo from "assets/img/reactlogo.png";
 let ps;
 
 const useStyles = makeStyles(styles);
 
+function HideOnScroll() {
+  const trigger = useScrollTrigger();
+  return (
+    <Slide in={!trigger}>
+      <div>Hello</div>
+    </Slide>
+  );
+}
 export default function Admin({ ...rest }) {
   // styles
   const classes = useStyles();
@@ -270,6 +280,7 @@ export default function Admin({ ...rest }) {
           handleFixedClick={handleFixedClick}
           fixedClasses={fixedClasses}
         />
+        <HideOnScroll/>
       </div>
     </div>
   );
