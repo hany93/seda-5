@@ -17,7 +17,6 @@ export default function Dropdown(props) {
     const handleChangeMeasures = async event => {
         var value = event.target.value;
         await setMesure(value)
-        console.log(mesure)
         props.camposMeasures(value)
         await setShowGM(true)
         props.showGrafic(showGM, showGD)

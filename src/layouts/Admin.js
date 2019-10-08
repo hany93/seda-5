@@ -193,6 +193,8 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("purple");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [municipios, setMunicipios] = React.useState(["Caibarién", "Caibarién ", "Camajuaní", "Cifuentes", "Corralillo", "Encrucijada", "Manicaragua", "Placetas", "Quemado de Güines", "Ranchuelo", "Remedios", "Sagua la Grande", "Santa Clara", "Santo Domingo"]);
+
   const handleImageClick = image => {
     setImage(image);
   };
@@ -216,6 +218,9 @@ export default function Admin({ ...rest }) {
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
+
+    //console.log(municipios)
+
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -249,6 +254,7 @@ export default function Admin({ ...rest }) {
           routes={routes}
           color={color}
           handleDrawerToggle={handleDrawerToggle}
+          setMunicipios={setMunicipios}
           {...rest}
         />
         <div className={classes.content}>
@@ -267,7 +273,7 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard"  render={() => <Dashboard />}/>
+              <Route path="/admin/dashboard" render={() => <Dashboard municipios={municipios} />} />
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}</div>
         </div>

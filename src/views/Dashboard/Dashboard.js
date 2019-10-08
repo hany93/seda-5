@@ -48,13 +48,17 @@ const cubejsApi = cubejs(
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+
+
   const classes = useStyles();
 
   const [organoponico, setOrganoponico] = React.useState([]);
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
+
+
 
 
   useEffect(
@@ -76,6 +80,11 @@ export default function Dashboard() {
               "values": [
                 "organoponico"
               ]
+            },
+            {
+              "dimension": "SymAgricUrbanaPoint.municipio",
+              "operator": "equals",
+              "values": props.municipios
             }
           ]
         })
@@ -85,9 +94,7 @@ export default function Dashboard() {
         const huertos = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
           "timeDimensions": [],
-          "dimensions": [
-            //"SymAgricUrbanaPoint.municipio"
-          ],
+          "dimensions": [],
           "filters": [
             {
               "dimension": "SymAgricUrbanaPoint.tecnologia",
@@ -95,6 +102,11 @@ export default function Dashboard() {
               "values": [
                 "Huerto"
               ]
+            },
+            {
+              "dimension": "SymAgricUrbanaPoint.municipio",
+              "operator": "equals",
+              "values": props.municipios
             }
           ]
         })
@@ -104,9 +116,7 @@ export default function Dashboard() {
         const parcelas = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
           "timeDimensions": [],
-          "dimensions": [
-            //"SymAgricUrbanaPoint.municipio"
-          ],
+          "dimensions": [],
           "filters": [
             {
               "dimension": "SymAgricUrbanaPoint.tecnologia",
@@ -114,6 +124,11 @@ export default function Dashboard() {
               "values": [
                 "Parcela"
               ]
+            },
+            {
+              "dimension": "SymAgricUrbanaPoint.municipio",
+              "operator": "equals",
+              "values": props.municipios
             }
           ]
         })
@@ -123,9 +138,7 @@ export default function Dashboard() {
         const fincas = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
           "timeDimensions": [],
-          "dimensions": [
-            //"SymAgricUrbanaPoint.municipio"
-          ],
+          "dimensions": [],
           "filters": [
             {
               "dimension": "SymAgricUrbanaPoint.tecnologia",
@@ -133,6 +146,11 @@ export default function Dashboard() {
               "values": [
                 "Finca"
               ]
+            },
+            {
+              "dimension": "SymAgricUrbanaPoint.municipio",
+              "operator": "equals",
+              "values": props.municipios
             }
           ]
         })
@@ -141,7 +159,7 @@ export default function Dashboard() {
       }
       asyncrona();
     },
-    []
+    [props]
   )
 
   return (
@@ -152,6 +170,7 @@ export default function Dashboard() {
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos"/>
+                <img src={Verduras} />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>
