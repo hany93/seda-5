@@ -16,7 +16,7 @@ const dashboardStyle = {
   stats: {
     color: grayColor[0],
     display: "inline-flex",
-    fontSize: "12px",
+    fontSize: "20px",
     lineHeight: "22px",
     "& svg": {
       top: "4px",
@@ -33,6 +33,10 @@ const dashboardStyle = {
       marginRight: "3px",
       marginLeft: "3px"
     }
+  },
+  imgIconCard: {
+    marginLeft: "5px",
+    marginRight: "5px"
   },
   cardCategory: {
     color: grayColor[0],
