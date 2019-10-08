@@ -175,15 +175,12 @@ let ps;
 
 const useStyles = makeStyles(styles);
 
-<<<<<<< HEAD
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
 const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
-=======
->>>>>>> c72f1141384d7a94dac35261193d5f0d63fd2d27
 
 export default function Admin({ ...rest }) {
   // styles
@@ -285,7 +282,7 @@ export default function Admin({ ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           setMunicipios={setMunicipios}
           {...rest}
-        />        
+        />
         <div className={classes.content}>
           <div className={classes.container}>{
             <Switch>
