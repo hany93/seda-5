@@ -58,11 +58,8 @@
 // }
 /*eslint-disable*/
 import React from "react";
-import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/footerStyle.js";
 
@@ -72,13 +69,13 @@ export default function Footer(props) {
   const classes = useStyles();
   return (
     <footer className={classes.footer}>
-      <div className={classes.container}  style={{textAlign: 'center'}}>
+      <div className={classes.container} style={{ textAlign: 'center' }}>
         <p>
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
             Empresa de Proyectos e Ingeniería del MINAG, UEB Villa Clara
           </span>
-          <br/>
+          <br />
           <span>Desarrollado X Grupo Geomática ENPA UEB VC</span>
         </p>
       </div>

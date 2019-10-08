@@ -10,7 +10,7 @@ const cardBodyStyle = {
     paddingRight: "5px"
   },
   cardBodyProfile: {
-    marginTop: "15px"
+    marginTop: "100px"
   }
 };
 

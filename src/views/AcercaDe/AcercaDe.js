@@ -16,7 +16,7 @@ export default function AcercaDe() {
     <div>
           <Card profile>
             <CardAvatar profile>
-              <a href="/admin/dashboard" onClick={e => e.preventDefault()}>
+              <a href="/admin/dashboard">
                 <img src={avatar} alt="..." />
               </a>
             </CardAvatar>

@@ -170,7 +170,6 @@ export default function Dashboard(props) {
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos"/>
-                <img src={Verduras} />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>
