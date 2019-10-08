@@ -36,6 +36,12 @@ const headerStyle = () => ({
   flex: {
     flex: 1
   },
+  title_link: {
+    color: (props) => props.color === "blue" ? infoColor[0] : props.color === "purple" ? primaryColor[0] : props.color === "green" ? successColor[0] : props.color === "orange" ? warningColor[0] : dangerColor[0],
+    "&:hover,&:focus": {
+      color: (props) => props.color === "blue" ? infoColor[3] : props.color === "purple" ? primaryColor[3] : props.color === "green" ? successColor[3] : props.color === "orange" ? warningColor[3] : dangerColor[3]
+    }
+  },
   title: {
     ...defaultFont,
     letterSpacing: "unset",

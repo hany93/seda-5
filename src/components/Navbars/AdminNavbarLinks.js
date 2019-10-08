@@ -351,7 +351,7 @@ export default function AdminNavbarLinks(props) {
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {municipioLista.map(name => (
-            <MenuItem key={name} value={name} className={classes.dropdownItem}>
+            <MenuItem key={name} value={name} className={classes.dropdownItem + classes.sel}>
               {name}
             </MenuItem>
           ))}

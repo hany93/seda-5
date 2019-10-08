@@ -86,7 +86,11 @@ const sidebarStyle = theme => ({
     lineHeight: "30px",
     textDecoration: "none",
     backgroundColor: "transparent",
+    color:whiteColor,
     "&,&:hover": {
+      color: whiteColor
+    },
+    "&,&:visited": {
       color: whiteColor
     }
   },
