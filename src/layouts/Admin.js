@@ -257,7 +257,7 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard" component={Dashboard} />
+              <Route path="/admin/dashboard"  render={() => <Dashboard />}/>
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}</div>
         </div>

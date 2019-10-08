@@ -28,6 +28,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Verduras from "assets/img/verduras.png";
 
 import { bugs, website, server } from "variables/general.js";
 
@@ -59,7 +60,7 @@ export default function Dashboard() {
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
-  
+
 
   useEffect(
 
@@ -142,15 +143,10 @@ export default function Dashboard() {
         })
         var auxf = fincas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
         await setFinca(auxf);
-
       }
-
       asyncrona();
-
     },
-
     []
-
   )
 
   return (
@@ -160,21 +156,17 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <Icon>content_copy</Icon>
+                <img src={Verduras}/>
               </CardIcon>
-              <p className={classes.cardCategory}>Used Space</p>
+              <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>
-                {organoponico} <small>GB</small>
+                {organoponico}
               </h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <Danger>
-                  <Warning />
-                </Danger>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  Get more space
-                </a>
+                <Warning />
+                Organopónicos
               </div>
             </CardFooter>
           </Card>
@@ -185,13 +177,13 @@ export default function Dashboard() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>Revenue</p>
+              <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{huerto}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Last 24 Hours
+                Huertos
               </div>
             </CardFooter>
           </Card>
@@ -202,13 +194,13 @@ export default function Dashboard() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>Fixed Issues</p>
+              <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{parcela}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <LocalOffer />
-                Tracked from Github
+                Parcelas
               </div>
             </CardFooter>
           </Card>
@@ -219,13 +211,13 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Followers</p>
+              <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{finca}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <Update />
-                Just Updated
+                Fincas
               </div>
             </CardFooter>
           </Card>

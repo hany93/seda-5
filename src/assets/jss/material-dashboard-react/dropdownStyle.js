@@ -120,13 +120,6 @@ const dropdownStyle = theme => ({
       color: whiteColor,
       boxShadow: (props) => props.color === "blue" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(infoColor[0]) +",.4)" : props.color === "purple" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(primaryColor[0]) +",.4)" : props.color === "green" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(successColor[0]) +",.4)" : props.color === "orange" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(warningColor[0]) +",.4)" : "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(dangerColor[0]) +",.4)"
     }
-  },
-  sel:{
-    "&:selected": {
-      backgroundColor: (props) => props.color === "blue" ? infoColor[0] : props.color === "purple" ? primaryColor[0] : props.color === "green" ? successColor[0] : props.color === "orange" ? warningColor[0] : dangerColor[0],
-      color: whiteColor,
-      boxShadow: (props) => props.color === "blue" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(infoColor[0]) +",.4)" : props.color === "purple" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(primaryColor[0]) +",.4)" : props.color === "green" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(successColor[0]) +",.4)" : props.color === "orange" ? "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(warningColor[0]) +",.4)" : "0 4px 20px 0 rgba(" +hexToRgb(blackColor) +",.14), 0 7px 10px -5px rgba(" +hexToRgb(dangerColor[0]) +",.4)"
-    }
   }
 });
 
