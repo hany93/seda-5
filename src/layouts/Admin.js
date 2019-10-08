@@ -173,6 +173,7 @@ let ps;
 
 const useStyles = makeStyles(styles);
 
+
 export default function Admin({ ...rest }) {
   // styles
   const classes = useStyles();
@@ -246,7 +247,7 @@ export default function Admin({ ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           setMunicipios={setMunicipios}
           {...rest}
-        />
+        />        
         <div className={classes.content}>
           <div className={classes.container}>{
             <Switch>
