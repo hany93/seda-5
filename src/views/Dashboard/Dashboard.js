@@ -46,7 +46,7 @@ const useStyles = makeStyles(styles);
 
 
 
-const API_URL = "http://192.168.0.10:4000"; // change to your actual endpoint
+const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
 const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
