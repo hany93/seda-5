@@ -305,6 +305,7 @@ export default function AdminNavbarLinks(props) {
 
   const handleChangeM = event => {
     setMunicipioName(event.target.value);
+    props.setMunicipios(event.target.value)
   };
 
   return (

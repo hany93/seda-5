@@ -114,10 +114,10 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          {makeBrand() === undefined ? <Button color="transparent" href="#" className={classes.title}><span><HomeIcon/>Home</span></Button> : <Button color="transparent" href="#" className={classes.title}><Link to="/admin/dashboard" className={classes.title_link}><HomeIcon color="inherit" />Home</Link>&nbsp;/ {makeBrand()}</Button>}
+          {makeBrand() === undefined ? <Button color="transparent" href="#" className={classes.title}><span><HomeIcon />Home</span></Button> : <Button color="transparent" href="#" className={classes.title}><Link to="/admin/dashboard" className={classes.title_link}><HomeIcon color="inherit" />Home</Link>&nbsp;/ {makeBrand()}</Button>}
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks color={color}/>
+          <AdminNavbarLinks color={color} setMunicipios={props.setMunicipios} />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

@@ -25,7 +25,6 @@ class gg extends Component {
   }
 
   async componentWillReceiveProps(nextprops) {
-    console.log(nextprops)
     await this.setState({ camposMeasures: nextprops.camposMeasures })
     await this.setState({ camposDimensions: nextprops.camposDimensions })
 
@@ -120,7 +119,6 @@ class gg extends Component {
 
   render() {
 
-    console.log(this.nextprops)
 
     return (
       <QueryRenderer
