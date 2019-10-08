@@ -11,7 +11,10 @@ const cardAvatarStyle = {
     maxWidth: "130px",
     maxHeight: "130px",
     margin: "-50px auto 0",
-    borderRadius: "50%",
+    borderTopLeftRadius: "5px",
+    borderTopRightRadius: "5px",
+    borderBottomRightRadius: "20px",
+    borderBottomLeftRadius: "20px",
     overflow: "hidden",
     padding: "0",
     boxShadow:
@@ -28,5 +31,4 @@ const cardAvatarStyle = {
   },
   cardAvatarPlain: {}
 };
-
 export default cardAvatarStyle;
