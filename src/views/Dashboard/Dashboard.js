@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -39,10 +39,120 @@ import {
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
+import cubejs from '@cubejs-client/core';
+
 const useStyles = makeStyles(styles);
+
+
+
+const API_URL = "http://192.168.0.10:4000"; // change to your actual endpoint
+
+const cubejsApi = cubejs(
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
+  { apiUrl: API_URL + "/cubejs-api/v1" }
+);
 
 export default function Dashboard() {
   const classes = useStyles();
+
+  const [organoponico, setOrganoponico] = React.useState([]);
+  const [huerto, setHuerto] = React.useState([]);
+  const [parcela, setParcela] = React.useState([]);
+  const [finca, setFinca] = React.useState([]);
+  
+
+  useEffect(
+
+    () => {
+
+      async function asyncrona() {
+
+        const organoponicos = await cubejsApi.load({
+          "measures": ["SymAgricUrbanaPoint.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"SymAgricUrbanaPoint.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "operator": "equals",
+              "values": [
+                "organoponico"
+              ]
+            }
+          ]
+        })
+        var auxo = organoponicos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        await setOrganoponico(auxo);
+
+        const huertos = await cubejsApi.load({
+          "measures": ["SymAgricUrbanaPoint.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"SymAgricUrbanaPoint.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Huerto"
+              ]
+            }
+          ]
+        })
+        var auxh = huertos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        await setHuerto(auxh);
+
+        const parcelas = await cubejsApi.load({
+          "measures": ["SymAgricUrbanaPoint.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"SymAgricUrbanaPoint.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Parcela"
+              ]
+            }
+          ]
+        })
+        var auxp = parcelas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        await setParcela(auxp);
+
+        const fincas = await cubejsApi.load({
+          "measures": ["SymAgricUrbanaPoint.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"SymAgricUrbanaPoint.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Finca"
+              ]
+            }
+          ]
+        })
+        var auxf = fincas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        await setFinca(auxf);
+
+      }
+
+      asyncrona();
+
+    },
+
+    []
+
+  )
+
   return (
     <div>
       <GridContainer>
@@ -54,7 +164,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Used Space</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
+                {organoponico} <small>GB</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -76,7 +186,7 @@ export default function Dashboard() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>{huerto}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -93,7 +203,7 @@ export default function Dashboard() {
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Fixed Issues</p>
-              <h3 className={classes.cardTitle}>75</h3>
+              <h3 className={classes.cardTitle}>{parcela}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -110,7 +220,7 @@ export default function Dashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Followers</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>{finca}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

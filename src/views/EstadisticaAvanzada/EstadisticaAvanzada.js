@@ -32,9 +32,9 @@ const useStyles = makeStyles(styles);
 export default function EstadisticaAvanzadaPage(props) {
   const classes = useStyles();
 
-  const [measures, setMeasures] = React.useState("SymAgricUrbanaPoint.count");
-  const [dimensions, setDimensions] = React.useState("SymAgricUrbanaPoint.tecnologia");
-  const [tipoGrafic, setTipoGrafic] = React.useState('pie');
+  const [measures, setMeasures] = React.useState(["SymAgricUrbanaPoint.count"]);
+  const [dimensions, setDimensions] = React.useState(["SymAgricUrbanaPoint.tecnologia"]);
+  const [tipoGrafic, setTipoGrafic] = React.useState('bar');
   const [showGM, setShowGM] = React.useState(true);
   const [showGD, setShowGD] = React.useState(true);
 
