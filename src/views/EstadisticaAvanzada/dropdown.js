@@ -4,6 +4,7 @@ import { Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
+import { async } from 'q';
 
 export default function Dropdown(props) {
 
@@ -11,70 +12,63 @@ export default function Dropdown(props) {
     const [showGD, setShowGD] = React.useState(true);
     const [mesure, setMesure] = React.useState(['SymAgricUrbanaPoint.count']);
     const [dimension, setDimension] = React.useState(['SymAgricUrbanaPoint.tecnologia']);
-    const [grafico, setGrafico] = React.useState('pie');
+    const [grafico, setGrafico] = React.useState('bar');
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
-        if (value.length > 0) {
-            setMesure(value)
-            props.camposMeasures(mesure)
-            await setShowGM(true)
-            props.showGrafic(showGM, showGD)
-        } else {
-            //Message.error('Debe seleccionar el valor por el eje Y.', 5);
-            await setShowGM(false)
-            props.showGrafic(showGM, showGD)
-        }
+        await setMesure(value)
+        console.log(mesure)
+        props.camposMeasures(value)
+        await setShowGM(true)
+        props.showGrafic(showGM, showGD)
     }
 
     const handleChangeDimensions = async event => {
         var value = event.target.value;
-        if (value.length > 0) {
-            setDimension(value)
-            props.camposDimensions(dimension)
-            await setShowGD(true)
-            props.showGrafic(showGM, showGD)
-        } else {
-            //Message.error('Debe seleccionar la categoría por el eje X.', 5);
-            await setShowGD(false)
-            props.showGrafic(showGM, showGD)
-        }
+        setDimension(value)
+        props.camposDimensions(value)
+        await setShowGD(true)
+        props.showGrafic(showGM, showGD)
     }
 
-    const handleChangeGrafic = event => {
+    const handleChangeGrafic = async event => {
         var value = event.target.value;
-        setGrafico(value)
-        props.tipoGrafic(grafico)
+        await setGrafico(value)
+        props.tipoGrafic(value)
     }
+
     return (
         <div>
             <Row>
                 <InputLabel htmlFor="select-multiple">Valores (eje Y):</InputLabel>
                 <Select
+                    multiple
                     value={mesure}
                     style={{ width: '50%' }}
                     onChange={handleChangeMeasures}
                     input={<Input id="select-multiple" />}
-                    defaultValue='SymAgricUrbanaPoint.count'
+                    defaultValue="SymAgricUrbanaPoint.count"
                 >
-                    <MenuItem value='SymAgricUrbanaPoint.count'>Cantidad</MenuItem>
-                    <MenuItem value='SymAgricUrbanaPoint.areaTotal'>Área</MenuItem>
+                    <MenuItem value="SymAgricUrbanaPoint.count">Cantidad</MenuItem>
+                    <MenuItem value="SymAgricUrbanaPoint.areaTotal">Área</MenuItem>
                 </Select>
             </Row>
             <Row>
                 <br />
                 <InputLabel htmlFor="select-multiple1">Categorías (eje X):</InputLabel>
                 <Select
+                    multiple
                     value={dimension}
                     style={{ width: '50%' }}
                     onChange={handleChangeDimensions}
                     input={<Input id="select-multiple1" />}
-                    defaultValue='SymAgricUrbanaPoint.nombre'
+                    defaultValue="SymAgricUrbanaPoint.nombre"
                 >
                     <MenuItem value="SymAgricUrbanaPoint.nombre">Nombre</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.tecnologia">Tecnología</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.ministerio">Ministerio</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.consejoPopular">Consejo Popular</MenuItem>
+                    <MenuItem value="SymAgricUrbanaPoint.municipio">Municipio</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.provincia">Provincia</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.entidad">Entidad</MenuItem>
                     <MenuItem value="SymAgricUrbanaPoint.productor">Productor</MenuItem>
