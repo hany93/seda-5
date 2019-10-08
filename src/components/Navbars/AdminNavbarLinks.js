@@ -261,6 +261,8 @@ export default function AdminNavbarLinks(props) {
 
       async function asyncrona() {
 
+
+
         const provincias = await cubejsApi.load({
           "measures": [],
           "timeDimensions": [],
@@ -295,7 +297,7 @@ export default function AdminNavbarLinks(props) {
 
     },
 
-    []
+    [props]
 
   )
 
@@ -304,7 +306,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeM = event => {
-    setMunicipioName(event.target.value);    
+    setMunicipioName(event.target.value);
 
     if (event.target.value.length) {
       props.setMunicipios(event.target.value)

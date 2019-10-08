@@ -169,7 +169,7 @@ export default function Dashboard(props) {
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos"/>
+                <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>
@@ -187,7 +187,7 @@ export default function Dashboard(props) {
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
-                <img src={Verduras} className={classes.imgIconCard} alt="Huertos"/>
+                <img src={Verduras} className={classes.imgIconCard} alt="Huertos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{huerto}</h3>
@@ -203,7 +203,7 @@ export default function Dashboard(props) {
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <img src={Aspersor} className={classes.imgIconCard} alt="Parcelas"/>
+                <img src={Aspersor} className={classes.imgIconCard} alt="Parcelas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{parcela}</h3>
@@ -219,7 +219,7 @@ export default function Dashboard(props) {
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <img src={Campo} className={classes.imgIconCard} alt="Fincas"/>
+                <img src={Campo} className={classes.imgIconCard} alt="Fincas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               <h3 className={classes.cardTitle}>{finca}</h3>
