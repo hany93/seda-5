@@ -304,8 +304,15 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeM = event => {
-    setMunicipioName(event.target.value);
-    props.setMunicipios(event.target.value)
+    setMunicipioName(event.target.value);    
+
+    if (event.target.value.length) {
+      props.setMunicipios(event.target.value)
+    } else {
+      props.setMunicipios(municipioLista)
+    }
+
+    //props.setMunicipios(event.target.value)
   };
 
   return (
