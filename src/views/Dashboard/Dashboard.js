@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-// react plugin for creating charts
-import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -27,14 +25,11 @@ import Campo from "assets/img/campo.png";
 import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
+import Card4Dash from "variables/card4Dashboard.js";
+import TablaTotalPorMinist from "variables/tablaTotalPorMinist/index.js";
+import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 
 import { bugs, website, server } from "variables/general.js";
-
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
-} from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -291,68 +286,33 @@ export default function Dashboard(props) {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="Tasks:"
             headerColor="primary"
             tabs={[
               {
                 tabName: "Bugs",
                 tabIcon: BugReport,
                 tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
+                  <Card4Dash />
                 )
               },
               {
                 tabName: "Website",
                 tabIcon: Code,
                 tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
+                  <TablaTotalPorTecnolog />
                 )
               },
               {
                 tabName: "Server",
                 tabIcon: Cloud,
                 tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
+                  <TablaTotalPorMinist />
                 )
               }
             ]}
           />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-              <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"]
-                ]}
-              />
-            </CardBody>
-          </Card>
         </GridItem>
       </GridContainer>
     </div>

@@ -321,9 +321,7 @@ export default function AdminNavbarLinks(props) {
       }
       asyncrona();
     },
-
     [props]
-
   )
 
   const handleChangeP = event => {
