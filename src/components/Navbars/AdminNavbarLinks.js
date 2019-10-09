@@ -255,11 +255,41 @@ export default function AdminNavbarLinks(props) {
   const [municipioLista, setMunicipioLista] = React.useState([]);
   const [provinciaLista, setProvinciaLista] = React.useState([]);
 
+
+
+  //const [probando, setProbando] = React.useState([]);
+
   useEffect(
 
     () => {
 
       async function asyncrona() {
+
+        ///////////////////////////////////////
+
+
+
+        // const probandoc = await cubejsApi.load({
+        //   "measures": [
+        //     "SymAgricUrbanaPoint.count"
+        //   ],
+        //   "timeDimensions": [],
+        //   "dimensions": [
+        //     "SymAgricUrbanaPoint.tecnologia",
+        //     "SymAgricUrbanaPoint.ministerio"
+        //   ],
+        //   "filters": []
+        // })
+        // // var provand = []
+        // // probandoc["loadResponse"]["data"].map((prov) =>
+        // //   provand.push(prov["SymAgricUrbanaPoint.provincia"])
+        // // )
+        // //await setProbando(probandoc);
+        // console.log(probandoc["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"])
+
+
+
+        ////////////////////////////////
 
         const provincias = await cubejsApi.load({
           "measures": [],
@@ -292,7 +322,13 @@ export default function AdminNavbarLinks(props) {
       }
       asyncrona();
     },
+<<<<<<< HEAD
     []
+=======
+
+    [props]
+
+>>>>>>> e2d5324b8300bdd2c1d85b26db4303125deed334
   )
 
   const handleChangeP = event => {
@@ -300,7 +336,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeM = event => {
-    setMunicipioName(event.target.value);    
+    setMunicipioName(event.target.value);
 
     if (event.target.value.length) {
       props.setMunicipios(event.target.value)

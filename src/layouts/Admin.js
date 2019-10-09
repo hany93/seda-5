@@ -169,10 +169,18 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-1.jpg";
 import logo from "assets/img/reactlogo.png";
+
+import cubejs from '@cubejs-client/core';
 let ps;
 
 const useStyles = makeStyles(styles);
 
+const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
+
+const cubejsApi = cubejs(
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
+  { apiUrl: API_URL + "/cubejs-api/v1" }
+);
 
 export default function Admin({ ...rest }) {
   // styles
@@ -184,7 +192,7 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("purple");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [municipios, setMunicipios] = React.useState(["Caibarién", "Caibarién ", "Camajuaní", "Cifuentes", "Corralillo", "Encrucijada", "Manicaragua", "Placetas", "Quemado de Güines", "Ranchuelo", "Remedios", "Sagua la Grande", "Santa Clara", "Santo Domingo"]);
+  const [municipios, setMunicipios] = React.useState();
 
   const handleImageClick = image => {
     setImage(image);
@@ -210,8 +218,6 @@ export default function Admin({ ...rest }) {
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
 
-    //console.log(municipios)
-
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -227,7 +233,36 @@ export default function Admin({ ...rest }) {
       }
       window.removeEventListener("resize", resizeFunction);
     };
+
   }, [mainPanel]);
+
+  React.useEffect(() => {
+    async function asyncrona() {
+
+      const municipios = await cubejsApi.load({
+        "measures": [],
+        "timeDimensions": [],
+        "dimensions": [
+          "SymAgricUrbanaPoint.municipio"
+        ],
+        "filters": []
+      })
+      var auxm = []
+      municipios["loadResponse"]["data"].map((mun) =>
+        auxm.push(mun["SymAgricUrbanaPoint.municipio"])
+      )
+      await setMunicipios(auxm);
+
+    }
+
+    asyncrona()
+
+  },
+
+    []
+
+  );
+
   return (
     <div className={classes.wrapper}>
       <Sidebar
@@ -247,7 +282,7 @@ export default function Admin({ ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           setMunicipios={setMunicipios}
           {...rest}
-        />        
+        />
         <div className={classes.content}>
           <div className={classes.container}>{
             <Switch>
