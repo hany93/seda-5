@@ -24,6 +24,9 @@ import Verduras from "assets/img/verduras.png";
 import Siembra from "assets/img/siembra.png";
 import Aspersor from "assets/img/aspersor.png";
 import Campo from "assets/img/campo.png";
+import Card1Dash from "variables/card1Dashboard.js";
+import Card2Dash from "variables/card2Dashboard.js";
+import Card3Dash from "variables/card3Dashboard.js";
 
 import { bugs, website, server } from "variables/general.js";
 
@@ -232,17 +235,11 @@ export default function Dashboard(props) {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridContainer>
+      <GridContainer>                      {/*aki otro contenedor de graficos */}
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
-              <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
+              <Card1Dash />
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Daily Sales</h4>
@@ -263,14 +260,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              <ChartistGraph
-                className="ct-chart"
-                data={emailsSubscriptionChart.data}
-                type="Bar"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
-              />
+              <Card2Dash />
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Email Subscriptions</h4>
@@ -286,13 +276,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
-              <ChartistGraph
-                className="ct-chart"
-                data={completedTasksChart.data}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
+              <Card3Dash />
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Completed Tasks</h4>
