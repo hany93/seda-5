@@ -239,7 +239,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
-              <Card1Dash />
+              <Card1Dash municipios={props.municipios} />
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Daily Sales</h4>
