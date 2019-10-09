@@ -322,13 +322,7 @@ export default function AdminNavbarLinks(props) {
       }
       asyncrona();
     },
-<<<<<<< HEAD
-    []
-=======
-
     [props]
-
->>>>>>> e2d5324b8300bdd2c1d85b26db4303125deed334
   )
 
   const handleChangeP = event => {

@@ -22,27 +22,27 @@ const lineRender = ({ resultSet }) => {
   const options = {
     legend: { display: false, },
     scales: {
-        xAxes: [{
-            gridLines: {
-                color: "rgba(255, 255, 255, 0.2) ",// Eje x color verde
-                display: true,
-                
-            },
-            ticks: {
-                fontColor: "#FFF" // Cambiar color de labels
-            }
-        }],
-        yAxes: [{
-            gridLines: {
-                color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
-                display: true
-            },
-            ticks: {
-                fontColor: "#FFF" // Cambiar color de labels
-            }
-        }]
+      xAxes: [{
+        gridLines: {
+          color: "rgba(255, 255, 255, 0.2)",// Eje x color verde
+          display: true,
+
+        },
+        ticks: {
+          fontColor: "#FFF" // Cambiar color de labels
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
+          display: true
+        },
+        ticks: {
+          fontColor: "#FFF" // Cambiar color de labels
+        }
+      }]
     }
-};
+  };
   return <Line data={data} options={options} />;
 };
 
@@ -55,7 +55,7 @@ const cubejsApi = cubejs(
 
 const renderChart = (Component) => ({ resultSet, error }) => (
   (resultSet && <Component resultSet={resultSet} />) ||
-  (error && error.toString()) || 
+  (error && error.toString()) ||
   (<Spin />)
 )
 
