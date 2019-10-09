@@ -318,7 +318,6 @@ export default function AdminNavbarLinks(props) {
           auxm.push(mun["SymAgricUrbanaPoint.municipio"])
         )
         await setMunicipioLista(auxm);
-
       }
 
       asyncrona();
