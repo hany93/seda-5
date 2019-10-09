@@ -48,19 +48,9 @@ class gg extends Component {
                     "timeDimensions": [],
                     "filters": [
                         {
-                            "dimension": "SymAgricUrbanaPoint.provincia",
-                            "operator": "equals",
-                            "values": [
-                                'Villa Clara'
-                            ]
-                        },
-                        {
                             "dimension": "SymAgricUrbanaPoint.municipio",
                             "operator": "equals",
-                            "values": [
-                                'Remedios',
-                                'Santa Clara'
-                            ]
+                            "values": this.props.municipios
                         }
                     ],
                     "dimensions": [

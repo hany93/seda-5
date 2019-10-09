@@ -279,21 +279,21 @@ export default function Dashboard(props) {
                 tabName: "Área Total y Cantidad",
                 tabIcon: TimelineIcon,
                 tabContent: (
-                  <Card4Dash />
+                  <Card4Dash municipios={props.municipios} />
                 )
               },
               {
                 tabName: "Tecnologías",
                 tabIcon: TableChartIcon,
                 tabContent: (
-                  <TablaTotalPorTecnolog />
+                  <TablaTotalPorTecnolog municipios={props.municipios} />
                 )
               },
               {
                 tabName: "Ministerio",
                 tabIcon: TableChartIcon,
                 tabContent: (
-                  <TablaTotalPorMinist />
+                  <TablaTotalPorMinist municipios={props.municipios} />
                 )
               }
             ]}
