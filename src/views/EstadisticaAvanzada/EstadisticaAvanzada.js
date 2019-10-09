@@ -58,9 +58,6 @@ export default function EstadisticaAvanzadaPage(props) {
     <Card>
       <CardHeader color={props.color1}>
         <h4 className={classes.cardTitleWhite}>Estadística Avanzada</h4>
-        <p className={classes.cardCategoryWhite}>
-          En este espacio .......
-        </p>
       </CardHeader>
       <CardBody>
         <Dropdown showGrafic={showGrafic} camposMeasures={camposMeasures} camposDimensions={camposDimensions} tipoGrafic={tipoGraficFunction} />

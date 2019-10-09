@@ -28,8 +28,10 @@ import Card3Dash from "variables/card3Dashboard.js";
 import Card4Dash from "variables/card4Dashboard.js";
 import TablaTotalPorMinist from "variables/tablaTotalPorMinist/index.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
-
-import { bugs, website, server } from "variables/general.js";
+import TimelineIcon from '@material-ui/icons/Timeline';
+import TableChartIcon from '@material-ui/icons/TableChartOutlined';
+import ShowChartRoundedIcon from '@material-ui/icons/ShowChartRounded';
+import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -236,18 +238,9 @@ export default function Dashboard(props) {
             <CardHeader color="success">
               <Card1Dash municipios={props.municipios} />
             </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
-              <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
-              </p>
-            </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
+                <ShowChartRoundedIcon /> Por Tecnologías
               </div>
             </CardFooter>
           </Card>
@@ -257,13 +250,9 @@ export default function Dashboard(props) {
             <CardHeader color="warning">
               <Card2Dash municipios={props.municipios} />
             </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
-            </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <BarChartOutlinedIcon /> Por Municipios
               </div>
             </CardFooter>
           </Card>
@@ -273,13 +262,9 @@ export default function Dashboard(props) {
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
             </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
-            </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <TimelineIcon /> Por Ministerios
               </div>
             </CardFooter>
           </Card>
@@ -291,22 +276,22 @@ export default function Dashboard(props) {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Bugs",
-                tabIcon: BugReport,
+                tabName: "Área Total y Cantidad",
+                tabIcon: TimelineIcon,
                 tabContent: (
                   <Card4Dash />
                 )
               },
               {
-                tabName: "Website",
-                tabIcon: Code,
+                tabName: "Tecnologías",
+                tabIcon: TableChartIcon,
                 tabContent: (
                   <TablaTotalPorTecnolog />
                 )
               },
               {
-                tabName: "Server",
-                tabIcon: Cloud,
+                tabName: "Ministerio",
+                tabIcon: TableChartIcon,
                 tabContent: (
                   <TablaTotalPorMinist />
                 )
