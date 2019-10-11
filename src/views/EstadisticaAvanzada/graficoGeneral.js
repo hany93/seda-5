@@ -127,13 +127,11 @@ class gg extends Component {
           "timeDimensions": [],
           "dimensions": this.props.camposDimensions,
           "filters": [
-            //{
-            //  "dimension": "SymAgricUrbanaPoint.municipio",
-            //  "operator": "equals",
-            //  "values": [
-            //    this.props.municipio.charAt(0).toUpperCase() + this.props.municipio.slice(1)
-            //    ]
-            // }
+            {
+              "dimension": "SymAgricUrbanaPoint.municipio",
+              "operator": "equals",
+              "values": this.props.municipios
+            }
           ]
         }}
         cubejsApi={cubejsApi}
