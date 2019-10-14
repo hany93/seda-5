@@ -248,12 +248,12 @@ const cubejsApi = cubejs(
 export default function AdminNavbarLinks(props) {
   const classes = useStyles(props);
 
-  const [provinciaName, setProvinciaName] = React.useState([]);
-  const [municipioName, setMunicipioName] = React.useState([]);
+  const [provinciasSeleccionadas, setprovinciasSeleccionadas] = React.useState([]);
+  const [municipiosSeleccionados, setmunicipiosSeleccionados] = React.useState([]);
 
 
-  const [municipioLista, setMunicipioLista] = React.useState([]);
-  const [provinciaLista, setProvinciaLista] = React.useState([]);
+  const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
+  const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
 
 
 
@@ -264,32 +264,6 @@ export default function AdminNavbarLinks(props) {
     () => {
 
       async function asyncrona() {
-
-        ///////////////////////////////////////
-
-
-
-        // const probandoc = await cubejsApi.load({
-        //   "measures": [
-        //     "SymAgricUrbanaPoint.count"
-        //   ],
-        //   "timeDimensions": [],
-        //   "dimensions": [
-        //     "SymAgricUrbanaPoint.tecnologia",
-        //     "SymAgricUrbanaPoint.ministerio"
-        //   ],
-        //   "filters": []
-        // })
-        // // var provand = []
-        // // probandoc["loadResponse"]["data"].map((prov) =>
-        // //   provand.push(prov["SymAgricUrbanaPoint.provincia"])
-        // // )
-        // //await setProbando(probandoc);
-        // console.log(probandoc["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"])
-
-
-
-        ////////////////////////////////
 
         const provincias = await cubejsApi.load({
           "measures": [],
@@ -303,7 +277,7 @@ export default function AdminNavbarLinks(props) {
         provincias["loadResponse"]["data"].map((prov) =>
           auxp.push(prov["SymAgricUrbanaPoint.provincia"])
         )
-        await setProvinciaLista(auxp);
+        await settotalDeProvincias(auxp);
 
         const municipios = await cubejsApi.load({
           "measures": [],
@@ -317,25 +291,40 @@ export default function AdminNavbarLinks(props) {
         municipios["loadResponse"]["data"].map((mun) =>
           auxm.push(mun["SymAgricUrbanaPoint.municipio"])
         )
-        await setMunicipioLista(auxm);
+        await settotalDeMunicipios(auxm);
+
       }
+
       asyncrona();
+      //setmunicipiosSeleccionados(props.municipios);
+
     },
+
     [props]
   )
 
-  const handleChangeP = event => {
-    setProvinciaName(event.target.value);
+  const onOpen = event => {
+    console.log(event)
+    setmunicipiosSeleccionados(props.municipios);
   };
 
-  const handleChangeM = event => {
-    setMunicipioName(event.target.value);
+  const handleChangeP = event => {
+    setprovinciasSeleccionadas(event.target.value);
+  };
+
+  const handleChangeM = async event => {
+
+    setmunicipiosSeleccionados(event.target.value);
 
     if (event.target.value.length) {
-      props.setMunicipios(event.target.value)
+      await props.setMunicipios(event.target.value)
+      // setmunicipiosSeleccionados(props.municipios);
     } else {
-      props.setMunicipios(municipioLista)
+      await props.setMunicipios(totalDeMunicipios)
+      //setmunicipiosSeleccionados(props.municipios);
     }
+
+    //setmunicipiosSeleccionados(props.municipios);
 
     //props.setMunicipios(event.target.value)
   };
@@ -347,7 +336,7 @@ export default function AdminNavbarLinks(props) {
           className={classes.select_link}
           IconComponent='VignetteIcon'
           multiple
-          value={provinciaName}
+          value={provinciasSeleccionadas}
           onChange={handleChangeP}
           displayEmpty
           input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />}
@@ -361,7 +350,7 @@ export default function AdminNavbarLinks(props) {
           <MenuItem value='' disabled className={classes.dropdownItem} >
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Provincia
           </MenuItem>
-          {provinciaLista.map(name => (
+          {totalDeProvincias.map(name => (
             <MenuItem key={name} value={name} className={classes.dropdownItem}>
               {name}
             </MenuItem>
@@ -371,11 +360,14 @@ export default function AdminNavbarLinks(props) {
           className={classes.select_link}
           IconComponent='VignetteIcon'
           multiple
-          value={municipioName}
+          value={municipiosSeleccionados}
+          //native={true}
           onChange={handleChangeM}
+          onOpen={onOpen}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
           renderValue={selected => {
+            console.log(selected)
             if (selected.length === 0) {
               return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Municipio</span>;
             }
@@ -385,7 +377,7 @@ export default function AdminNavbarLinks(props) {
           <MenuItem value='' disabled className={classes.dropdownItem}>
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
-          {municipioLista.map(name => (
+          {totalDeMunicipios.map(name => (
             <MenuItem key={name} value={name} className={classes.dropdownItem}>
               {name}
             </MenuItem>
