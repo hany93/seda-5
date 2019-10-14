@@ -2,21 +2,13 @@ import React, { useEffect } from "react";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import Table from "components/Table/Table.js";
-import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import Verduras from "assets/img/verduras.png";
 import Siembra from "assets/img/siembra.png";
@@ -32,14 +24,13 @@ import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
 import ShowChartRoundedIcon from '@material-ui/icons/ShowChartRounded';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
-
+import Map1 from 'variables/maps.js';
+import { Spin } from 'antd';
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 import cubejs from '@cubejs-client/core';
 
 const useStyles = makeStyles(styles);
-
-
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -57,7 +48,10 @@ export default function Dashboard(props) {
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
-
+  const [loading, setLoading] = React.useState(true);
+  const [loading1, setLoading1] = React.useState(true);
+  const [loading2, setLoading2] = React.useState(true);
+  const [loading3, setLoading3] = React.useState(true);
 
 
 
@@ -90,6 +84,7 @@ export default function Dashboard(props) {
         })
         var auxo = organoponicos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
         await setOrganoponico(auxo);
+        setLoading(false);
 
         const huertos = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
@@ -112,6 +107,7 @@ export default function Dashboard(props) {
         })
         var auxh = huertos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
         await setHuerto(auxh);
+        setLoading1(false);
 
         const parcelas = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
@@ -134,6 +130,7 @@ export default function Dashboard(props) {
         })
         var auxp = parcelas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
         await setParcela(auxp);
+        setLoading2(false);
 
         const fincas = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
@@ -156,6 +153,7 @@ export default function Dashboard(props) {
         })
         var auxf = fincas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
         await setFinca(auxf);
+        setLoading3(false);
       }
       asyncrona();
     },
@@ -172,9 +170,7 @@ export default function Dashboard(props) {
                 <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              <h3 className={classes.cardTitle}>
-                {organoponico}
-              </h3>
+              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -190,7 +186,7 @@ export default function Dashboard(props) {
                 <img src={Verduras} className={classes.imgIconCard} alt="Huertos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              <h3 className={classes.cardTitle}>{huerto}</h3>
+              {loading1 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -206,7 +202,7 @@ export default function Dashboard(props) {
                 <img src={Aspersor} className={classes.imgIconCard} alt="Parcelas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              <h3 className={classes.cardTitle}>{parcela}</h3>
+              {loading2 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -222,7 +218,7 @@ export default function Dashboard(props) {
                 <img src={Campo} className={classes.imgIconCard} alt="Fincas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              <h3 className={classes.cardTitle}>{finca}</h3>
+              {loading3 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -234,7 +230,7 @@ export default function Dashboard(props) {
       </GridContainer>
       <GridContainer>                      {/*aki otro contenedor de graficos */}
         <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
+          <Card >
             <CardHeader color="success">
               <Card1Dash municipios={props.municipios} />
             </CardHeader>
@@ -261,6 +257,7 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
+              {/* <Map1/> */}
             </CardHeader>
             <CardFooter chart>
               <div className={classes.stats}>
