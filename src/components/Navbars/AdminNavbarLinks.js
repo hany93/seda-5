@@ -299,22 +299,23 @@ export default function AdminNavbarLinks(props) {
   )
 
   const onOpen = event => {
-    console.log(event)
     setmunicipiosSeleccionados(props.municipios);
   };
 
   const handleChangeP = async event => {
+    props.setLugarfiltrado(event.target.value)
     setprovinciasSeleccionadas([event.target.value]);
 
     if (event.target.value.length) {
-      await props.setMunicipios([event.target.value])
+      await props.setProvincias([event.target.value])
     } else {
-      await props.setMunicipios(totalDeMunicipios)
+      await props.setProvincias(totalDeMunicipios)
     }
   };
 
   const handleChangeM = async event => {
 
+    await props.setLugarfiltrado(event.target.value);
     setmunicipiosSeleccionados([event.target.value]);
 
     if (event.target.value.length) {
@@ -366,7 +367,7 @@ export default function AdminNavbarLinks(props) {
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {totalDeMunicipios.map(name => (
-            name == 'Todos' ? <MenuItem key={name} value={provinciasSeleccionadas} className={classes.dropdownItem}>{name}</MenuItem>:<MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+            name == 'Todos' ? <MenuItem key={name} value={() => { return provinciasSeleccionadas.length ? provinciasSeleccionadas[0] : "Deve seleccionar una Provincia" }} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}
         </Select>
       </div>

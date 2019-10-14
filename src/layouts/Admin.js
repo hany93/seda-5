@@ -183,6 +183,8 @@ const cubejsApi = cubejs(
 );
 
 export default function Admin({ ...rest }) {
+
+
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -194,6 +196,10 @@ export default function Admin({ ...rest }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [municipios, setMunicipios] = React.useState();
   const [provincias, setProvincias] = React.useState();
+
+  const [lugarFiltrado, setLugarfiltrado] = React.useState("esfeswrf");
+
+
 
   const handleImageClick = image => {
     setImage(image);
@@ -278,6 +284,7 @@ export default function Admin({ ...rest }) {
         municipios={municipios}
         setProvincias={setProvincias}
         provincias={provincias}
+        setLugarfiltrado={setLugarfiltrado}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -289,6 +296,7 @@ export default function Admin({ ...rest }) {
           municipios={municipios}
           setProvincias={setProvincias}
           provincias={provincias}
+          setLugarfiltrado={setLugarfiltrado}
           {...rest}
         />
         <div className={classes.content}>
@@ -307,7 +315,7 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard" render={() => <Dashboard municipios={municipios} />} />
+              <Route path="/admin/dashboard" render={() => <Dashboard municipios={municipios} provincias={provincias} lugarfiltrado={lugarFiltrado} />} />
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}</div>
         </div>

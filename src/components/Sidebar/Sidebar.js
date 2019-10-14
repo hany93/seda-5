@@ -175,7 +175,7 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>
-            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} />}
+            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} setLugarfiltrado={props.setLugarfiltrado} />}
             {links}
           </div>
           {image !== undefined ? (

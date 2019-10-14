@@ -41,6 +41,8 @@ const cubejsApi = cubejs(
 
 export default function Dashboard(props) {
 
+  console.log(props.lugarfiltrado)
+
 
   const classes = useStyles();
 
@@ -60,7 +62,6 @@ export default function Dashboard(props) {
     () => {
 
       async function asyncrona() {
-        console.log(props.municipios)
         const organoponicos = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
           "timeDimensions": [],
@@ -169,7 +170,7 @@ export default function Dashboard(props) {
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
             </CardHeader>
             <CardFooter chart>
-              {props.municipios == "Todos" ? <GridItem xs={12} sm={12} md={12}><h4 style={{ textAlign: 'center' }}>Villa Clara</h4></GridItem> : <GridItem xs={12} sm={12} md={12}><h4 style={{ textAlign: 'center' }}>{props.municipios}</h4></GridItem>}
+              {props.lugarfiltrado}
             </CardFooter>
           </Card>
         </GridItem>
