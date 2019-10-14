@@ -339,25 +339,26 @@ export default function AdminNavbarLinks(props) {
 
     //props.setMunicipios(event.target.value)
   };
-
   return (
     <div>
       <div className={classes.manager}>
+
         <Select
           className={classes.select_link}
+          IconComponent='VignetteIcon'
           multiple
           value={provinciaName}
           onChange={handleChangeP}
           displayEmpty
-          input={<Input id="select-multiple" />}
+          input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />}
           renderValue={selected => {
             if (selected.length === 0) {
-              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Provincia</span>;
+              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Provincia</span>;
             }
             return selected.join(', ');
           }}
         >
-          <MenuItem value='' disabled className={classes.dropdownItem}>
+          <MenuItem value='' disabled className={classes.dropdownItem} >
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Provincia
           </MenuItem>
           {provinciaLista.map(name => (
@@ -368,14 +369,15 @@ export default function AdminNavbarLinks(props) {
         </Select>
         <Select
           className={classes.select_link}
+          IconComponent='VignetteIcon'
           multiple
           value={municipioName}
           onChange={handleChangeM}
           displayEmpty
-          input={<Input id="select-multiple1" />}
+          input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
           renderValue={selected => {
             if (selected.length === 0) {
-              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio</span>;
+              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Municipio</span>;
             }
             return selected.join(', ');
           }}

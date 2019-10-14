@@ -32,7 +32,6 @@ const headerLinksStyle = theme => ({
     margin: "0px"
   },
   select_link: {
-    marginRight: '50px',
     "&:before": {
       borderBottom: 'none',
     },

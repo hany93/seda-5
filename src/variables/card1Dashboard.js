@@ -32,8 +32,8 @@ class gg extends Component {
                 xAxes: [{
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2) ",// Eje x color verde
+                        zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true,
-
                     },
                     ticks: {
                         fontColor: "#FFF" // Cambiar color de labels
@@ -42,6 +42,7 @@ class gg extends Component {
                 yAxes: [{
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
+                        zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true
                     },
                     ticks: {

@@ -34,6 +34,7 @@ class gg extends Component {
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)",// Eje x color verde
+                        zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true,
                     },
                     ticks: {
@@ -44,6 +45,7 @@ class gg extends Component {
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
+                        zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true
                     },
                     ticks: {
@@ -70,7 +72,7 @@ class gg extends Component {
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "SymAgricUrbanaPoint.municipio"
+                        "SymAgricUrbanaPoint.entidad"
                     ],
                     "filters": [
                         {
