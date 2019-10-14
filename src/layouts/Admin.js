@@ -274,6 +274,7 @@ export default function Admin({ ...rest }) {
         open={mobileOpen}
         color={color}
         setMunicipios={setMunicipios}
+        municipios={municipios}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -282,6 +283,7 @@ export default function Admin({ ...rest }) {
           color={color}
           handleDrawerToggle={handleDrawerToggle}
           setMunicipios={setMunicipios}
+          municipios={municipios}
           {...rest}
         />
         <div className={classes.content}>
