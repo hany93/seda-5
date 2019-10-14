@@ -313,7 +313,7 @@ export default function AdminNavbarLinks(props) {
           ],
           "filters": []
         })
-        var auxm = []
+        var auxm = ['Todos']
         municipios["loadResponse"]["data"].map((mun) =>
           auxm.push(mun["SymAgricUrbanaPoint.municipio"])
         )
@@ -329,10 +329,11 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeM = event => {
-    setMunicipioName(event.target.value);
+    console.log(event.target.value)
+    setMunicipioName([event.target.value]);
 
     if (event.target.value.length) {
-      props.setMunicipios(event.target.value)
+      props.setMunicipios([event.target.value])
     } else {
       props.setMunicipios(municipioLista)
     }
@@ -346,16 +347,12 @@ export default function AdminNavbarLinks(props) {
         <Select
           className={classes.select_link}
           IconComponent='VignetteIcon'
-          multiple
           value={provinciaName}
           onChange={handleChangeP}
           displayEmpty
           input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />}
-          renderValue={selected => {
-            if (selected.length === 0) {
-              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Provincia</span>;
-            }
-            return selected.join(', ');
+          renderValue={() => {
+            return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Provincia</span>;
           }}
         >
           <MenuItem value='' disabled className={classes.dropdownItem} >
@@ -370,16 +367,13 @@ export default function AdminNavbarLinks(props) {
         <Select
           className={classes.select_link}
           IconComponent='VignetteIcon'
-          multiple
           value={municipioName}
           onChange={handleChangeM}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
-          renderValue={selected => {
-            if (selected.length === 0) {
-              return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Municipio</span>;
-            }
-            return selected.join(', ');
+          renderValue={() => {
+            return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Municipio</span>;
+
           }}
         >
           <MenuItem value='' disabled className={classes.dropdownItem}>

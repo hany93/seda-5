@@ -33,7 +33,6 @@ class gg extends Component {
         tt["loadResponse"]["data"].map((p) =>
             aux.push(p["SymAgricUrbanaPoint.municipio"])
         )
-        console.log(aux)
     }
 
     //[0]["SymAgricUrbanaPoint.municipio"]

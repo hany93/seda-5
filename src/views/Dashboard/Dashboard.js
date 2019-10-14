@@ -163,6 +163,18 @@ export default function Dashboard(props) {
   return (
     <div>
       <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card >
+            <CardHeader color="info">
+              <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
+            </CardHeader>
+            <CardFooter chart>
+              {props.municipios === 'Todos' ? <GridItem xs={12} sm={12} md={12}><h4 style={{ textAlign: 'center' }}>Villa Clara</h4></GridItem> : <GridItem xs={12} sm={12} md={12}><h4 style={{ textAlign: 'center' }}>{props.municipios}</h4></GridItem>}
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="warning" stats icon>
