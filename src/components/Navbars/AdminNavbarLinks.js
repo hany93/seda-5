@@ -304,15 +304,15 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeP = event => {
-    setprovinciasSeleccionadas(event.target.value);
+    setprovinciasSeleccionadas([event.target.value]);
   };
 
   const handleChangeM = async event => {
 
-    setmunicipiosSeleccionados(event.target.value);
+    setmunicipiosSeleccionados([event.target.value]);
 
     if (event.target.value.length) {
-      await props.setMunicipios(event.target.value)
+      await props.setMunicipios([event.target.value])
     } else {
       await props.setMunicipios(totalDeMunicipios)
     }
@@ -360,9 +360,7 @@ export default function AdminNavbarLinks(props) {
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {totalDeMunicipios.map(name => (
-            <MenuItem key={name} value={name} className={classes.dropdownItem}>
-              {name}
-            </MenuItem>
+            name == 'Todos' ? <MenuItem key={name} value={provinciasSeleccionadas} className={classes.dropdownItem}>{name}</MenuItem>:<MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}
         </Select>
       </div>

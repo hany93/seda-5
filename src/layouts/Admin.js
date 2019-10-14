@@ -193,6 +193,7 @@ export default function Admin({ ...rest }) {
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [municipios, setMunicipios] = React.useState();
+  const [provincias, setProvincias] = React.useState();
 
   const handleImageClick = image => {
     setImage(image);
@@ -275,6 +276,8 @@ export default function Admin({ ...rest }) {
         color={color}
         setMunicipios={setMunicipios}
         municipios={municipios}
+        setProvincias={setProvincias}
+        provincias={provincias}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -284,6 +287,8 @@ export default function Admin({ ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           setMunicipios={setMunicipios}
           municipios={municipios}
+          setProvincias={setProvincias}
+          provincias={provincias}
           {...rest}
         />
         <div className={classes.content}>
