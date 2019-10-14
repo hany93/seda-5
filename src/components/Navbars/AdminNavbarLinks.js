@@ -255,10 +255,6 @@ export default function AdminNavbarLinks(props) {
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
 
-
-
-  //const [probando, setProbando] = React.useState([]);
-
   useEffect(
 
     () => {
@@ -296,7 +292,6 @@ export default function AdminNavbarLinks(props) {
       }
 
       asyncrona();
-      //setmunicipiosSeleccionados(props.municipios);
 
     },
 
@@ -318,16 +313,12 @@ export default function AdminNavbarLinks(props) {
 
     if (event.target.value.length) {
       await props.setMunicipios(event.target.value)
-      // setmunicipiosSeleccionados(props.municipios);
     } else {
       await props.setMunicipios(totalDeMunicipios)
-      //setmunicipiosSeleccionados(props.municipios);
     }
 
-    //setmunicipiosSeleccionados(props.municipios);
-
-    //props.setMunicipios(event.target.value)
   };
+
   return (
     <div>
       <div className={classes.manager}>
