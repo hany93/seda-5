@@ -15,20 +15,20 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-  lineRender = ({ resultSet }) => {
+  barRender = ({ resultSet }) => {
     const data = {
-      labels: resultSet.categories().map(c => c.category),
-      datasets: resultSet.series().map((s, index) => (
-        {
-          label: 'Cantidad',
-          data: s.series.map(r => r.value),
-          borderColor: COLORS_SERIES[index],
-          fill: false
-        }
-      )),
+        labels: resultSet.categories().map(c => c.category),
+        datasets: resultSet.series().map((s, index) => (
+            {
+                label: 'Cantidad',
+                data: s.series.map(r => r.value),
+                backgroundColor: COLORS_SERIES[index],
+                fill: false
+            }
+        )),
     };
     const options = {
-      legend: { display: false, },
+      legend: { display: false },
       scales: {
         xAxes: [{
           gridLines: {
@@ -37,7 +37,9 @@ class gg extends Component {
             display: true,
           },
           ticks: {
-            fontColor: "#FFF" // Cambiar color de labels
+            fontColor: "#FFF", // Cambiar color de labels
+            fontSize: 10,
+            minRotation: 2
           }
         }],
         yAxes: [{
@@ -52,7 +54,7 @@ class gg extends Component {
         }]
       }
     };
-    return <Line data={data} options={options} />;
+    return <Bar data={data} options={options} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (
@@ -66,11 +68,11 @@ class gg extends Component {
       <QueryRenderer
         query={{
           "measures": [
-            "SymAgricUrbanaPoint.areaTotal"
+            "SymAgricUrbanaPoint.count"
           ],
           "timeDimensions": [],
           "dimensions": [
-            "SymAgricUrbanaPoint.ministerio"
+            "SymAgricUrbanaPoint.entidad"
           ],
           "filters": [
             {
@@ -81,7 +83,7 @@ class gg extends Component {
           ]
         }}
         cubejsApi={cubejsApi}
-        render={this.renderChart(this.lineRender)}
+        render={this.renderChart(this.barRender)}
       />);
   }
 }

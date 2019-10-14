@@ -15,17 +15,17 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-    barRender = ({ resultSet }) => {
+    lineRender = ({ resultSet }) => {
         const data = {
-            labels: resultSet.categories().map(c => c.category),
-            datasets: resultSet.series().map((s, index) => (
-                {
-                    label: 'Cantidad',
-                    data: s.series.map(r => r.value),
-                    backgroundColor: COLORS_SERIES[index],
-                    fill: false
-                }
-            )),
+          labels: resultSet.categories().map(c => c.category),
+          datasets: resultSet.series().map((s, index) => (
+            {
+              label: 'Cantidad',
+              data: s.series.map(r => r.value),
+              borderColor: COLORS_SERIES[index],
+              fill: false
+            }
+          )),
         };
         const options = {
             legend: { display: false, },
@@ -54,7 +54,7 @@ class gg extends Component {
                 }]
             }
         };
-        return <Bar data={data} options={options} />;
+        return <Line data={data} options={options} />;
     };
 
     renderChart = (Component) => ({ resultSet, error }) => (
@@ -68,11 +68,11 @@ class gg extends Component {
             <QueryRenderer
                 query={{
                     "measures": [
-                        "SymAgricUrbanaPoint.areaTotal"
+                        "SymAgricUrbanaPoint.count"
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "SymAgricUrbanaPoint.entidad"
+                        "SymAgricUrbanaPoint.ministerio"
                     ],
                     "filters": [
                         {
@@ -83,7 +83,7 @@ class gg extends Component {
                     ]
                 }}
                 cubejsApi={cubejsApi}
-                render={this.renderChart(this.barRender)}
+                render={this.renderChart(this.lineRender)}
             />);
     }
 }

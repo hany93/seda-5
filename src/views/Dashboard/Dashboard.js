@@ -27,7 +27,8 @@ import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import Map1 from 'variables/maps.js';
 import { Spin } from 'antd';
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
+import CardBody from "components/Card/CardBody.js";
+import LanguageIcon from '@material-ui/icons/Language';
 import cubejs from '@cubejs-client/core';
 
 const useStyles = makeStyles(styles);
@@ -269,7 +270,6 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
-              {/* <Map1/> */}
             </CardHeader>
             <CardFooter chart>
               <div className={classes.stats}>
@@ -279,6 +279,18 @@ export default function Dashboard(props) {
           </Card>
         </GridItem>
       </GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card >
+          <CardHeader color="primary" stats icon>
+            <CardIcon color="primary">
+              <LanguageIcon />
+            </CardIcon>
+          </CardHeader>
+          <CardBody>
+            <Map1 />
+          </CardBody>
+        </Card>
+      </GridItem>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs

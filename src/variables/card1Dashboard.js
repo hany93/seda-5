@@ -15,14 +15,15 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-    areaRender = ({ resultSet }) => {
+    barRender = ({ resultSet }) => {
         const data = {
             labels: resultSet.categories().map(c => c.category),
             datasets: resultSet.series().map((s, index) => (
                 {
                     label: 'Cantidad',
                     data: s.series.map(r => r.value),
-                    backgroundColor: COLORS_SERIES[index]
+                    backgroundColor: COLORS_SERIES[index],
+                    fill: false
                 }
             )),
         };
@@ -51,7 +52,7 @@ class gg extends Component {
                 }]
             }
         };
-        return <Line data={data} options={options} />;
+        return <Bar data={data} options={options} />;
     };
 
     renderChart = (Component) => ({ resultSet, error }) => (
@@ -80,7 +81,7 @@ class gg extends Component {
                     ]
                 }}
                 cubejsApi={cubejsApi}
-                render={this.renderChart(this.areaRender)}
+                render={this.renderChart(this.barRender)}
             />);
     }
 }
