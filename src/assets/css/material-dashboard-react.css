@@ -52,6 +52,21 @@
   display: -webkit-flex;
   display: flex;
 }
+.ol-viewport{
+  border-radius: 10px;
+}
+.ol-viewport .ol-unselectable .ol-layers{
+  border-radius: 10px;
+}
+.ol-viewport .ol-unselectable .ol-layers .ol-layer{
+  border-radius: 10px;
+}
+.ol-viewport .ol-unselectable .ol-layers .ol-overlaycontainer{
+  border-radius: 10px;
+}
+.ol-viewport .ol-unselectable .ol-layers .ol-overlaycontainer-stopevent{
+  border-radius: 10px;
+}
 .ct-label {
   fill: rgba(0, 0, 0, 0.4);
   line-height: 1;
