@@ -273,6 +273,7 @@ export default function Admin({ ...rest }) {
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
+        setMunicipios={setMunicipios}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
