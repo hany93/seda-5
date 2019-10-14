@@ -303,8 +303,14 @@ export default function AdminNavbarLinks(props) {
     setmunicipiosSeleccionados(props.municipios);
   };
 
-  const handleChangeP = event => {
+  const handleChangeP = async event => {
     setprovinciasSeleccionadas([event.target.value]);
+
+    if (event.target.value.length) {
+      await props.setMunicipios([event.target.value])
+    } else {
+      await props.setMunicipios(totalDeMunicipios)
+    }
   };
 
   const handleChangeM = async event => {
