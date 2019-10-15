@@ -4,6 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import React from 'react';
 import { defaults } from 'ol/interaction';
+import { defaults as defaultsControls, FullScreen } from 'ol/control';
 
 let map;
 
@@ -22,6 +23,10 @@ class Maps1 extends React.Component {
                 center: [22.408987, -79.962018],
                 zoom: 5
             }),
+            controls: defaultsControls({
+                rotate: false,
+                fullScreen: true
+            }).extend([new FullScreen()]),
             interactions: defaults({
                 doubleClickZoom: true,
                 dragAndDrop: true,

@@ -30,7 +30,7 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import CardBody from "components/Card/CardBody.js";
 import LanguageIcon from '@material-ui/icons/Language';
 import cubejs from '@cubejs-client/core';
-import Hidden from "@material-ui/core/Hidden";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles(styles);
 
@@ -56,7 +56,6 @@ export default function Dashboard(props) {
   useEffect(
 
     () => {
-
       async function asyncrona() {
         const organoponicos = await cubejsApi.load({
           "measures": ["SymAgricUrbanaPoint.count"],
@@ -161,13 +160,11 @@ export default function Dashboard(props) {
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Card >
+          <Card plain>
             <CardHeader color="info">
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
+              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight:5 }} /> {props.lugarfiltrado}</h4>
             </CardHeader>
-            <CardFooter chart>
-              {props.lugarfiltrado}
-            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
@@ -242,11 +239,16 @@ export default function Dashboard(props) {
           <Card >
             <CardHeader color="success">
               <Card1Dash municipios={props.municipios} />
-            </CardHeader>
-            <CardFooter chart>
+            </CardHeader>            
+            <CardBody>
               <div className={classes.stats}>
-                <ShowChartRoundedIcon /> Por Tecnologías
+                <BarChartOutlinedIcon /> Cantidad Por Tecnología
               </div>
+            </CardBody>
+            <CardFooter chart>
+              <p className={classes.cardCategory}>
+                increase in today sales.
+              </p>
             </CardFooter>
           </Card>
         </GridItem>
@@ -254,11 +256,16 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="warning">
               <Card2Dash municipios={props.municipios} />
-            </CardHeader>
-            <CardFooter chart>
+            </CardHeader>          
+            <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon /> Por Municipios
+                <TimelineIcon /> Cantidad Por Ministerio
               </div>
+            </CardBody>
+            <CardFooter chart>
+              <p className={classes.cardCategory}>
+                increase in today sales.
+              </p>
             </CardFooter>
           </Card>
         </GridItem>
@@ -266,11 +273,16 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
-            </CardHeader>
-            <CardFooter chart>
+            </CardHeader>          
+            <CardBody>
               <div className={classes.stats}>
-                <TimelineIcon /> Por Ministerios
+                <BarChartOutlinedIcon /> Cantidad Por Empresa
               </div>
+            </CardBody>
+            <CardFooter chart>
+              <p className={classes.cardCategory}>
+                increase in today sales.
+              </p>
             </CardFooter>
           </Card>
         </GridItem>
@@ -288,11 +300,6 @@ export default function Dashboard(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <TablaTotalPorMinist municipios={props.municipios} />
                 </GridItem>
-                <Hidden smUp xsUp implementation="css">
-                <GridItem xs={12} sm={12} md={12}>
-                  cfhgg
-                </GridItem>
-                </Hidden>
                 <GridItem xs={12} sm={12} md={6}>
                   <Map1 />
                 </GridItem>
