@@ -262,6 +262,8 @@ export default function AdminNavbarLinks(props) {
   });
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
 
+  console.log(props.municipios)
+
   useEffect(
 
     () => {
