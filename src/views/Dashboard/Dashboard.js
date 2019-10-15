@@ -42,7 +42,7 @@ const cubejsApi = cubejs(
 
 export default function Dashboard(props) {
 
-  console.log(props.lugarfiltrado)
+  //console.log(props.municipios)
 
 
   const classes = useStyles();
