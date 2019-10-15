@@ -194,7 +194,7 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("purple");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [municipios, setMunicipios] = React.useState();
+  const [municipios, setMunicipios] = React.useState([]);
   const [provincias, setProvincias] = React.useState();
 
   const [lugarFiltrado, setLugarfiltrado] = React.useState("esfeswrf");

@@ -248,12 +248,10 @@ const cubejsApi = cubejs(
 export default function AdminNavbarLinks(props) {
   const classes = useStyles(props);
 
-  const [provinciasSeleccionadas, setprovinciasSeleccionadas] = React.useState([]);
-  const [municipiosSeleccionados, setmunicipiosSeleccionados] = React.useState([]);
-
-
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
+
+  const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
 
   useEffect(
 
@@ -281,47 +279,48 @@ export default function AdminNavbarLinks(props) {
           "dimensions": [
             "SymAgricUrbanaPoint.municipio"
           ],
-          "filters": []
+          "filters": [
+            {
+              "dimension": "SymAgricUrbanaPoint.provincia",
+              "operator": "equals",
+              "values": props.provincias
+            }
+          ]
         })
         var auxm = ['Todos']
-        municipios["loadResponse"]["data"].map((mun) =>
+        var auxmSoloMunicipios = []
+        municipios["loadResponse"]["data"].map((mun) => {
           auxm.push(mun["SymAgricUrbanaPoint.municipio"])
+          auxmSoloMunicipios.push(mun["SymAgricUrbanaPoint.municipio"])
+        }
         )
         await settotalDeMunicipios(auxm);
+        await settotalDeMunicipiosSoloMun(auxmSoloMunicipios);
 
       }
-
       asyncrona();
-
     },
-
     [props]
   )
 
-  const onOpen = event => {
-    setmunicipiosSeleccionados(props.municipios);
-  };
-
   const handleChangeP = async event => {
     props.setLugarfiltrado(event.target.value)
-    setprovinciasSeleccionadas([event.target.value]);
-
-    if (event.target.value.length) {
-      await props.setProvincias([event.target.value])
-    } else {
-      await props.setProvincias(totalDeMunicipios)
-    }
+    await props.setProvincias([event.target.value])
   };
 
   const handleChangeM = async event => {
 
-    await props.setLugarfiltrado(event.target.value);
-    setmunicipiosSeleccionados([event.target.value]);
-
-    if (event.target.value.length) {
-      await props.setMunicipios([event.target.value])
+    if (Array.isArray(event.target.value)) {
+      // es un array
+      await props.setMunicipios(event.target.value)
+    } else if (typeof event.target.value === 'string') {
+      // es un objeto regular que no es un array
+      var aux = [];
+      await aux.push(event.target["value"])
+      await props.setMunicipios(aux)
     } else {
-      await props.setMunicipios(totalDeMunicipios)
+      // puede ser undefined, string, number o boolean.
+      console.log("nada sirvió // puede ser undefined, string, number o boolean.")
     }
 
   };
@@ -333,7 +332,7 @@ export default function AdminNavbarLinks(props) {
         <Select
           className={classes.select_link}
           IconComponent='VignetteIcon'
-          value={provinciasSeleccionadas}
+          value={props.provincias}
           onChange={handleChangeP}
           displayEmpty
           input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />}
@@ -353,10 +352,8 @@ export default function AdminNavbarLinks(props) {
         <Select
           className={classes.select_link}
           IconComponent='VignetteIcon'
-          value={municipiosSeleccionados}
-          //native={true}
+          value={props.municipios}
           onChange={handleChangeM}
-          onOpen={onOpen}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
           renderValue={() => {
@@ -367,7 +364,7 @@ export default function AdminNavbarLinks(props) {
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {totalDeMunicipios.map(name => (
-            name == 'Todos' ? <MenuItem key={name} value={() => { return provinciasSeleccionadas.length ? provinciasSeleccionadas[0] : "Deve seleccionar una Provincia" }} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+            name == 'Todos' ? <MenuItem key={name} value={totalDeMunicipiosSoloMun} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}
         </Select>
       </div>
