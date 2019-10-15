@@ -256,8 +256,8 @@ export default function AdminNavbarLinks(props) {
     checkedA: false
   });
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
+  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(false);
 
-  console.log(props.municipios)
 
   useEffect(
 
@@ -332,7 +332,13 @@ export default function AdminNavbarLinks(props) {
   };
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    if (event.target.checked) {
+      setInavilitarProvMun(event.target.checked)
+    } else {
+      setInavilitarProvMun(event.target.checked)
+    }
   };
+
   return (
     <div>
       <div className={classes.manager}>
@@ -344,6 +350,7 @@ export default function AdminNavbarLinks(props) {
           inputProps={{ 'aria-label': 'secondary checkbox' }}
         />
         <Select
+          disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='VignetteIcon'
           value={props.provincias}
@@ -364,6 +371,7 @@ export default function AdminNavbarLinks(props) {
           ))}
         </Select>
         <Select
+          disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='VignetteIcon'
           value={props.municipios}

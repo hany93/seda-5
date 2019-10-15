@@ -42,7 +42,6 @@ const cubejsApi = cubejs(
 );
 export default function Dashboard(props) {
 
-  console.log(props)
 
   const classes = useStyles();
 
