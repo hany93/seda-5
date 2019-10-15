@@ -230,6 +230,11 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import Switch from '@material-ui/core/Switch';
 import Cuba1 from 'assets/img/cuba1.png'
+import Cuba2 from 'assets/img/cuba2.png'
+import Cuba3 from 'assets/img/cuba3.png'
+import Cuba4 from 'assets/img/cuba4.png'
+import Cuba5 from 'assets/img/cuba5.png'
+import Cuba6 from 'assets/img/cuba6.png'
 // @material-ui/icons
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 // core components
@@ -334,12 +339,14 @@ export default function AdminNavbarLinks(props) {
   return (
     <div>
       <div className={classes.manager}>
-        <img src={Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
+        <img src={state.checkedA ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
         <Switch
           checked={state.checkedA}
           onChange={handleChange('checkedA')}
           value="checkedA"
           inputProps={{ 'aria-label': 'secondary checkbox' }}
+          color='default'
+          style={{ color: state.checkedA ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
         />
         <Select
           className={classes.select_link}
