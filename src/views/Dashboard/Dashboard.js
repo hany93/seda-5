@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // @material-ui/core
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -30,6 +30,7 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import CardBody from "components/Card/CardBody.js";
 import LanguageIcon from '@material-ui/icons/Language';
 import cubejs from '@cubejs-client/core';
+import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(styles);
 
@@ -39,11 +40,7 @@ const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
-
 export default function Dashboard(props) {
-
-  console.log(props.lugarfiltrado)
-
 
   const classes = useStyles();
 
@@ -55,8 +52,6 @@ export default function Dashboard(props) {
   const [loading1, setLoading1] = React.useState(true);
   const [loading2, setLoading2] = React.useState(true);
   const [loading3, setLoading3] = React.useState(true);
-
-
 
   useEffect(
 
@@ -280,18 +275,32 @@ export default function Dashboard(props) {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card >
-          <CardHeader color="primary" stats icon>
-            <CardIcon color="primary">
-              <LanguageIcon />
-            </CardIcon>
-          </CardHeader>
-          <CardBody>
-            <Map1 />
-          </CardBody>
-        </Card>
-      </GridItem>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card >
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <LanguageIcon />
+              </CardIcon>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <TablaTotalPorMinist municipios={props.municipios} />
+                </GridItem>
+                <Hidden smUp xsUp implementation="css">
+                <GridItem xs={12} sm={12} md={12}>
+                  cfhgg
+                </GridItem>
+                </Hidden>
+                <GridItem xs={12} sm={12} md={6}>
+                  <Map1 />
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs

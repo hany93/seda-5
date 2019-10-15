@@ -3,17 +3,7 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import React from 'react';
-
-
-var rasterLayercache = new TileLayer({
-    //source: new OSM({
-    projection: "EPSG:4326",
-    source: new XYZ({
-        //url: 'geocache/osmmapMapnik/{z}/{x}/{-y}.png'
-        url: 'http://localhost/osmmapMapnik/{z}/{x}/{-y}.png'
-    }),
-    type: "base"
-});
+import { defaults } from 'ol/interaction';
 
 let map;
 
@@ -31,6 +21,15 @@ class Maps1 extends React.Component {
             view: new View({
                 center: [22.408987, -79.962018],
                 zoom: 5
+            }),
+            interactions: defaults({
+                doubleClickZoom: true,
+                dragAndDrop: true,
+                keyboardPan: true,
+                keyboardZoom: false,
+                mouseWheelZoom: false,
+                pointer: true,
+                select: true
             })
         });
     };
