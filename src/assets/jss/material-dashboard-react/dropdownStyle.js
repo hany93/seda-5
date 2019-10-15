@@ -97,6 +97,10 @@ const dropdownStyle = theme => ({
     WebkitBackgroundClip: "padding-box",
     backgroundClip: "padding-box"
   },
+  switch1:{
+    backgroundColor: (props) => props.color === "blue" ? infoColor[0] : props.color === "purple" ? primaryColor[0] : props.color === "green" ? successColor[0] : props.color === "orange" ? warningColor[0] : dangerColor[0],
+    color: (props) => props.color === "blue" ? infoColor[0] : props.color === "purple" ? primaryColor[0] : props.color === "green" ? successColor[0] : props.color === "orange" ? warningColor[0] : dangerColor[0],
+  },
   dropdownItem: {
     ...defaultFont,
     fontSize: "13px",
