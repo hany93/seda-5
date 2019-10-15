@@ -68,7 +68,7 @@ class gg extends Component {
             <QueryRenderer
                 query={{
                     "measures": [
-                        "SymAgricUrbanaPoint.count"
+                        "SymAgricUrbanaPoint.areaTotal"
                     ],
                     "timeDimensions": [],
                     "dimensions": [

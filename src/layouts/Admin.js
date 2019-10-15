@@ -184,8 +184,6 @@ const cubejsApi = cubejs(
 
 export default function Admin({ ...rest }) {
 
-  
-
 
   // styles
   const classes = useStyles();
@@ -194,7 +192,7 @@ export default function Admin({ ...rest }) {
   // states and functions
   const [image, setImage] = React.useState(bgImage);
   const [color, setColor] = React.useState("purple");
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
+  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [municipios, setMunicipios] = React.useState();
   const [provincias, setProvincias] = React.useState();

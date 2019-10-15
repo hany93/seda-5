@@ -228,6 +228,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
+import Switch from '@material-ui/core/Switch';
+import Cuba1 from 'assets/img/cuba1.png'
 // @material-ui/icons
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 // core components
@@ -250,7 +252,9 @@ export default function AdminNavbarLinks(props) {
 
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
-
+  const [state, setState] = React.useState({
+    checkedA: false
+  });
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
 
   console.log(props.municipios)
@@ -326,11 +330,19 @@ export default function AdminNavbarLinks(props) {
     }
 
   };
-
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
   return (
     <div>
       <div className={classes.manager}>
-
+        <img src={Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
+        <Switch
+          checked={state.checkedA}
+          onChange={handleChange('checkedA')}
+          value="checkedA"
+          inputProps={{ 'aria-label': 'secondary checkbox' }}
+        />
         <Select
           className={classes.select_link}
           IconComponent='VignetteIcon'
