@@ -350,11 +350,11 @@ export default function AdminNavbarLinks(props) {
   return (
     <div>
       <div className={classes.manager}>
-        <img src={state.checkedA ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
+        <img alt='País' title='País' src={state.checkedA ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
         <Switch
           checked={state.checkedA}
           onChange={handleChange('checkedA')}
-          value="checkedA"
+          value="checked"
           inputProps={{ 'aria-label': 'secondary checkbox' }}
           color='default'
           style={{ color: state.checkedA ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
@@ -362,7 +362,7 @@ export default function AdminNavbarLinks(props) {
         <Select
           disabled={inavilitarProvMun}
           className={classes.select_link}
-          IconComponent='VignetteIcon'
+          IconComponent='span'
           value={props.provincias}
           onChange={handleChangeP}
           displayEmpty
@@ -371,7 +371,7 @@ export default function AdminNavbarLinks(props) {
             return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Provincia</span>;
           }}
         >
-          <MenuItem value='' disabled className={classes.dropdownItem} >
+          <MenuItem value='' disabled={true} className={classes.dropdownItem} >
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Provincia
           </MenuItem>
           {totalDeProvincias.map(name => (
@@ -383,7 +383,7 @@ export default function AdminNavbarLinks(props) {
         <Select
           disabled={inavilitarProvMun}
           className={classes.select_link}
-          IconComponent='VignetteIcon'
+          IconComponent='span'
           value={props.municipios}
           onChange={handleChangeM}
           displayEmpty
@@ -392,7 +392,7 @@ export default function AdminNavbarLinks(props) {
             return <span><LocationOnIcon className={classes.icons} style={{ fontSize: 16, marginRight: window.innerWidth > 959 ? "10px" : "none" }} /> Municipio</span>;
           }}
         >
-          <MenuItem value='' disabled className={classes.dropdownItem}>
+          <MenuItem value='' disabled={true} className={classes.dropdownItem}>
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {totalDeMunicipios.map(name => (

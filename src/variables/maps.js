@@ -6,11 +6,9 @@ import React from 'react';
 import { defaults } from 'ol/interaction';
 import { defaults as defaultsControls, FullScreen } from 'ol/control';
 
-let map;
-
 class Maps1 extends React.Component {
     componentDidMount = () => {
-        map = new Map({
+        new Map({
             target: 'map',
             layers: [
                 new TileLayer({

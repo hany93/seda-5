@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // @material-ui/core
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -18,11 +18,9 @@ import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
 import Card4Dash from "variables/card4Dashboard.js";
-import TablaTotalPorMinist from "variables/tablaTotalPorMinist/index.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
-import ShowChartRoundedIcon from '@material-ui/icons/ShowChartRounded';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import Map1 from 'variables/maps.js';
 import { Spin } from 'antd';
@@ -42,8 +40,11 @@ const cubejsApi = cubejs(
 );
 export default function Dashboard(props) {
 
+<<<<<<< HEAD
   console.log(props)
 
+=======
+>>>>>>> 55ec5d58f11aec4445c60c202b5755b3446f3e2c
   const classes = useStyles();
 
   const [organoponico, setOrganoponico] = React.useState([]);
@@ -300,7 +301,7 @@ export default function Dashboard(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <TablaTotalPorMinist municipios={props.municipios} />
+                  <TablaTotalPorTecnolog municipios={props.municipios} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <Map1 />
@@ -327,13 +328,6 @@ export default function Dashboard(props) {
                 tabIcon: TableChartIcon,
                 tabContent: (
                   <TablaTotalPorTecnolog municipios={props.municipios} />
-                )
-              },
-              {
-                tabName: "Ministerio",
-                tabIcon: TableChartIcon,
-                tabContent: (
-                  <TablaTotalPorMinist municipios={props.municipios} />
                 )
               }
             ]}
