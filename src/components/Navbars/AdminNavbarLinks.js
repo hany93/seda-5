@@ -335,10 +335,13 @@ export default function AdminNavbarLinks(props) {
     }
 
   };
+
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
     if (event.target.checked) {
       setInavilitarProvMun(event.target.checked)
+      // props.setMunicipios()
+      // props.setProvincias()
     } else {
       setInavilitarProvMun(event.target.checked)
     }

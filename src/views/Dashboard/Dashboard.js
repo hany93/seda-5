@@ -42,6 +42,7 @@ const cubejsApi = cubejs(
 );
 export default function Dashboard(props) {
 
+  console.log(props)
 
   const classes = useStyles();
 
@@ -164,7 +165,7 @@ export default function Dashboard(props) {
           <Card plain>
             <CardHeader color="info">
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
-              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight:5 }} /> {props.lugarfiltrado}</h4>
+              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
             </CardHeader>
           </Card>
         </GridItem>
@@ -240,7 +241,7 @@ export default function Dashboard(props) {
           <Card >
             <CardHeader color="success">
               <Card1Dash municipios={props.municipios} />
-            </CardHeader>            
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <BarChartOutlinedIcon /> Cantidad Por Tecnología
@@ -257,7 +258,7 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="warning">
               <Card2Dash municipios={props.municipios} />
-            </CardHeader>          
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <TimelineIcon /> Cantidad Por Ministerio
@@ -274,7 +275,7 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
-            </CardHeader>          
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <BarChartOutlinedIcon /> Cantidad Por Empresa

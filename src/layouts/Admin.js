@@ -184,6 +184,7 @@ const cubejsApi = cubejs(
 
 export default function Admin({ ...rest }) {
 
+  console.log(rest.match.params)
 
   // styles
   const classes = useStyles();
@@ -225,6 +226,8 @@ export default function Admin({ ...rest }) {
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
 
+    //console.log(rest.match.params)
+
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -244,6 +247,9 @@ export default function Admin({ ...rest }) {
   }, [mainPanel]);
 
   React.useEffect(() => {
+
+   // console.log(rest.match.params)
+
     async function asyncrona() {
 
       const municipios = await cubejsApi.load({
@@ -315,7 +321,7 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard" render={() => <Dashboard municipios={municipios} provincias={provincias} lugarfiltrado={lugarFiltrado} />} />
+              <Route path="/admin/dashboard" render={() => <Dashboard rest={{ ...rest }} municipios={municipios} provincias={provincias} lugarfiltrado={lugarFiltrado} />} />
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}</div>
         </div>
