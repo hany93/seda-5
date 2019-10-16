@@ -261,8 +261,8 @@ export default function AdminNavbarLinks(props) {
     checkedA: false
   });
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
+  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(false);
 
-  console.log(props.municipios)
 
   useEffect(
 
@@ -337,7 +337,13 @@ export default function AdminNavbarLinks(props) {
   };
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    if (event.target.checked) {
+      setInavilitarProvMun(event.target.checked)
+    } else {
+      setInavilitarProvMun(event.target.checked)
+    }
   };
+
   return (
     <div>
       <div className={classes.manager}>
@@ -351,6 +357,7 @@ export default function AdminNavbarLinks(props) {
           style={{ color: state.checkedA ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
         />
         <Select
+          disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
           value={props.provincias}
@@ -371,6 +378,7 @@ export default function AdminNavbarLinks(props) {
           ))}
         </Select>
         <Select
+          disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
           value={props.municipios}
