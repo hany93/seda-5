@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import { Line, Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 const COLORS_SERIES = ['#FFF', '#FFF', '#FFF'];
 

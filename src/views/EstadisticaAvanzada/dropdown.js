@@ -4,7 +4,6 @@ import { Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
-import { async } from 'q';
 
 export default function Dropdown(props) {
 

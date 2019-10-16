@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // @material-ui/core
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -18,11 +18,9 @@ import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
 import Card4Dash from "variables/card4Dashboard.js";
-import TablaTotalPorMinist from "variables/tablaTotalPorMinist/index.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
-import ShowChartRoundedIcon from '@material-ui/icons/ShowChartRounded';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import Map1 from 'variables/maps.js';
 import { Spin } from 'antd';
@@ -41,8 +39,6 @@ const cubejsApi = cubejs(
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
 export default function Dashboard(props) {
-
-  console.log(props)
 
   const classes = useStyles();
 
@@ -165,7 +161,7 @@ export default function Dashboard(props) {
           <Card plain>
             <CardHeader color="info">
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
-              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight:5 }} /> {props.lugarfiltrado}</h4>
+              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
             </CardHeader>
           </Card>
         </GridItem>
@@ -241,7 +237,7 @@ export default function Dashboard(props) {
           <Card >
             <CardHeader color="success">
               <Card1Dash municipios={props.municipios} />
-            </CardHeader>            
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <BarChartOutlinedIcon /> Cantidad Por Tecnología
@@ -258,7 +254,7 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="warning">
               <Card2Dash municipios={props.municipios} />
-            </CardHeader>          
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <TimelineIcon /> Cantidad Por Ministerio
@@ -275,7 +271,7 @@ export default function Dashboard(props) {
           <Card chart>
             <CardHeader color="danger">
               <Card3Dash municipios={props.municipios} />
-            </CardHeader>          
+            </CardHeader>
             <CardBody>
               <div className={classes.stats}>
                 <BarChartOutlinedIcon /> Cantidad Por Empresa
@@ -300,7 +296,7 @@ export default function Dashboard(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <TablaTotalPorMinist municipios={props.municipios} />
+                  <TablaTotalPorTecnolog municipios={props.municipios} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <Map1 />
@@ -327,13 +323,6 @@ export default function Dashboard(props) {
                 tabIcon: TableChartIcon,
                 tabContent: (
                   <TablaTotalPorTecnolog municipios={props.municipios} />
-                )
-              },
-              {
-                tabName: "Ministerio",
-                tabIcon: TableChartIcon,
-                tabContent: (
-                  <TablaTotalPorMinist municipios={props.municipios} />
                 )
               }
             ]}

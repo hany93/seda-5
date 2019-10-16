@@ -14,26 +14,21 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-    state = {
-        showGM: true,
-        showGD: true
-    }
-
-    async componentDidMount() {
-        const tt = await cubejsApi.load({
-            "measures": [],
-            "timeDimensions": [],
-            "dimensions": [
-                "SymAgricUrbanaPoint.municipio"
-            ],
-            "filters": []
-        })
-        console.log(tt["loadResponse"]["data"])
-        var aux = []
-        tt["loadResponse"]["data"].map((p) =>
-            aux.push(p["SymAgricUrbanaPoint.municipio"])
-        )
-    }
+    // async componentDidMount() {
+    //     const tt = await cubejsApi.load({
+    //         "measures": [],
+    //         "timeDimensions": [],
+    //         "dimensions": [
+    //             "SymAgricUrbanaPoint.municipio"
+    //         ],
+    //         "filters": []
+    //     })
+    //     console.log(tt["loadResponse"]["data"])
+    //     var aux = []
+    //     tt["loadResponse"]["data"].map((p) =>
+    //         aux.push(p["SymAgricUrbanaPoint.municipio"])
+    //     )
+    // }
 
     //[0]["SymAgricUrbanaPoint.municipio"]
 
@@ -58,13 +53,6 @@ class gg extends Component {
                 }}
                 cubejsApi={cubejsApi}
                 render={({ resultSet, measures, availableMeasures, updateMeasures }) => {
-                    if (updateMeasures) {
-                        //console.log(updateMeasures)
-                    }
-
-                    if (!resultSet) {
-                        return (<Spin />)
-                    }
 
                     if (resultSet) {
 
@@ -78,9 +66,12 @@ class gg extends Component {
                                     pagination={false}
                                     columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key }))}
                                     dataSource={tablepivotNew}
+                                    rowKey={record => record.uid}
                                 />
                             </div>
                         )
+                    } else {
+                        return (<Spin />)
                     }
                 }}
             />);

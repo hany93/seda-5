@@ -47,6 +47,7 @@ class gg extends Component {
 
       case "table":
         this.setState({ tipoGraficFunction: this.tableRender })
+        break;
 
       default:
         break;
