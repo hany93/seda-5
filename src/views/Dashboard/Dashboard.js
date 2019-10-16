@@ -40,11 +40,6 @@ const cubejsApi = cubejs(
 );
 export default function Dashboard(props) {
 
-<<<<<<< HEAD
-  console.log(props)
-
-=======
->>>>>>> 55ec5d58f11aec4445c60c202b5755b3446f3e2c
   const classes = useStyles();
 
   const [organoponico, setOrganoponico] = React.useState([]);
