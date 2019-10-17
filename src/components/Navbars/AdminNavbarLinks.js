@@ -265,6 +265,10 @@ export default function AdminNavbarLinks(props) {
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(false);
 
 
+  const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState(false);
+  const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState(false);
+
+
   useEffect(
 
     () => {
@@ -316,7 +320,12 @@ export default function AdminNavbarLinks(props) {
   )
 
   const handleChangeP = async event => {
-    props.setLugarfiltrado(event.target.value)
+    var provinciamunicipoio = []
+    provinciamunicipoio.push(props.lufarFiltrado)
+    //provinciamunicipoio[0] = (event.target.value)
+    //provinciamunicipoio.splice(0, 0, event.target.value);
+    provinciamunicipoio.push(event.target.value)
+    props.setLugarfiltrado(provinciamunicipoio)
     await props.setProvincias([event.target.value])
   };
 
@@ -325,11 +334,20 @@ export default function AdminNavbarLinks(props) {
     if (Array.isArray(event.target.value)) {
       // es un array
       await props.setMunicipios(event.target.value)
+
+      var provinciamunicipoio = props.lufarFiltrado
+      provinciamunicipoio[1] = "Todos"
+      props.setLugarfiltrado(provinciamunicipoio)
+
     } else if (typeof event.target.value === 'string') {
       // es un objeto regular que no es un array
       var aux = [];
       await aux.push(event.target["value"])
       await props.setMunicipios(aux)
+
+      // var provinciamunicipoio = props.lufarFiltrado
+      // provinciamunicipoio[1] = event.target.value
+      // props.setLugarfiltrado(provinciamunicipoio)
     } else {
       // puede ser undefined, string, number o boolean.
       console.log("nada sirvió // puede ser undefined, string, number o boolean.")
@@ -339,11 +357,21 @@ export default function AdminNavbarLinks(props) {
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+
     if (event.target.checked) {
-      setInavilitarProvMun(event.target.checked)
+      setProvinciaAntesDePais(props.provincias)
+      setMunicipioAntesDePais(props.municipios)
       props.setProvincias(totalDeProvincias)
       props.setMunicipios(totalDeMunicipios)
+      props.setLugarfiltrado("País")
+      setInavilitarProvMun(event.target.checked)
     } else {
+      props.setProvincias(provinciaAntesDePais)
+      props.setMunicipios(municipioAntesDePais)
+      var provinciaYmunicipio = [];
+      provinciaYmunicipio.push(provinciaAntesDePais)
+      provinciaYmunicipio.push(municipioAntesDePais)
+      props.setLugarfiltrado(provinciaYmunicipio)
       setInavilitarProvMun(event.target.checked)
     }
   };
