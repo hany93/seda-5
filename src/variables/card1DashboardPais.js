@@ -71,7 +71,7 @@ class gg extends Component {
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "SymAgricUrbanaPoint.municipio"
+                        "SymAgricUrbanaPoint.tecnologia"
                     ],
                     "filters": [
                         {

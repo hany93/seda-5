@@ -17,11 +17,16 @@ import Campo from "assets/img/campo.png";
 import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
-import Card4Dash from "variables/card4Dashboard.js";
 import Card1Dashp from "variables/card1DashboardProv.js";
 import Card2Dashp from "variables/card2DashboardProv.js";
 import Card3Dashp from "variables/card3DashboardProv.js";
 import Card4Dashp from "variables/card4DashboardProv.js";
+import Card1Dashpais from "variables/card1DashboardPais";
+import Card2Dashpais from "variables/card2DashboardPais.js";
+import Card3Dashpais from "variables/card3DashboardPais.js";
+import Card4Dashpais from "variables/card4DashboardPais.js";
+import Card5Dashpais from "variables/card4DashboardPais.js";
+import Card4Dash from "variables/card4Dashboard.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
@@ -240,7 +245,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card >
             <CardHeader color="success">
-              <Card1Dash municipios={props.municipios} />
+              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} /> : <Card1Dashpais municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
@@ -257,7 +262,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              {props.municipios.length != 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} /> : <Card2Dashpais municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
@@ -274,7 +279,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
-              <Card3Dash municipios={props.municipios} />
+              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} /> : <Card3Dashpais municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
