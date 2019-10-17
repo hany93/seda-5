@@ -264,10 +264,8 @@ export default function AdminNavbarLinks(props) {
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(false);
 
-
   const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState(false);
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState(false);
-
 
   useEffect(
 
@@ -335,19 +333,20 @@ export default function AdminNavbarLinks(props) {
       // es un array
       await props.setMunicipios(event.target.value)
 
-      var provinciamunicipoio = props.lufarFiltrado
-      provinciamunicipoio[1] = "Todos"
+      var provinciamunicipoio = []
+      provinciamunicipoio.push(props.provincias)
+      provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
-
     } else if (typeof event.target.value === 'string') {
       // es un objeto regular que no es un array
       var aux = [];
       await aux.push(event.target["value"])
       await props.setMunicipios(aux)
 
-      // var provinciamunicipoio = props.lufarFiltrado
-      // provinciamunicipoio[1] = event.target.value
-      // props.setLugarfiltrado(provinciamunicipoio)
+      var provinciamunicipoio = []
+      provinciamunicipoio.push(props.provincias)
+      provinciamunicipoio.push(aux)
+      props.setLugarfiltrado(provinciamunicipoio)
     } else {
       // puede ser undefined, string, number o boolean.
       console.log("nada sirvió // puede ser undefined, string, number o boolean.")
