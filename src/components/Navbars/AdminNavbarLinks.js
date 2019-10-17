@@ -229,6 +229,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import Switch from '@material-ui/core/Switch';
+import Cuba0 from 'assets/img/cuba0.png'
 import Cuba1 from 'assets/img/cuba1.png'
 import Cuba2 from 'assets/img/cuba2.png'
 import Cuba3 from 'assets/img/cuba3.png'
@@ -350,7 +351,7 @@ export default function AdminNavbarLinks(props) {
   return (
     <div>
       <div className={classes.manager}>
-        <img alt='País' title='País' src={state.checkedA ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : Cuba1} className={classes.icons} style={{ fontSize: 50 }} />
+        <img alt='País' title='País' src={state.checkedA ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
         <Switch
           checked={state.checkedA}
           onChange={handleChange('checkedA')}

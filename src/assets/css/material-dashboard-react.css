@@ -52,19 +52,48 @@
   display: -webkit-flex;
   display: flex;
 }
+.ol-zoom.ol-unselectable.ol-control{
+  float:left;
+  margin-left: 15px;
+  margin-top: 5px;
+  display: flex;
+  border-color: #ab47bc;
+}
+.ol-zoom.ol-unselectable.ol-control button{
+  border-color: #ab47bc;
+  background-color: #8e24aa;
+  color:#fff;
+}
+.ol-full-screen.ol-unselectable.ol-control button{
+  border-color: #ab47bc;
+  background-color: #8e24aa;
+  color:#fff;
+}
+.ol-full-screen.ol-unselectable.ol-control{
+  float:right ;
+  margin-right: 15px;
+  margin-top: 5px;
+  display: flex;
+  border-color: #ab47bc;
+} 
+#map .ol-viewport .ol-unselectable.ol-layers .ol-layer canvas{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
 .ol-viewport{
   border-radius: 10px;
 }
-.ol-viewport .ol-unselectable .ol-layers{
+.ol-viewport.ol-unselectable.ol-layers{
   border-radius: 10px;
 }
-.ol-viewport .ol-unselectable .ol-layers .ol-layer{
+.ol-viewport.ol-unselectable.ol-layers.ol-layer{
   border-radius: 10px;
 }
-.ol-viewport .ol-unselectable .ol-layers .ol-overlaycontainer{
+.ol-viewport.ol-unselectable.ol-layers.ol-overlaycontainer{
   border-radius: 10px;
 }
-.ol-viewport .ol-unselectable .ol-layers .ol-overlaycontainer-stopevent{
+.ol-viewport.ol-unselectable.ol-layers.ol-overlaycontainer-stopevent{
   border-radius: 10px;
 }
 .ct-label {
