@@ -184,7 +184,6 @@ const cubejsApi = cubejs(
 
 export default function Admin({ ...rest }) {
 
-  console.log(rest.match.params)
 
   // styles
   const classes = useStyles();
@@ -198,7 +197,7 @@ export default function Admin({ ...rest }) {
   const [municipios, setMunicipios] = React.useState();
   const [provincias, setProvincias] = React.useState();
 
-  const [lugarFiltrado, setLugarfiltrado] = React.useState("esfeswrf");
+  const [lugarFiltrado, setLugarfiltrado] = React.useState(["País"]);
 
 
 
@@ -291,6 +290,7 @@ export default function Admin({ ...rest }) {
         setProvincias={setProvincias}
         provincias={provincias}
         setLugarfiltrado={setLugarfiltrado}
+        lugarFiltrado={lugarFiltrado}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -303,6 +303,7 @@ export default function Admin({ ...rest }) {
           setProvincias={setProvincias}
           provincias={provincias}
           setLugarfiltrado={setLugarfiltrado}
+          lugarFiltrado={lugarFiltrado}
           {...rest}
         />
         <div className={classes.content}>
