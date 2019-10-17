@@ -18,6 +18,10 @@ import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
 import Card4Dash from "variables/card4Dashboard.js";
+import Card1Dashp from "variables/card1DashboardProv.js";
+import Card2Dashp from "variables/card2DashboardProv.js";
+import Card3Dashp from "variables/card3DashboardProv.js";
+import Card4Dashp from "variables/card4DashboardProv.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
@@ -253,7 +257,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              <Card2Dash municipios={props.municipios} />
+              {props.municipios.length != 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
