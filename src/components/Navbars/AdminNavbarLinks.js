@@ -341,8 +341,8 @@ export default function AdminNavbarLinks(props) {
     setState({ ...state, [name]: event.target.checked });
     if (event.target.checked) {
       setInavilitarProvMun(event.target.checked)
-      // props.setMunicipios()
-      // props.setProvincias()
+      props.setProvincias(totalDeProvincias)
+      props.setMunicipios(totalDeMunicipios)
     } else {
       setInavilitarProvMun(event.target.checked)
     }

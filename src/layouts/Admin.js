@@ -226,8 +226,6 @@ export default function Admin({ ...rest }) {
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
 
-    //console.log(rest.match.params)
-
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -248,10 +246,7 @@ export default function Admin({ ...rest }) {
 
   React.useEffect(() => {
 
-   // console.log(rest.match.params)
-
     async function asyncrona() {
-
       const municipios = await cubejsApi.load({
         "measures": [],
         "timeDimensions": [],
@@ -265,10 +260,15 @@ export default function Admin({ ...rest }) {
         auxm.push(mun["SymAgricUrbanaPoint.municipio"])
       )
       await setMunicipios(auxm);
-
     }
 
-    asyncrona()
+    if (rest.match.params.provincia && rest.match.params.municipio) {
+      console.log("entraron los dos")
+      setProvincias([rest.match.params.provincia])
+      setMunicipios([rest.match.params.municipio])
+    } else {
+      asyncrona()
+    }
 
   },
 
