@@ -32,7 +32,7 @@ export default function AdminNavbarLinks(props) {
 
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
-  const [stateSwitch, setStateSwitch] = React.useState(true);
+  const [check, setCheck] = React.useState(true);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
 
@@ -125,34 +125,31 @@ export default function AdminNavbarLinks(props) {
 
   };
 
-  const handleChange = async event => {
-
-    if (stateSwitch) {
-      await setStateSwitch(false);
+  const handleChange = event => {
+    if (check) {
+      setCheck(false);    
     } else {
-      await setStateSwitch(true);
+      setCheck(true);    
     }
 
-    if (stateSwitch) {
-      console.log(stateSwitch)
-
+    if (check) {
+      console.log(check)
       //cuando se pone por pais
-      await setProvinciaAntesDePais(props.provincias)
-      await setMunicipioAntesDePais(props.municipios)
-      await props.setProvincias(totalDeProvincias)
-      await props.setMunicipios(totalDeMunicipios)
-      await props.setLugarfiltrado("País")
-      await setInavilitarProvMun(stateSwitch)
+      setProvinciaAntesDePais(props.provincias)
+      setMunicipioAntesDePais(props.municipios)
+      props.setProvincias(totalDeProvincias)
+      props.setMunicipios(totalDeMunicipios)
+      props.setLugarfiltrado("País")
+      setInavilitarProvMun(true)  
     } else {
-      console.log(stateSwitch)
-
-     await props.setProvincias(provinciaAntesDePais)
-      await props.setMunicipios(municipioAntesDePais)
+      console.log(check)
+      props.setProvincias(provinciaAntesDePais)
+      props.setMunicipios(municipioAntesDePais)
       var provinciaYmunicipio = [];
-      await provinciaYmunicipio.push(provinciaAntesDePais)
-      await provinciaYmunicipio.push(municipioAntesDePais)
-      await props.setLugarfiltrado(provinciaYmunicipio)
-      await setInavilitarProvMun(stateSwitch)
+      provinciaYmunicipio.push(provinciaAntesDePais)
+      provinciaYmunicipio.push(municipioAntesDePais)
+      props.setLugarfiltrado(provinciaYmunicipio)
+      setInavilitarProvMun(false)  
     }
 
   };
@@ -160,15 +157,14 @@ export default function AdminNavbarLinks(props) {
   return (
     <div>
       <div className={classes.manager}>
-        <img alt='País' title='País' src={stateSwitch ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
+        <img alt='País' title='País' src={check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
         <Switch
-          defaultChecked
-          checked={stateSwitch}
+          checked={check}
           onChange={handleChange}
           //value="checked"
           inputProps={{ 'aria-label': 'secondary checkbox' }}
           color='default'
-          style={{ color: stateSwitch ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
+          style={{ color: check ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
         />
         <Select
           disabled={inavilitarProvMun}
