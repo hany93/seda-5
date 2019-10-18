@@ -246,17 +246,32 @@ export default function Admin({ ...rest }) {
   React.useEffect(() => {
 
     async function asyncrona() {
+
+      const provincias = await cubejsApi.load({
+        "measures": [],
+        "timeDimensions": [],
+        "dimensions": [
+          "EntidadAgricUrbana.provincia"
+        ],
+        "filters": []
+      })
+      var auxp = []
+      provincias["loadResponse"]["data"].map((prov) =>
+        auxp.push(prov["EntidadAgricUrbana.provincia"])
+      )
+      await setProvincias(auxp);
+
       const municipios = await cubejsApi.load({
         "measures": [],
         "timeDimensions": [],
         "dimensions": [
-          "SymAgricUrbanaPoint.municipio"
+          "EntidadAgricUrbana.municipio"
         ],
         "filters": []
       })
       var auxm = []
       municipios["loadResponse"]["data"].map((mun) =>
-        auxm.push(mun["SymAgricUrbanaPoint.municipio"])
+        auxm.push(mun["EntidadAgricUrbana.municipio"])
       )
       await setMunicipios(auxm);
     }

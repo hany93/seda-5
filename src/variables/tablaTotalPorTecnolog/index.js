@@ -19,36 +19,36 @@ class gg extends Component {
     //         "measures": [],
     //         "timeDimensions": [],
     //         "dimensions": [
-    //             "SymAgricUrbanaPoint.municipio"
+    //             "EntidadAgricUrbana.municipio"
     //         ],
     //         "filters": []
     //     })
     //     console.log(tt["loadResponse"]["data"])
     //     var aux = []
     //     tt["loadResponse"]["data"].map((p) =>
-    //         aux.push(p["SymAgricUrbanaPoint.municipio"])
+    //         aux.push(p["EntidadAgricUrbana.municipio"])
     //     )
     // }
 
-    //[0]["SymAgricUrbanaPoint.municipio"]
+    //[0]["EntidadAgricUrbana.municipio"]
 
     render() {
         return (
             <QueryRenderer
                 query={{
                     "measures": [
-                        "SymAgricUrbanaPoint.count"
+                        "EntidadAgricUrbana.count"
                     ],
                     "timeDimensions": [],
                     "filters": [
                         {
-                            "dimension": "SymAgricUrbanaPoint.municipio",
+                            "dimension": "EntidadAgricUrbana.municipio",
                             "operator": "equals",
                             "values": this.props.municipios
                         }
                     ],
                     "dimensions": [
-                        "SymAgricUrbanaPoint.tecnologia"
+                        "EntidadAgricUrbana.tecnologia"
                     ]
                 }}
                 cubejsApi={cubejsApi}
@@ -58,8 +58,8 @@ class gg extends Component {
 
                         var tablepivotNew = resultSet.tablePivot();
 
-                        resultSet["loadResponse"]["annotation"]["dimensions"]["SymAgricUrbanaPoint.tecnologia"]["title"] = "Tecnología:"
-                        resultSet["loadResponse"]["annotation"]["measures"]["SymAgricUrbanaPoint.count"]["title"] = "Total"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.tecnologia"]["title"] = "Tecnología:"
+                        resultSet["loadResponse"]["annotation"]["measures"]["EntidadAgricUrbana.count"]["title"] = "Total"
                         return (
                             <div>
                                 <Table

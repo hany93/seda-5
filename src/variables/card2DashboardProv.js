@@ -69,15 +69,23 @@ class gg extends Component {
             <QueryRenderer
                 query={{
                     "measures": [
+<<<<<<< HEAD
                         "SymAgricUrbanaPoint.count"
                     ],
                     "timeDimensions": [],
                     "dimensions": [
                         "SymAgricUrbanaPoint.tecnologia"
+=======
+                        "EntidadAgricUrbana.areaTotal"
+                    ],
+                    "timeDimensions": [],
+                    "dimensions": [
+                        "EntidadAgricUrbana.ministerio"
+>>>>>>> ddd3aac7de06539cef595d2501713717ec476846
                     ],
                     "filters": [
                         {
-                            "dimension": "SymAgricUrbanaPoint.municipio",
+                            "dimension": "EntidadAgricUrbana.municipio",
                             "operator": "equals",
                             "values": this.props.municipios
                         }

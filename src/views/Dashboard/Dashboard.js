@@ -68,96 +68,96 @@ export default function Dashboard(props) {
     () => {
       async function asyncrona() {
         const organoponicos = await cubejsApi.load({
-          "measures": ["SymAgricUrbanaPoint.count"],
+          "measures": ["EntidadAgricUrbana.count"],
           "timeDimensions": [],
           "dimensions": [
-            //"SymAgricUrbanaPoint.municipio"
+            //"EntidadAgricUrbana.municipio"
           ],
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
                 "organoponico"
               ]
             },
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
             }
           ]
         })
-        var auxo = organoponicos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        var auxo = organoponicos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         await setOrganoponico(auxo);
         setLoading(false);
 
         const huertos = await cubejsApi.load({
-          "measures": ["SymAgricUrbanaPoint.count"],
+          "measures": ["EntidadAgricUrbana.count"],
           "timeDimensions": [],
           "dimensions": [],
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
                 "Huerto"
               ]
             },
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
             }
           ]
         })
-        var auxh = huertos["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        var auxh = huertos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         await setHuerto(auxh);
         setLoading1(false);
 
         const parcelas = await cubejsApi.load({
-          "measures": ["SymAgricUrbanaPoint.count"],
+          "measures": ["EntidadAgricUrbana.count"],
           "timeDimensions": [],
           "dimensions": [],
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
                 "Parcela"
               ]
             },
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
             }
           ]
         })
-        var auxp = parcelas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        var auxp = parcelas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         await setParcela(auxp);
         setLoading2(false);
 
         const fincas = await cubejsApi.load({
-          "measures": ["SymAgricUrbanaPoint.count"],
+          "measures": ["EntidadAgricUrbana.count"],
           "timeDimensions": [],
           "dimensions": [],
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.tecnologia",
+              "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
                 "Finca"
               ]
             },
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
             }
           ]
         })
-        var auxf = fincas["loadResponse"]["data"][0]["SymAgricUrbanaPoint.count"]
+        var auxf = fincas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         await setFinca(auxf);
         setLoading3(false);
       }

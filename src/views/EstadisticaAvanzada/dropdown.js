@@ -9,8 +9,8 @@ export default function Dropdown(props) {
 
     const [showGM, setShowGM] = React.useState(true);
     const [showGD, setShowGD] = React.useState(true);
-    const [mesure, setMesure] = React.useState(['SymAgricUrbanaPoint.count']);
-    const [dimension, setDimension] = React.useState(['SymAgricUrbanaPoint.tecnologia']);
+    const [mesure, setMesure] = React.useState(['EntidadAgricUrbana.count']);
+    const [dimension, setDimension] = React.useState(['EntidadAgricUrbana.tecnologia']);
     const [grafico, setGrafico] = React.useState('bar');
 
     const handleChangeMeasures = async event => {
@@ -45,10 +45,10 @@ export default function Dropdown(props) {
                     style={{ width: '50%' }}
                     onChange={handleChangeMeasures}
                     input={<Input id="select-multiple" />}
-                    defaultValue="SymAgricUrbanaPoint.count"
+                    defaultValue="EntidadAgricUrbana.count"
                 >
-                    <MenuItem value="SymAgricUrbanaPoint.count">Cantidad</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.areaTotal">Área</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
                 </Select>
             </Row>
             <Row>
@@ -60,16 +60,16 @@ export default function Dropdown(props) {
                     style={{ width: '50%' }}
                     onChange={handleChangeDimensions}
                     input={<Input id="select-multiple1" />}
-                    defaultValue="SymAgricUrbanaPoint.nombre"
+                    defaultValue="EntidadAgricUrbana.nombre"
                 >
-                    <MenuItem value="SymAgricUrbanaPoint.nombre">Nombre</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.tecnologia">Tecnología</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.ministerio">Ministerio</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.consejoPopular">Consejo Popular</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.municipio">Municipio</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.provincia">Provincia</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.entidad">Entidad</MenuItem>
-                    <MenuItem value="SymAgricUrbanaPoint.productor">Productor</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
                 </Select>
             </Row>
             <Row>
