@@ -17,15 +17,15 @@ class gg extends Component {
 
   barRender = ({ resultSet }) => {
     const data = {
-        labels: resultSet.categories().map(c => c.category),
-        datasets: resultSet.series().map((s, index) => (
-            {
-                label: 'Área Total',
-                data: s.series.map(r => r.value),
-                backgroundColor: COLORS_SERIES[index],
-                fill: false
-            }
-        )),
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: 'Cantidad',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
     };
     const options = {
       legend: { display: false },
@@ -43,7 +43,7 @@ class gg extends Component {
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(ha)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)', fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",
@@ -60,7 +60,7 @@ class gg extends Component {
 
   renderChart = (Component) => ({ resultSet, error }) => (
     (resultSet && <Component resultSet={resultSet} />) ||
-    (error && 'No existen datos.') ||
+    (error && error.toString()) ||
     (<Spin />)
   )
 
@@ -69,23 +69,15 @@ class gg extends Component {
       <QueryRenderer
         query={{
           "measures": [
-<<<<<<< HEAD
-            "SymAgricUrbanaPoint.areaTotal"
+            "SymAgricUrbanaPoint.count"
           ],
           "timeDimensions": [],
           "dimensions": [
-            "SymAgricUrbanaPoint.tecnologia"
-=======
-            "EntidadAgricUrbana.count"
-          ],
-          "timeDimensions": [],
-          "dimensions": [
-            "EntidadAgricUrbana.entidad"
->>>>>>> ddd3aac7de06539cef595d2501713717ec476846
+            "SymAgricUrbanaPoint.entidad"
           ],
           "filters": [
             {
-              "dimension": "EntidadAgricUrbana.municipio",
+              "dimension": "SymAgricUrbanaPoint.municipio",
               "operator": "equals",
               "values": this.props.municipios
             }

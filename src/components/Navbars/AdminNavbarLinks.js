@@ -16,6 +16,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
 import cubejs from '@cubejs-client/core';
+import { async } from "q";
 
 const useStyles = makeStyles(styles);
 
@@ -124,35 +125,36 @@ export default function AdminNavbarLinks(props) {
 
   };
 
-  const handleChange = event => {
-    if (stateSwitch) {
-      setStateSwitch(false);
-    } else {
-      setStateSwitch(true);
-    }
+  const handleChange = async event => {
 
+    if (stateSwitch) {
+      await setStateSwitch(false);
+    } else {
+      await setStateSwitch(true);
+    }
 
     if (stateSwitch) {
       console.log(stateSwitch)
 
       //cuando se pone por pais
-      setProvinciaAntesDePais(props.provincias)
-      setMunicipioAntesDePais(props.municipios)
-      props.setProvincias(totalDeProvincias)
-      props.setMunicipios(totalDeMunicipios)
-      props.setLugarfiltrado("País")
-      setInavilitarProvMun(stateSwitch)
+      await setProvinciaAntesDePais(props.provincias)
+      await setMunicipioAntesDePais(props.municipios)
+      await props.setProvincias(totalDeProvincias)
+      await props.setMunicipios(totalDeMunicipios)
+      await props.setLugarfiltrado("País")
+      await setInavilitarProvMun(stateSwitch)
     } else {
       console.log(stateSwitch)
 
-      props.setProvincias(provinciaAntesDePais)
-      props.setMunicipios(municipioAntesDePais)
+     await props.setProvincias(provinciaAntesDePais)
+      await props.setMunicipios(municipioAntesDePais)
       var provinciaYmunicipio = [];
-      provinciaYmunicipio.push(provinciaAntesDePais)
-      provinciaYmunicipio.push(municipioAntesDePais)
-      props.setLugarfiltrado(provinciaYmunicipio)
-      setInavilitarProvMun(stateSwitch)
+      await provinciaYmunicipio.push(provinciaAntesDePais)
+      await provinciaYmunicipio.push(municipioAntesDePais)
+      await props.setLugarfiltrado(provinciaYmunicipio)
+      await setInavilitarProvMun(stateSwitch)
     }
+
   };
 
   return (
