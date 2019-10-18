@@ -129,7 +129,7 @@ class gg extends Component {
           "dimensions": this.props.camposDimensions,
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
             }
