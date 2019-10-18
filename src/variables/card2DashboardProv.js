@@ -20,7 +20,7 @@ class gg extends Component {
           labels: resultSet.categories().map(c => c.category),
           datasets: resultSet.series().map((s, index) => (
             {
-              label: 'Área Total',
+              label: 'Cantidad',
               data: s.series.map(r => r.value),
               borderColor: COLORS_SERIES[index],
               fill: false
@@ -42,7 +42,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Hectáreas)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
@@ -60,7 +60,7 @@ class gg extends Component {
 
     renderChart = (Component) => ({ resultSet, error }) => (
         (resultSet && <Component resultSet={resultSet} />) ||
-        (error && error.toString()) ||
+        (error && 'No existen datos.') ||
         (<Spin />)
     )
 
@@ -69,11 +69,11 @@ class gg extends Component {
             <QueryRenderer
                 query={{
                     "measures": [
-                        "SymAgricUrbanaPoint.areaTotal"
+                        "SymAgricUrbanaPoint.count"
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "SymAgricUrbanaPoint.ministerio"
+                        "SymAgricUrbanaPoint.tecnologia"
                     ],
                     "filters": [
                         {

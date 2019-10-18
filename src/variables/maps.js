@@ -18,8 +18,9 @@ class Maps1 extends React.Component {
                 })
             ],
             view: new View({
-                center: [22.408987, -79.962018],
-                zoom: 5
+				projection: 'EPSG:4326',
+                center: [-79.8125, 22.742],
+                zoom: 6
             }),
             controls: defaultsControls({
                 rotate: false,

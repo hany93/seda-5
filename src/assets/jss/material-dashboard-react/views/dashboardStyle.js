@@ -34,10 +34,6 @@ const dashboardStyle = {
       marginLeft: "3px"
     }
   },
-  imgIconCard: {
-    marginLeft: "5px",
-    marginRight: "5px"
-  },
   cardCategory: {
     color: grayColor[0],
     margin: "0",

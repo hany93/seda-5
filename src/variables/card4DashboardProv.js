@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-const COLORS_SERIES = ['#FFF', '#FFF', '#FFF'];
+const COLORS_SERIES = ['#ec407a', '#66bb6a', '#ab47bc', '#26c6da'];
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -15,52 +15,52 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-  barRender = ({ resultSet }) => {
+  pieRender = ({ resultSet }) => {
     const data = {
-        labels: resultSet.categories().map(c => c.category),
-        datasets: resultSet.series().map((s, index) => (
-            {
-                label: 'Cantidad',
-                data: s.series.map(r => r.value),
-                backgroundColor: COLORS_SERIES[index],
-                fill: false
-            }
-        )),
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map(s => (
+        {
+          label: s.title,
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES,
+          hoverBackgroundColor: COLORS_SERIES,
+        }
+      ))
     };
     const options = {
-      legend: { display: false },
+      legend: { display: true, position: 'right' },
       scales: {
         xAxes: [{
           gridLines: {
-            color: "rgba(255, 255, 255, 0.2)",// Eje x color verde
-            zeroLineColor: "rgba(255, 255, 255, 0.2)",
+            color: "#000",// Eje x color verde
+            zeroLineColor: "#000",
             display: true,
           },
           ticks: {
-            fontColor: "#FFF", // Cambiar color de labels
+            fontColor: "#000", // Cambiar color de labels
             fontSize: 10,
             minRotation: 2
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)', fontColor: "#000" },
           gridLines: {
-            color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
-            zeroLineColor: "rgba(255, 255, 255, 0.2)",
+            color: "#000", // Eje y color rojo
+            zeroLineColor: "#000",
             display: true
           },
           ticks: {
-            fontColor: "#FFF" // Cambiar color de labels
+            fontColor: "#000" // Cambiar color de labels
           }
         }]
       }
     };
-    return <Bar data={data} options={options} />;
+    return <Doughnut data={data} options={options} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (
     (resultSet && <Component resultSet={resultSet} />) ||
-    (error && error.toString()) ||
+    (error && 'No hay datos.') ||
     (<Spin />)
   )
 
@@ -69,11 +69,11 @@ class gg extends Component {
       <QueryRenderer
         query={{
           "measures": [
-            "SymAgricUrbanaPoint.count"
+            "SymAgricUrbanaPoint.areaTotal"
           ],
           "timeDimensions": [],
           "dimensions": [
-            "SymAgricUrbanaPoint.entidad"
+            "SymAgricUrbanaPoint.tecnologia"
           ],
           "filters": [
             {
@@ -84,7 +84,7 @@ class gg extends Component {
           ]
         }}
         cubejsApi={cubejsApi}
-        render={this.renderChart(this.barRender)}
+        render={this.renderChart(this.pieRender)}
       />);
   }
 }
