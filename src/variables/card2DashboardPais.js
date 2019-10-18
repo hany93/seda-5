@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const COLORS_SERIES = ['#FFF', '#FFF', '#FFF'];
 
@@ -15,45 +15,47 @@ const cubejsApi = cubejs(
 
 class gg extends Component {
 
-    barRender = ({ resultSet }) => {
+    lineRender = ({ resultSet }) => {
         const data = {
-            labels: resultSet.categories().map(c => c.category),
-            datasets: resultSet.series().map((s, index) => (
-                {
-                    label: 'Cantidad',
-                    data: s.series.map(r => r.value),
-                    backgroundColor: COLORS_SERIES[index],
-                    fill: false
-                }
-            )),
+          labels: resultSet.categories().map(c => c.category),
+          datasets: resultSet.series().map((s, index) => (
+            {
+              label: 'Área Total',
+              data: s.series.map(r => r.value),
+              borderColor: COLORS_SERIES[index],
+              fill: false
+            }
+          )),
         };
         const options = {
             legend: { display: false, },
             scales: {
                 xAxes: [{
+                    lineColor: '#FFFFFF',
                     gridLines: {
-                        color: "rgba(255, 255, 255, 0.2) ",// Eje x color verde
+                        color: "rgba(255, 255, 255, 0.2)",// Eje x color verde
                         zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true,
                     },
                     ticks: {
-                        fontColor: "#FFF" // Cambiar color de labels
+                        fontColor: "#FFFFFF" // Cambiar color de labels
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Unidades)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(Hectáreas)',fontColor: "#FFF" },
+                    lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
                         zeroLineColor: "rgba(255, 255, 255, 0.2)",
                         display: true
                     },
                     ticks: {
-                        fontColor: "#FFF" // Cambiar color de labels
+                        fontColor: "#FFFFFF" // Cambiar color de labels
                     }
                 }]
             }
         };
-        return <Bar data={data} options={options} />;
+        return <Line data={data} options={options} />;
     };
 
     renderChart = (Component) => ({ resultSet, error }) => (
@@ -67,26 +69,22 @@ class gg extends Component {
             <QueryRenderer
                 query={{
                     "measures": [
-                        "EntidadAgricUrbana.count"
+                        "SymAgricUrbanaPoint.areaTotal"
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-<<<<<<< HEAD
-                        "EntidadAgricUrbana.tecnologia"
-=======
-                        "SymAgricUrbanaPoint.municipio"
->>>>>>> 5b98da73d47ad07e3a9d57f0034a9f0994833a4c
+                        "SymAgricUrbanaPoint.ministerio"
                     ],
                     "filters": [
                         {
-                            "dimension": "EntidadAgricUrbana.municipio",
+                            "dimension": "SymAgricUrbanaPoint.municipio",
                             "operator": "equals",
                             "values": this.props.municipios
                         }
                     ]
                 }}
                 cubejsApi={cubejsApi}
-                render={this.renderChart(this.barRender)}
+                render={this.renderChart(this.lineRender)}
             />);
     }
 }
