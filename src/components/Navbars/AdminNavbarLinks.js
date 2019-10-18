@@ -31,7 +31,7 @@ export default function AdminNavbarLinks(props) {
 
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
-  const [state, setState] = React.useState(true);
+  const [stateSwitch, setStateSwitch] = React.useState(true);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
 
@@ -125,10 +125,15 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChange = event => {
-    setState(event.target.checked);
+    if (stateSwitch) {
+      setStateSwitch(false);
+    } else {
+      setStateSwitch(true);
+    }
 
-    if (event.target.checked) {
-      console.log(event.target.checked)
+
+    if (stateSwitch) {
+      console.log(stateSwitch)
 
       //cuando se pone por pais
       setProvinciaAntesDePais(props.provincias)
@@ -136,9 +141,9 @@ export default function AdminNavbarLinks(props) {
       props.setProvincias(totalDeProvincias)
       props.setMunicipios(totalDeMunicipios)
       props.setLugarfiltrado("País")
-      setInavilitarProvMun(event.target.checked)
+      setInavilitarProvMun(stateSwitch)
     } else {
-      console.log(event.target.checked)
+      console.log(stateSwitch)
 
       props.setProvincias(provinciaAntesDePais)
       props.setMunicipios(municipioAntesDePais)
@@ -146,21 +151,22 @@ export default function AdminNavbarLinks(props) {
       provinciaYmunicipio.push(provinciaAntesDePais)
       provinciaYmunicipio.push(municipioAntesDePais)
       props.setLugarfiltrado(provinciaYmunicipio)
-      setInavilitarProvMun(event.target.checked)
+      setInavilitarProvMun(stateSwitch)
     }
   };
 
   return (
     <div>
       <div className={classes.manager}>
-        <img alt='País' title='País' src={state ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
+        <img alt='País' title='País' src={stateSwitch ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
         <Switch
-          checked={state.checkedA}
+          defaultChecked
+          checked={stateSwitch}
           onChange={handleChange}
           //value="checked"
           inputProps={{ 'aria-label': 'secondary checkbox' }}
           color='default'
-          style={{ color: state ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
+          style={{ color: stateSwitch ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
         />
         <Select
           disabled={inavilitarProvMun}
