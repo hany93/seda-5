@@ -14,6 +14,8 @@ import Verduras from "assets/img/verduras.png";
 import Siembra from "assets/img/siembra.png";
 import Aspersor from "assets/img/aspersor.png";
 import Campo from "assets/img/campo.png";
+import Invernadero from "assets/img/invernadero.png";
+import Materia from "assets/img/materia.png";
 import Card1Dash from "variables/card1Dashboard.js";
 import Card2Dash from "variables/card2Dashboard.js";
 import Card3Dash from "variables/card3Dashboard.js";
@@ -21,11 +23,12 @@ import Card1Dashp from "variables/card1DashboardProv.js";
 import Card2Dashp from "variables/card2DashboardProv.js";
 import Card3Dashp from "variables/card3DashboardProv.js";
 import Card4Dashp from "variables/card4DashboardProv.js";
+import Card5Dashp from "variables/card5DashboardProv.js";
 import Card1Dashpais from "variables/card1DashboardPais";
 import Card2Dashpais from "variables/card2DashboardPais.js";
 import Card3Dashpais from "variables/card3DashboardPais.js";
 import Card4Dashpais from "variables/card4DashboardPais.js";
-import Card5Dashpais from "variables/card4DashboardPais.js";
+import Card5Dashpais from "variables/card5DashboardPais.js";
 import Card4Dash from "variables/card4Dashboard.js";
 import TablaTotalPorTecnolog from "variables/tablaTotalPorTecnolog/index.js";
 import TimelineIcon from '@material-ui/icons/Timeline';
@@ -176,11 +179,11 @@ export default function Dashboard(props) {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={2}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <img src={Siembra} className={classes.imgIconCard} alt="Organopónicos" />
+                <img src={Siembra} alt="Organopónicos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
@@ -192,11 +195,43 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={2}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <img src={Invernadero} alt="Semiprotegidos" />
+              </CardIcon>
+              <p className={classes.cardCategory}>Cantidad Total</p>
+              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                Semiprotegidos
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={2}>
+          <Card>
+            <CardHeader color="rose" stats icon>
+              <CardIcon color="rose">
+                <img src={Materia} alt="Centro de Materia Orgánica" />
+              </CardIcon>
+              <p className={classes.cardCategory}>Cantidad Total</p>
+              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                Ctro Materia Orgánica
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={2}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
-                <img src={Verduras} className={classes.imgIconCard} alt="Huertos" />
+                <img src={Verduras} alt="Huertos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               {loading1 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
@@ -208,11 +243,11 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={2}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <img src={Aspersor} className={classes.imgIconCard} alt="Parcelas" />
+                <img src={Aspersor} alt="Parcelas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               {loading2 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
@@ -224,11 +259,11 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={2}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <img src={Campo} className={classes.imgIconCard} alt="Fincas" />
+                <img src={Campo} alt="Fincas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
               {loading3 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
@@ -243,13 +278,13 @@ export default function Dashboard(props) {
       </GridContainer>
       <GridContainer>                      {/*aki otro contenedor de graficos */}
         <GridItem xs={12} sm={12} md={4}>
-          <Card >
+          <Card chart>
             <CardHeader color="success">
-              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} /> : <Card1Dashpais municipios={props.municipios} />}
+              {props.lugarfiltrado == 'País' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon /> Cantidad Por Tecnología
+                <BarChartOutlinedIcon /> {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Tecnologías' : 'Cantidad Por Empresas'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -262,11 +297,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} /> : <Card2Dashpais municipios={props.municipios} />}
+              {props.lugarfiltrado == 'País' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <TimelineIcon /> Cantidad Por Ministerio
+                <TimelineIcon /> {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Ministerios' : 'Cantidad Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -279,11 +314,47 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
-              {props.lugarfiltrado != 'País' ? props.municipios.length != 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} /> : <Card3Dashpais municipios={props.municipios} />}
+              {props.lugarfiltrado == 'País' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon /> Cantidad Por Empresa
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Empresas' : 'Área Total Por Tecnologías'}
+              </div>
+            </CardBody>
+            <CardFooter chart>
+              <p className={classes.cardCategory}>
+                increase in today sales.
+              </p>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card chart>
+            <CardHeader color="white">
+              {props.lugarfiltrado == 'País' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
+            </CardHeader>
+            <CardBody>
+              <div className={classes.stats}>
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : 'Área Total Por Tecnologías'}
+              </div>
+            </CardBody>
+            <CardFooter chart>
+              <p className={classes.cardCategory}>
+                increase in today sales.
+              </p>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card chart>
+            <CardHeader color="rose">
+              {props.lugarfiltrado == 'País' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
+            </CardHeader>
+            <CardBody>
+              <div className={classes.stats}>
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : 'Área Total Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>

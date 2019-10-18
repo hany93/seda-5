@@ -183,6 +183,11 @@ const roseCardHeader = {
     "linear-gradient(60deg, " + roseColor[1] + ", " + roseColor[2] + ")",
   ...roseBoxShadow
 };
+const whiteCardHeader = {
+  background:
+    "linear-gradient(60deg, " + whiteColor + ", " + whiteColor + ")",
+  ...roseBoxShadow
+};
 
 const cardActions = {
   margin: "0 20px 10px",
@@ -292,6 +297,7 @@ export {
   infoCardHeader,
   primaryCardHeader,
   roseCardHeader,
+  whiteCardHeader,
   cardActions,
   cardHeader,
   defaultBoxShadow,

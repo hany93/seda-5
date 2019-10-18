@@ -60,7 +60,7 @@ class gg extends Component {
 
     renderChart = (Component) => ({ resultSet, error }) => (
         (resultSet && <Component resultSet={resultSet} />) ||
-        (error && error.toString()) ||
+        (error && 'No existen datos.') ||
         (<Spin />)
     )
 

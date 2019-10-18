@@ -43,7 +43,7 @@ class gg extends Component {
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",
@@ -60,7 +60,7 @@ class gg extends Component {
 
   renderChart = (Component) => ({ resultSet, error }) => (
     (resultSet && <Component resultSet={resultSet} />) ||
-    (error && error.toString()) ||
+    (error && 'No existen datos.') ||
     (<Spin />)
   )
 

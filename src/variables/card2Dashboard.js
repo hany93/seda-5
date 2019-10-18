@@ -42,7 +42,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Hectáreas)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(ha)',fontColor: "#FFF" },
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
@@ -60,7 +60,7 @@ class gg extends Component {
 
     renderChart = (Component) => ({ resultSet, error }) => (
         (resultSet && <Component resultSet={resultSet} />) ||
-        (error && error.toString()) ||
+        (error && 'No existen datos.') ||
         (<Spin />)
     )
 
