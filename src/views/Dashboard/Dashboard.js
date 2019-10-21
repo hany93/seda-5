@@ -82,6 +82,11 @@ export default function Dashboard(props) {
               ]
             },
             {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
+            },
+            {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
@@ -103,6 +108,11 @@ export default function Dashboard(props) {
               "values": [
                 "Huerto"
               ]
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
             },
             {
               "dimension": "EntidadAgricUrbana.municipio",
@@ -128,6 +138,11 @@ export default function Dashboard(props) {
               ]
             },
             {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
+            },
+            {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": props.municipios
@@ -149,6 +164,11 @@ export default function Dashboard(props) {
               "values": [
                 "Finca"
               ]
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
             },
             {
               "dimension": "EntidadAgricUrbana.municipio",

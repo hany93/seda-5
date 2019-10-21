@@ -96,7 +96,7 @@ export default function AdminNavbarLinks(props) {
 
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
-  const [check, setCheck] = React.useState(false);
+  const [check, setCheck] = React.useState(true);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
   const [open, setOpen] = React.useState(false);
@@ -171,12 +171,9 @@ export default function AdminNavbarLinks(props) {
   )
 
   const handleChangeP = async event => {
-    var provinciamunicipoio = []
-    provinciamunicipoio.push(props.lufarFiltrado)
-
-    provinciamunicipoio.push(event.target.value)
-    props.setLugarfiltrado(provinciamunicipoio)
     await props.setProvincias([event.target.value])
+    await props.setLugarfiltrado([])
+    await props.setLugarfiltrado(event.target.value)
   };
 
   const handleChangeM = async event => {
@@ -222,7 +219,7 @@ export default function AdminNavbarLinks(props) {
       }
       props.setLugarfiltrado(provinciaYmunicipio)
       setInavilitarProvMun(false)
-      setOpen(true);
+      //setOpen(true);
     } else {
       setCheck(true)
       //cuando se pone por pais
