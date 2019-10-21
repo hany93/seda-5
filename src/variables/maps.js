@@ -40,7 +40,7 @@ class Maps1 extends React.Component {
     render() {
         return (
             <div>
-                <div id="map" style={{ width: 'auto', height: '400px', borderRadius: '10px' }} />
+                <div id="map" style={{ width: 'auto', height: '700px', borderRadius: '10px' }} />
             </div>
         );
     }

@@ -36,9 +36,7 @@ class gg extends Component {
         return (
             <QueryRenderer
                 query={{
-                    "measures": [
-                        "EntidadAgricUrbana.count"
-                    ],
+                    "measures": [],
                     "timeDimensions": [],
                     "filters": [
                         {
@@ -48,7 +46,12 @@ class gg extends Component {
                         }
                     ],
                     "dimensions": [
-                        "EntidadAgricUrbana.tecnologia"
+                        "EntidadAgricUrbana.nombre",
+                        "EntidadAgricUrbana.tecnologia",
+                        "EntidadAgricUrbana.consejoPopular",
+                        "EntidadAgricUrbana.ministerio",
+                        "EntidadAgricUrbana.entidad",
+                        "EntidadAgricUrbana.productor"
                     ]
                 }}
                 cubejsApi={cubejsApi}
@@ -58,12 +61,16 @@ class gg extends Component {
 
                         var tablepivotNew = resultSet.tablePivot();
 
-                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.tecnologia"]["title"] = "Tecnología:"
-                        resultSet["loadResponse"]["annotation"]["measures"]["EntidadAgricUrbana.count"]["title"] = "Total"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.nombre"]["title"] = "Nombre"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.tecnologia"]["title"] = "Tecnología"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.consejoPopular"]["title"] = "Consejo Popular"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.ministerio"]["title"] = "Ministerio"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.entidad"]["title"] = "Entidad"
+                        resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.productor"]["title"] = "Productor"
                         return (
                             <div>
                                 <Table
-                                    pagination={false}
+                                    pagination={{ pageSize: 6 }}
                                     columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key }))}
                                     dataSource={tablepivotNew}
                                     rowKey={record => record.uid}
