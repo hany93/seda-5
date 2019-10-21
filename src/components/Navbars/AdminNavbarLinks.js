@@ -32,9 +32,9 @@ export default function AdminNavbarLinks(props) {
 
   const [totalDeMunicipios, settotalDeMunicipios] = React.useState([]);
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
-  const [check, setCheck] = React.useState(true);
+  const [check, setCheck] = React.useState(false);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
-  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
+  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(false);
 
   const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState(props.provincias);
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState(props.municipios);
@@ -125,33 +125,32 @@ export default function AdminNavbarLinks(props) {
 
   };
 
-  const handleChange = event => {
+  const handleChange = async () => {
     if (check) {
-      setCheck(false);    
+      await setCheck(false);
     } else {
-      setCheck(true);    
+      await setCheck(true);
     }
 
-    if (check) {
-      console.log(check)
+    if (!check) {
+      console.log(check + "false")
       //cuando se pone por pais
       setProvinciaAntesDePais(props.provincias)
       setMunicipioAntesDePais(props.municipios)
       props.setProvincias(totalDeProvincias)
       props.setMunicipios(totalDeMunicipios)
       props.setLugarfiltrado("País")
-      setInavilitarProvMun(true)  
+      setInavilitarProvMun(true)
     } else {
-      console.log(check)
+      console.log(check + "true")
       props.setProvincias(provinciaAntesDePais)
       props.setMunicipios(municipioAntesDePais)
       var provinciaYmunicipio = [];
       provinciaYmunicipio.push(provinciaAntesDePais)
       provinciaYmunicipio.push(municipioAntesDePais)
       props.setLugarfiltrado(provinciaYmunicipio)
-      setInavilitarProvMun(false)  
+      setInavilitarProvMun(false)
     }
-
   };
 
   return (
