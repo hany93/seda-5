@@ -28,32 +28,7 @@ class gg extends Component {
       ))
     };
     const options = {
-      legend: { display: true, position: 'right' },
-      scales: {
-        xAxes: [{
-          gridLines: {
-            color: "#000",// Eje x color verde
-            zeroLineColor: "#000",
-            display: true,
-          },
-          ticks: {
-            fontColor: "#000", // Cambiar color de labels
-            fontSize: 10,
-            minRotation: 2
-          }
-        }],
-        yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)', fontColor: "#000" },
-          gridLines: {
-            color: "#000", // Eje y color rojo
-            zeroLineColor: "#000",
-            display: true
-          },
-          ticks: {
-            fontColor: "#000" // Cambiar color de labels
-          }
-        }]
-      }
+      legend: { display: true, position: 'right' }
     };
     return <Doughnut data={data} options={options} />;
   };

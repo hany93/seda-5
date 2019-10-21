@@ -197,7 +197,7 @@ export default function Admin({ ...rest }) {
   const [municipios, setMunicipios] = React.useState(['']);
   const [provincias, setProvincias] = React.useState(['']);
 
-  const [lugarFiltrado, setLugarfiltrado] = React.useState(["País"]);
+  const [lugarFiltrado, setLugarfiltrado] = React.useState(["Cuba"]);
 
 
 

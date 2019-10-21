@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
-import Switch from '@material-ui/core/Switch';
 import Cuba0 from 'assets/img/cuba0.png'
 import Cuba1 from 'assets/img/cuba1.png'
 import Cuba2 from 'assets/img/cuba2.png'
@@ -12,10 +11,16 @@ import Cuba4 from 'assets/img/cuba4.png'
 import Cuba5 from 'assets/img/cuba5.png'
 import Cuba6 from 'assets/img/cuba6.png'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import IconButton from '@material-ui/core/IconButton';
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
 import cubejs from '@cubejs-client/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import PropTypes from "prop-types";
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import WarningIcon from '@material-ui/icons/Warning';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles);
 
@@ -26,6 +31,66 @@ const cubejsApi = cubejs(
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
 
+const variantIcon = {
+  warning: WarningIcon
+};
+
+const useStyles1 = makeStyles(theme => ({
+  warning: {
+    backgroundColor: '#ffa726',
+  },
+  info: {
+    backgroundColor: '#26c6da',
+  },
+  success: {
+    backgroundColor: '#66bb6a',
+  },
+  danger: {
+    backgroundColor: '#ef5350',
+  },
+  primary: {
+    backgroundColor: '#ab47bc',
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing(1),
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+}));
+
+function MySnackbarContentWrapper(props) {
+  const classes = useStyles1();
+  const { className, message, onClose, variant, ...other } = props;
+  const Icon = variantIcon['warning'];
+
+  return (
+    <SnackbarContent
+      className={clsx(classes[variant], className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
+          <Icon className={clsx(classes.icon, classes.iconVariant)} />
+          {message}
+        </span>
+      }
+      {...other}
+    />
+  );
+}
+
+MySnackbarContentWrapper.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(['warning,success,info,danger,primary']).isRequired,
+};
+
 export default function AdminNavbarLinks(props) {
   const classes = useStyles(props);
 
@@ -34,9 +99,9 @@ export default function AdminNavbarLinks(props) {
   const [check, setCheck] = React.useState(true);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
-
-  const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState(props.provincias);
-  const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState(props.municipios);
+  const [open, setOpen] = React.useState(false);
+  const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
+  const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
 
   useEffect(
 
@@ -73,14 +138,31 @@ export default function AdminNavbarLinks(props) {
           ]
         })
         var auxm = ['Todos']
-        var auxmSoloMunicipios = []
         municipios["loadResponse"]["data"].map((mun) => {
           auxm.push(mun["EntidadAgricUrbana.municipio"])
-          auxmSoloMunicipios.push(mun["EntidadAgricUrbana.municipio"])
         }
         )
         await settotalDeMunicipios(auxm);
-        await settotalDeMunicipiosSoloMun(auxmSoloMunicipios);
+
+        const auxmSoloMunicipios = await cubejsApi.load({
+          "measures": [],
+          "timeDimensions": [],
+          "dimensions": [
+            "EntidadAgricUrbana.municipio"
+          ],
+          "filters": []
+        })
+        var auxmSoloMun = []
+        auxmSoloMunicipios["loadResponse"]["data"].map((mun) => {
+          auxmSoloMun.push(mun["EntidadAgricUrbana.municipio"])
+        }
+        )
+        await settotalDeMunicipiosSoloMun(auxmSoloMun);
+
+
+
+
+
 
       }
       asyncrona();
@@ -124,46 +206,62 @@ export default function AdminNavbarLinks(props) {
 
   };
 
-  const handleChange = event => {
+  const handleChange = () => {
     if (check) {
-      setCheck(false);    
+      setCheck(false)
+      var provinciaYmunicipio = [];
+      if (provinciaAntesDePais.length == 1 && municipioAntesDePais.length == 1) {
+        props.setProvincias(provinciaAntesDePais)
+        props.setMunicipios(municipioAntesDePais)
+        provinciaYmunicipio.push(provinciaAntesDePais)
+        provinciaYmunicipio.push(municipioAntesDePais)
+      } else {
+        props.setProvincias(totalDeProvincias)
+        props.setMunicipios(totalDeMunicipiosSoloMun)
+        provinciaYmunicipio.push("Cuba")
+      }
+      props.setLugarfiltrado(provinciaYmunicipio)
+      setInavilitarProvMun(false)
+      setOpen(true);
     } else {
-      setCheck(true);    
-    }
-
-    if (check) {
-      console.log(check)
+      setCheck(true)
       //cuando se pone por pais
       setProvinciaAntesDePais(props.provincias)
       setMunicipioAntesDePais(props.municipios)
       props.setProvincias(totalDeProvincias)
-      props.setMunicipios(totalDeMunicipios)
-      props.setLugarfiltrado("País")
-      setInavilitarProvMun(true)  
-    } else {
-      console.log(check)
-      props.setProvincias(provinciaAntesDePais)
-      props.setMunicipios(municipioAntesDePais)
-      var provinciaYmunicipio = [];
-      provinciaYmunicipio.push(provinciaAntesDePais)
-      provinciaYmunicipio.push(municipioAntesDePais)
-      props.setLugarfiltrado(provinciaYmunicipio)
-      setInavilitarProvMun(false)  
+      props.setMunicipios(totalDeMunicipiosSoloMun)
+      props.setLugarfiltrado("Cuba")
+      setInavilitarProvMun(true)
     }
   };
-
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
   return (
     <div>
       <div className={classes.manager}>
-        <img alt='País' title='País' src={check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none" }} />
-        <Switch
-          checked={check}
-          onChange={handleChange}
-          //value="checked"
-          inputProps={{ 'aria-label': 'secondary checkbox' }}
-          color='default'
-          style={{ color: check ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }}
-        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'center',
+            horizontal: 'center',
+          }}
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+        >
+          <MySnackbarContentWrapper
+            onClose={handleClose}
+            variant={props.color == 'purple' ? 'primary' : props.color === "blue" ? 'info' : props.color === "green" ? 'success' : props.color === "orange" ? 'warning' : 'danger'}
+            className={classes.margin}
+            message="Seleccione provincia y municipio para observar sus estadísticas."
+          />
+        </Snackbar>
+        <IconButton size='small' aria-label="add an alarm" onClick={handleChange} style={{ marginLeft: window.innerWidth > 959 ? "40px" : "none", marginBottom: window.innerWidth > 959 ? "20px" : "none", marginTop: window.innerWidth > 959 ? "10px" : "none", color: check ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }} >
+          <img alt='País' title='País' src={check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} />
+        </IconButton>
         <Select
           disabled={inavilitarProvMun}
           className={classes.select_link}

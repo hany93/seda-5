@@ -280,11 +280,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
-              {props.lugarfiltrado == 'País' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon /> {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Tecnologías' : 'Cantidad Por Empresas'}
+                <BarChartOutlinedIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Tecnologías' : 'Cantidad Por Empresas'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -297,11 +297,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              {props.lugarfiltrado == 'País' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <TimelineIcon /> {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Ministerios' : 'Cantidad Por Tecnologías'}
+                <TimelineIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Ministerios' : 'Cantidad Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -314,11 +314,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
-              {props.lugarfiltrado == 'País' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : props.municipios.length == 1 ? 'Cantidad Por Empresas' : 'Área Total Por Tecnologías'}
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Empresas' : 'Área Total Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -333,11 +333,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardHeader color="white">
-              {props.lugarfiltrado == 'País' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : 'Área Total Por Tecnologías'}
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : 'Área Total Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -350,11 +350,11 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardHeader color="rose">
-              {props.lugarfiltrado == 'País' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'País' ? 'Pais' : 'Área Total Por Tecnologías'}
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : 'Área Total Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
