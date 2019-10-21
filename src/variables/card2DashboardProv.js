@@ -17,15 +17,15 @@ class gg extends Component {
 
     lineRender = ({ resultSet }) => {
         const data = {
-          labels: resultSet.categories().map(c => c.category),
-          datasets: resultSet.series().map((s, index) => (
-            {
-              label: 'Cantidad',
-              data: s.series.map(r => r.value),
-              borderColor: COLORS_SERIES[index],
-              fill: false
-            }
-          )),
+            labels: resultSet.categories().map(c => c.category),
+            datasets: resultSet.series().map((s, index) => (
+                {
+                    label: 'Cantidad',
+                    data: s.series.map(r => r.value),
+                    borderColor: COLORS_SERIES[index],
+                    fill: false
+                }
+            )),
         };
         const options = {
             legend: { display: false, },
@@ -42,7 +42,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)', fontColor: "#FFF" },
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
