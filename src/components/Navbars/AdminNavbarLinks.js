@@ -39,6 +39,8 @@ export default function AdminNavbarLinks(props) {
   const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
 
+  const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
+
   useEffect(
 
     () => {
@@ -73,7 +75,7 @@ export default function AdminNavbarLinks(props) {
             }
           ]
         })
-        var auxm = ['Todos']
+        var auxm = ["Todos"]
         municipios["loadResponse"]["data"].map((mun) => {
           auxm.push(mun["EntidadAgricUrbana.municipio"])
         }
@@ -95,11 +97,6 @@ export default function AdminNavbarLinks(props) {
         )
         await settotalDeMunicipiosSoloMun(auxmSoloMun);
 
-
-
-
-
-
       }
       asyncrona();
     },
@@ -114,16 +111,18 @@ export default function AdminNavbarLinks(props) {
 
   const handleChangeM = async event => {
 
-    if (Array.isArray(event.target.value)) {
-      // es un array
-      await props.setMunicipios(event.target.value)
+    if (event.target.value === "Todos") {
+      setItemSelecDropDownMun("Todos")
+
+      await props.setMunicipios(totalDeMunicipiosSoloMun)
 
       var provinciamunicipoio = []
       provinciamunicipoio.push(props.provincias)
       provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
-    } else if (typeof event.target.value === 'string') {
-      // es un objeto regular que no es un array
+    } else {
+      setItemSelecDropDownMun(event.target.value)
+
       var aux = [];
       await aux.push(event.target["value"])
       await props.setMunicipios(aux)
@@ -132,9 +131,6 @@ export default function AdminNavbarLinks(props) {
       provinciamunicipoio.push(props.provincias)
       provinciamunicipoio.push(aux)
       props.setLugarfiltrado(provinciamunicipoio)
-    } else {
-      // puede ser undefined, string, number o boolean.
-      console.log("nada sirvió // puede ser undefined, string, number o boolean.")
     }
 
   };
@@ -157,7 +153,7 @@ export default function AdminNavbarLinks(props) {
       setInavilitarProvMun(false)
       const a = {
         content: <span style={{ fontSize: '20px' }}>Seleccione provincia y municipio para observar sus estadísticas.</span>,
-        icon: <InfoIcon style={{paddingBottom:0, marginRight:'10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> 
+        icon: <InfoIcon style={{ paddingBottom: 0, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} />
       }
       message.info(a);
     } else {
@@ -171,6 +167,7 @@ export default function AdminNavbarLinks(props) {
       setInavilitarProvMun(true)
     }
   };
+
   return (
     <div>
       <div className={classes.manager}>
@@ -202,7 +199,7 @@ export default function AdminNavbarLinks(props) {
           disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
-          value={props.municipios}
+          value={itemSelecDropDownMun}
           onChange={handleChangeM}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
@@ -214,7 +211,7 @@ export default function AdminNavbarLinks(props) {
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
           {totalDeMunicipios.map(name => (
-            name == 'Todos' ? <MenuItem key={name} value={totalDeMunicipiosSoloMun} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+            <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}
         </Select>
       </div>

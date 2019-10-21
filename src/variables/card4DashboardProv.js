@@ -14,7 +14,7 @@ const cubejsApi = cubejs(
 );
 
 
-function aleatorio(inferior,superior){
+function aleatorio(inferior, superior) {
   var numPosibilidades = superior - inferior
   var aleat = Math.random() * numPosibilidades
   aleat = Math.floor(aleat)
@@ -77,6 +77,11 @@ class gg extends Component {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": this.props.provincias
             }
           ]
         }}
