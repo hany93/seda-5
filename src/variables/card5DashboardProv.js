@@ -20,7 +20,7 @@ class gg extends Component {
         labels: resultSet.categories().map(c => c.category),
         datasets: resultSet.series().map((s, index) => (
             {
-                label: 'Cantidad',
+                label: 'Área en Uso',
                 data: s.series.map(r => r.value),
                 backgroundColor: COLORS_SERIES[index],
                 fill: false
@@ -43,7 +43,7 @@ class gg extends Component {
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(Unidades)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Área en Uso(%)',fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",
@@ -69,15 +69,15 @@ class gg extends Component {
       <QueryRenderer
         query={{
           "measures": [
-            "SymAgricUrbanaPoint.count"
+            "EntidadAgricUrbana.areaEnUsoPorciento"
           ],
           "timeDimensions": [],
           "dimensions": [
-            "SymAgricUrbanaPoint.entidad"
+            "EntidadAgricUrbana.tecnologia"
           ],
           "filters": [
             {
-              "dimension": "SymAgricUrbanaPoint.municipio",
+              "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
             }

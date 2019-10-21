@@ -41,6 +41,7 @@ import CardBody from "components/Card/CardBody.js";
 import LanguageIcon from '@material-ui/icons/Language';
 import cubejs from '@cubejs-client/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
 
 const useStyles = makeStyles(styles);
 
@@ -284,7 +285,7 @@ export default function Dashboard(props) {
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Tecnologías' : 'Cantidad Por Empresas'}
+                <BarChartOutlinedIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cantidad Por Provincia' : props.municipios.length == 1 ? 'Cantidad Por Tecnologías' : 'Cantidad Por Municipios'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -301,7 +302,7 @@ export default function Dashboard(props) {
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <TimelineIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Ministerios' : 'Cantidad Por Tecnologías'}
+                <TimelineIcon /> {props.lugarfiltrado == 'Cuba' ? 'Cantidad Por Tecnologías' : props.municipios.length == 1 ? 'Área Total Por Ministerios' : 'Cantidad Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -318,7 +319,7 @@ export default function Dashboard(props) {
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : props.municipios.length == 1 ? 'Cantidad Por Empresas' : 'Área Total Por Tecnologías'}
+                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Área Total Por Tecnologías' : props.municipios.length == 1 ? 'Cantidad Por Empresas' : 'Área Total Por Tecnologías'}
               </div>
             </CardBody>
             <CardFooter chart>
@@ -329,42 +330,44 @@ export default function Dashboard(props) {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="white">
-              {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
-            </CardHeader>
-            <CardBody>
-              <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : 'Área Total Por Tecnologías'}
-              </div>
-            </CardBody>
-            <CardFooter chart>
-              <p className={classes.cardCategory}>
-                increase in today sales.
+      {props.municipios.length == 1 ? '' : (
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card chart>
+              <CardHeader color="white">
+                {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
+              </CardHeader>
+              <CardBody>
+                <div className={classes.stats}>
+                  <DonutSmallRoundedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Área en Uso Por Provincias' : 'Área en Uso Por Municipios'}
+                </div>
+              </CardBody>
+              <CardFooter chart>
+                <p className={classes.cardCategory}>
+                  increase in today sales.
               </p>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="rose">
-              {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
-            </CardHeader>
-            <CardBody>
-              <div className={classes.stats}>
-                <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Cuba' : 'Área Total Por Tecnologías'}
-              </div>
-            </CardBody>
-            <CardFooter chart>
-              <p className={classes.cardCategory}>
-                increase in today sales.
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card chart>
+              <CardHeader color="rose">
+                {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
+              </CardHeader>
+              <CardBody>
+                <div className={classes.stats}>
+                  <BarChartOutlinedIcon />  {props.lugarfiltrado == 'Cuba' ? 'Área en Uso Por Tecnologías' : 'Área en Uso Por Tecnologías'}
+                </div>
+              </CardBody>
+              <CardFooter chart>
+                <p className={classes.cardCategory}>
+                  increase in today sales.
               </p>
-            </CardFooter>
-          </Card>
-        </GridItem>
-      </GridContainer>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card >

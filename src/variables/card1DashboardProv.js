@@ -71,7 +71,6 @@ class gg extends Component {
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "EntidadAgricUrbana.tecnologia",
                         "EntidadAgricUrbana.municipio"
                     ],
                     "filters": [
