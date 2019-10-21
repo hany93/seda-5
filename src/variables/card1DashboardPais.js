@@ -41,7 +41,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Unidades)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
                         zeroLineColor: "rgba(255, 255, 255, 0.2)",
@@ -71,15 +71,9 @@ class gg extends Component {
                     ],
                     "timeDimensions": [],
                     "dimensions": [
-                        "EntidadAgricUrbana.tecnologia"
+                        "EntidadAgricUrbana.provincia"
                     ],
-                    "filters": [
-                        {
-                            "dimension": "EntidadAgricUrbana.municipio",
-                            "operator": "equals",
-                            "values": this.props.municipios
-                        }
-                    ]
+                    "filters": []
                 }}
                 cubejsApi={cubejsApi}
                 render={this.renderChart(this.barRender)}
