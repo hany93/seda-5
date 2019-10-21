@@ -73,7 +73,7 @@ export default function AdminNavbarLinks(props) {
             }
           ]
         })
-        var auxm = ['Todos']
+        var auxm = ["Todos"]
         municipios["loadResponse"]["data"].map((mun) => {
           auxm.push(mun["EntidadAgricUrbana.municipio"])
         }
@@ -112,17 +112,19 @@ export default function AdminNavbarLinks(props) {
     await props.setLugarfiltrado(event.target.value)
   };
 
+
   const handleChangeM = async event => {
 
-    if (Array.isArray(event.target.value)) {
+    if (event.target.value === "Todos") {
+      console.log(event.target.value + " ijbnuibhui")
       // es un array
-      await props.setMunicipios(event.target.value)
+      await props.setMunicipios(totalDeMunicipiosSoloMun)
 
       var provinciamunicipoio = []
       provinciamunicipoio.push(props.provincias)
       provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
-    } else if (typeof event.target.value === 'string') {
+    } else {
       // es un objeto regular que no es un array
       var aux = [];
       await aux.push(event.target["value"])
@@ -132,12 +134,37 @@ export default function AdminNavbarLinks(props) {
       provinciamunicipoio.push(props.provincias)
       provinciamunicipoio.push(aux)
       props.setLugarfiltrado(provinciamunicipoio)
-    } else {
-      // puede ser undefined, string, number o boolean.
-      console.log("nada sirvió // puede ser undefined, string, number o boolean.")
     }
 
   };
+
+
+  // const handleChangeM = async event => {
+
+  //   if (Array.isArray(event.target.value)) {
+  //     // es un array
+  //     await props.setMunicipios(event.target.value)
+
+  //     var provinciamunicipoio = []
+  //     provinciamunicipoio.push(props.provincias)
+  //     provinciamunicipoio.push("Todos")
+  //     props.setLugarfiltrado(provinciamunicipoio)
+  //   } else if (typeof event.target.value === 'string') {
+  //     // es un objeto regular que no es un array
+  //     var aux = [];
+  //     await aux.push(event.target["value"])
+  //     await props.setMunicipios(aux)
+
+  //     var provinciamunicipoio = []
+  //     provinciamunicipoio.push(props.provincias)
+  //     provinciamunicipoio.push(aux)
+  //     props.setLugarfiltrado(provinciamunicipoio)
+  //   } else {
+  //     // puede ser undefined, string, number o boolean.
+  //     console.log("nada sirvió // puede ser undefined, string, number o boolean.")
+  //   }
+
+  // };
 
   const handleChange = () => {
     if (check) {
@@ -157,7 +184,7 @@ export default function AdminNavbarLinks(props) {
       setInavilitarProvMun(false)
       const a = {
         content: <span style={{ fontSize: '20px' }}>Seleccione provincia y municipio para observar sus estadísticas.</span>,
-        icon: <InfoIcon style={{paddingBottom:0, marginRight:'10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> 
+        icon: <InfoIcon style={{ paddingBottom: 0, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} />
       }
       message.info(a);
     } else {
@@ -171,6 +198,7 @@ export default function AdminNavbarLinks(props) {
       setInavilitarProvMun(true)
     }
   };
+
   return (
     <div>
       <div className={classes.manager}>
@@ -213,8 +241,11 @@ export default function AdminNavbarLinks(props) {
           <MenuItem value='' disabled={true} className={classes.dropdownItem}>
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
-          {totalDeMunicipios.map(name => (
+          {/* {totalDeMunicipios.map(name => (
             name == 'Todos' ? <MenuItem key={name} value={totalDeMunicipiosSoloMun} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+          ))} */}
+          {totalDeMunicipios.map(name => (
+            <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}
         </Select>
       </div>
