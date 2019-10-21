@@ -39,6 +39,8 @@ export default function AdminNavbarLinks(props) {
   const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
 
+  const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
+
   useEffect(
 
     () => {
@@ -95,11 +97,6 @@ export default function AdminNavbarLinks(props) {
         )
         await settotalDeMunicipiosSoloMun(auxmSoloMun);
 
-
-
-
-
-
       }
       asyncrona();
     },
@@ -112,12 +109,11 @@ export default function AdminNavbarLinks(props) {
     await props.setLugarfiltrado(event.target.value)
   };
 
-
   const handleChangeM = async event => {
 
     if (event.target.value === "Todos") {
-      console.log(event.target.value + " ijbnuibhui")
-      // es un array
+      setItemSelecDropDownMun("Todos")
+
       await props.setMunicipios(totalDeMunicipiosSoloMun)
 
       var provinciamunicipoio = []
@@ -125,7 +121,8 @@ export default function AdminNavbarLinks(props) {
       provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
     } else {
-      // es un objeto regular que no es un array
+      setItemSelecDropDownMun(event.target.value)
+
       var aux = [];
       await aux.push(event.target["value"])
       await props.setMunicipios(aux)
@@ -137,34 +134,6 @@ export default function AdminNavbarLinks(props) {
     }
 
   };
-
-
-  // const handleChangeM = async event => {
-
-  //   if (Array.isArray(event.target.value)) {
-  //     // es un array
-  //     await props.setMunicipios(event.target.value)
-
-  //     var provinciamunicipoio = []
-  //     provinciamunicipoio.push(props.provincias)
-  //     provinciamunicipoio.push("Todos")
-  //     props.setLugarfiltrado(provinciamunicipoio)
-  //   } else if (typeof event.target.value === 'string') {
-  //     // es un objeto regular que no es un array
-  //     var aux = [];
-  //     await aux.push(event.target["value"])
-  //     await props.setMunicipios(aux)
-
-  //     var provinciamunicipoio = []
-  //     provinciamunicipoio.push(props.provincias)
-  //     provinciamunicipoio.push(aux)
-  //     props.setLugarfiltrado(provinciamunicipoio)
-  //   } else {
-  //     // puede ser undefined, string, number o boolean.
-  //     console.log("nada sirvió // puede ser undefined, string, number o boolean.")
-  //   }
-
-  // };
 
   const handleChange = () => {
     if (check) {
@@ -230,7 +199,7 @@ export default function AdminNavbarLinks(props) {
           disabled={inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
-          value={props.municipios}
+          value={itemSelecDropDownMun}
           onChange={handleChangeM}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
@@ -241,9 +210,6 @@ export default function AdminNavbarLinks(props) {
           <MenuItem value='' disabled={true} className={classes.dropdownItem}>
             <LocationOnIcon className={classes.icons} style={{ fontSize: 16 }} /> Municipio
           </MenuItem>
-          {/* {totalDeMunicipios.map(name => (
-            name == 'Todos' ? <MenuItem key={name} value={totalDeMunicipiosSoloMun} className={classes.dropdownItem}>{name}</MenuItem> : <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
-          ))} */}
           {totalDeMunicipios.map(name => (
             <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
           ))}

@@ -17,15 +17,15 @@ class gg extends Component {
 
   barRender = ({ resultSet }) => {
     const data = {
-        labels: resultSet.categories().map(c => c.category),
-        datasets: resultSet.series().map((s, index) => (
-            {
-                label: 'Cantidad',
-                data: s.series.map(r => r.value),
-                backgroundColor: COLORS_SERIES[index],
-                fill: false
-            }
-        )),
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: 'Cantidad',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
     };
     const options = {
       legend: { display: false },
@@ -43,7 +43,7 @@ class gg extends Component {
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Cantidad(Unid)', fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",
@@ -80,6 +80,11 @@ class gg extends Component {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": this.props.provincias
             }
           ]
         }}

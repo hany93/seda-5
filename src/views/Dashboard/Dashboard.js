@@ -301,7 +301,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
-              {props.lugarfiltrado == 'Cuba' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash municipios={props.municipios} /> : <Card1Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash provincias={props.provincias} municipios={props.municipios} /> : <Card1Dashp provincias={props.provincias} municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
@@ -318,7 +318,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
-              {props.lugarfiltrado == 'Cuba' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash municipios={props.municipios} /> : <Card2Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash provincias={props.provincias} municipios={props.municipios} /> : <Card2Dashp provincias={props.provincias} municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
@@ -335,7 +335,7 @@ export default function Dashboard(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
-              {props.lugarfiltrado == 'Cuba' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash municipios={props.municipios} /> : <Card3Dashp municipios={props.municipios} />}
+              {props.lugarfiltrado == 'Cuba' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash provincias={props.provincias} municipios={props.municipios} /> : <Card3Dashp provincias={props.provincias} municipios={props.municipios} />}
             </CardHeader>
             <CardBody>
               <div className={classes.stats}>
@@ -355,7 +355,7 @@ export default function Dashboard(props) {
           <GridItem xs={12} sm={12} md={6}>
             <Card chart>
               <CardHeader color="white">
-                {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp municipios={props.municipios} />}
+                {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp provincias={props.provincias} municipios={props.municipios} />}
               </CardHeader>
               <CardBody>
                 <div className={classes.stats}>
@@ -372,7 +372,7 @@ export default function Dashboard(props) {
           <GridItem xs={12} sm={12} md={6}>
             <Card chart>
               <CardHeader color="rose">
-                {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp municipios={props.municipios} />}
+                {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp provincias={props.provincias} municipios={props.municipios} />}
               </CardHeader>
               <CardBody>
                 <div className={classes.stats}>

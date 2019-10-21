@@ -80,6 +80,11 @@ class gg extends Component {
                             "dimension": "EntidadAgricUrbana.municipio",
                             "operator": "equals",
                             "values": this.props.municipios
+                        },
+                        {
+                            "dimension": "EntidadAgricUrbana.provincia",
+                            "operator": "equals",
+                            "values": this.props.provincias
                         }
                     ]
                 }}
