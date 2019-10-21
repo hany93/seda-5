@@ -16,15 +16,11 @@ import IconButton from '@material-ui/core/IconButton';
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
 import cubejs from '@cubejs-client/core';
-<<<<<<< HEAD
 import Snackbar from '@material-ui/core/Snackbar';
 import PropTypes from "prop-types";
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import clsx from 'clsx';
-=======
-import { async } from "q";
->>>>>>> 0ae26e2a7bf45db7a9db7b16e4fa7222febffa51
 
 const useStyles = makeStyles(styles);
 
