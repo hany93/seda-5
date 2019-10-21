@@ -139,7 +139,9 @@ export default function AdminNavbarLinks(props) {
     if (check) {
       setCheck(false)
       var provinciaYmunicipio = [];
-      if (provinciaAntesDePais.length == 1 && municipioAntesDePais.length == 1) {
+      console.log(provinciaAntesDePais)
+      console.log(municipioAntesDePais)
+      if ((provinciaAntesDePais.length == 1 && municipioAntesDePais.length == 1) || (provinciaAntesDePais.length == 1 && municipioAntesDePais.length > 1)) {
         props.setProvincias(provinciaAntesDePais)
         props.setMunicipios(municipioAntesDePais)
         provinciaYmunicipio.push(provinciaAntesDePais)

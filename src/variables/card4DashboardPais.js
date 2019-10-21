@@ -31,7 +31,7 @@ function dame_color_aleatorio() {
 class gg extends Component {
 
   pieRender = ({ resultSet }) => {
-    console.log(resultSet['loadResponse']['data'])
+    //console.log(resultSet['loadResponse']['data'])
     var cantColores = resultSet['loadResponse']['data'];
     var COLORS_SERIES = [];
     cantColores.map(cc => COLORS_SERIES.push(dame_color_aleatorio()))
