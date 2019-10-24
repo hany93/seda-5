@@ -5,10 +5,15 @@ import XYZ from 'ol/source/XYZ';
 import React from 'react';
 import { defaults } from 'ol/interaction';
 import { defaults as defaultsControls, FullScreen } from 'ol/control';
-
+let map;
 class Maps1 extends React.Component {
+
+    componentWillReceiveProps = (nextprops) => {
+       // console.log(nextprops.selectedKeys1)
+    }
+
     componentDidMount = () => {
-        new Map({
+        map = new Map({
             target: 'map',
             layers: [
                 new TileLayer({
@@ -18,7 +23,7 @@ class Maps1 extends React.Component {
                 })
             ],
             view: new View({
-				projection: 'EPSG:4326',
+                projection: 'EPSG:4326',
                 center: [-79.8125, 22.742],
                 zoom: 6
             }),
