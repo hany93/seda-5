@@ -5,11 +5,60 @@ import XYZ from 'ol/source/XYZ';
 import React from 'react';
 import { defaults } from 'ol/interaction';
 import { defaults as defaultsControls, FullScreen } from 'ol/control';
+import nuevoazul from 'assets/img/nuevoazul.png'
+import Point from 'ol/geom/Point';
+import { Style, Icon, Text, Fill, Stroke, IconImage } from 'ol/style';
+import VectorSource from 'ol/source/Vector';
+import { Vector as VectorLayer } from 'ol/layer';
+import { fromLonLat } from 'ol/proj.js';
+import { Feature } from 'ol';
+
 let map;
+
+const iconStyle = new Style({
+    image: new Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: nuevoazul
+    }),
+    text: new Text({
+        text: 'Bienvenido a Londres',
+        font: 'bold 15px Open Sans',
+        //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
+        fill: new Fill({
+            color: 'blue'
+        }),
+        offsetX: 100,
+        offsetY: 8
+    })
+});
 class Maps1 extends React.Component {
 
     componentWillReceiveProps = (nextprops) => {
-       // console.log(nextprops.selectedKeys1)
+        //console.log(nextprops.selectedKeys1)
+        var array = nextprops.selectedKeys1;
+        array.map(a => {
+            console.log(a['EntidadAgricUrbana.longitud'])
+            console.log(a['EntidadAgricUrbana.latitud'])
+            var iconFeature = new Feature({
+                geometry: new Point(fromLonLat([a['EntidadAgricUrbana.longitud'], a['EntidadAgricUrbana.latitud']])),
+                population: 4000,
+                rainfall: 500
+            });
+
+            iconFeature.setStyle(iconStyle);
+
+            var vectorSource = new VectorSource({
+                features: [iconFeature]
+            });
+
+            var vectorLayer = new VectorLayer({
+                source: vectorSource
+            });
+
+            map.addLayer(vectorLayer);
+        });
     }
 
     componentDidMount = () => {
