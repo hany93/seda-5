@@ -105,8 +105,13 @@ export default function AdminNavbarLinks(props) {
 
   const handleChangeP = async event => {
     await props.setProvincias([event.target.value])
-    await props.setLugarfiltrado([])
-    await props.setLugarfiltrado(event.target.value)
+    await props.setMunicipios(totalDeMunicipiosSoloMun)
+    setItemSelecDropDownMun("Todos")
+
+    var provinciamunicipoio = []
+    provinciamunicipoio.push(event.target.value)
+    provinciamunicipoio.push("Todos")
+    await props.setLugarfiltrado(provinciamunicipoio)
   };
 
   const handleChangeM = async event => {
