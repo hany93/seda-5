@@ -144,8 +144,13 @@ export default function AdminNavbarLinks(props) {
       if ((provinciaAntesDePais.length == 1 && municipioAntesDePais.length == 1) || (provinciaAntesDePais.length == 1 && municipioAntesDePais.length > 1)) {
         props.setProvincias(provinciaAntesDePais)
         props.setMunicipios(municipioAntesDePais)
-        provinciaYmunicipio.push(provinciaAntesDePais)
-        provinciaYmunicipio.push(municipioAntesDePais)
+        if (municipioAntesDePais.length > 1) {
+          provinciaYmunicipio.push(provinciaAntesDePais)
+          provinciaYmunicipio.push("Todos")
+        } else {
+          provinciaYmunicipio.push(provinciaAntesDePais)
+          provinciaYmunicipio.push(municipioAntesDePais)
+        }
       } else {
         props.setProvincias(totalDeProvincias)
         props.setMunicipios(totalDeMunicipiosSoloMun)
