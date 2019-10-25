@@ -17,6 +17,7 @@ const cubejsApi = cubejs(
 class gg extends Component {
     state = {
         searchText: '',
+        columns: []
     };
 
     placeholderAux = (dataIndex) => {
@@ -149,6 +150,7 @@ class gg extends Component {
                 }}
                 cubejsApi={cubejsApi}
                 render={({ resultSet, measures, availableMeasures, updateMeasures }) => {
+
 
                     if (resultSet) {
 
