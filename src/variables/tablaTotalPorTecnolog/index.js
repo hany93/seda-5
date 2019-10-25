@@ -5,7 +5,7 @@ import { Table, Spin, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 import 'antd/dist/antd.css';
-import { async } from 'q';
+import './campo.css'
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -108,6 +108,17 @@ class gg extends Component {
         this.setState({ searchText: '' });
     };
 
+    // campoInvisible = (campo) => {
+    //     console.log(campo)
+    //     if (campo == 'EntidadAgricUrbana.id') {
+    //         console.log('ok\"')
+    //         return "className:\"hideCampo\", dataIndex:" + campo;
+    //     } else {
+    //         return "dataIndex:" + campo;
+    //         console.log('noooooooooook')
+    //     }
+    // }
+
     render() {
         return (
             <QueryRenderer
@@ -132,7 +143,9 @@ class gg extends Component {
                         "EntidadAgricUrbana.consejoPopular",
                         "EntidadAgricUrbana.ministerio",
                         "EntidadAgricUrbana.entidad",
-                        "EntidadAgricUrbana.productor"
+                        "EntidadAgricUrbana.productor",
+                        "EntidadAgricUrbana.longitud",
+                        "EntidadAgricUrbana.latitud"
                     ]
                 }}
                 cubejsApi={cubejsApi}
@@ -151,15 +164,12 @@ class gg extends Component {
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.ministerio"]["title"] = "Ministerio"
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.entidad"]["title"] = "Entidad"
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.productor"]["title"] = "Productor"
-                        var array = resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, ...this.getColumnSearchProps(c.key) }));
-
-
-                        //this.setState({ columns: array });
-
+                        var array = resultSet.tableColumns().map(c => ({ ...c, className: (c.key == 'EntidadAgricUrbana.longitud' || c.key == 'EntidadAgricUrbana.latitud') ? 'campoHidden' : '', dataIndex: c.key, ...this.getColumnSearchProps(c.key) }));
                         // rowSelection object indicates the need for row selection
                         const rowSelection = {
                             onChange: (selectedRowKeys, selectedRows) => {
-                                this.props.setSelectedKeys(selectedRowKeys);
+                                this.props.setSelectedKeys(selectedRows);
+                                //console.log(selectedRows)
                             },
                         };
                         return (
