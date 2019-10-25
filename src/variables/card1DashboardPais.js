@@ -29,6 +29,20 @@ class gg extends Component {
         };
         const options = {
             legend: { display: false, },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        // if (label) {
+                        //     label += ': ';
+                        // }
+                        label += ": " + tooltipItem.yLabel;
+                        return label + ' Unid';
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     gridLines: {
@@ -41,7 +55,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Cantidad(Unid)', fontColor: "#FFF" },
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
                         zeroLineColor: "rgba(255, 255, 255, 0.2)",

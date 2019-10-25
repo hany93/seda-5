@@ -29,6 +29,20 @@ class gg extends Component {
         };
         const options = {
             legend: { display: false, },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        // if (label) {
+                        //     label += ': ';
+                        // }
+                        label += ": " + tooltipItem.yLabel;
+                        return label + ' Unid';
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     lineColor: '#FFFFFF',

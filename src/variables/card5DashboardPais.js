@@ -29,6 +29,20 @@ class gg extends Component {
     };
     const options = {
       legend: { display: false },
+      tooltips: {
+        displayColors: false,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            // if (label) {
+            //     label += ': ';
+            // }
+            label += ": " + tooltipItem.yLabel;
+            return label + ' %';
+          }
+        }
+      },
       scales: {
         xAxes: [{
           gridLines: {
@@ -38,8 +52,6 @@ class gg extends Component {
           },
           ticks: {
             fontColor: "#FFF", // Cambiar color de labels
-            fontSize: 10,
-            minRotation: 2
           }
         }],
         yAxes: [{

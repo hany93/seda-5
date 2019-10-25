@@ -29,6 +29,20 @@ class gg extends Component {
         };
         const options = {
             legend: { display: false, },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+      
+                        // if (label) {
+                        //     label += ': ';
+                        // }
+                        label += ": " + tooltipItem.yLabel;
+                        return label + ' ha';
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     lineColor: '#FFFFFF',
@@ -42,7 +56,7 @@ class gg extends Component {
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: { display: true, labelString: 'Cantidad(ha)',fontColor: "#FFF" },
+                    scaleLabel: { display: true, labelString: 'Área Total(ha)',fontColor: "#FFF" },
                     lineColor: '#FFFFFF',
                     gridLines: {
                         color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo

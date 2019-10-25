@@ -45,11 +45,53 @@ class gg extends Component {
           data: s.series.map(r => r.value),
           backgroundColor: COLORS_SERIES,
           hoverBackgroundColor: COLORS_SERIES,
+          pointStyle: 'circle',
         }
       ))
     };
     const options = {
-      legend: { display: true, position: 'right' }
+      legend: {
+        display: true,
+        position: 'right',
+        labels: {
+          padding:20,
+          usePointStyle: true,
+          generateLabels: function (chart) {
+            var data = chart.data;
+            //console.log(data)
+            if (data.labels.length && data.datasets.length) {
+              return data.labels.map(function (label, i) {
+                //console.log(i+"..."+label)
+                return {
+                  text: label + " (" + data.datasets[0].data[i] + "%)",
+                  fillStyle: '#fff',
+                  strokeStyle: data.datasets[0].backgroundColor[i],
+                  lineWidth:3,
+                  // Extra data used for toggling the correct item
+                  index: i
+                };
+              });
+            }
+            return [];
+          }
+        }
+      },
+      tooltips: {
+        displayColors: true,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            // if (label) {
+            //     label += ': ';
+            // }
+            // console.log(tooltipItem)
+            // console.log(data)
+            label += ": " + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            return label + ' %';
+          }
+        }
+      },
     };
     return <Doughnut data={data} options={options} />;
   };

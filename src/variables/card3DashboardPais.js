@@ -17,18 +17,32 @@ class gg extends Component {
 
   barRender = ({ resultSet }) => {
     const data = {
-        labels: resultSet.categories().map(c => c.category),
-        datasets: resultSet.series().map((s, index) => (
-            {
-                label: 'Área Total',
-                data: s.series.map(r => r.value),
-                backgroundColor: COLORS_SERIES[index],
-                fill: false
-            }
-        )),
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: 'Área Total',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
     };
     const options = {
       legend: { display: false },
+      tooltips: {
+        displayColors: false,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            // if (label) {
+            //     label += ': ';
+            // }
+            label += ": " + tooltipItem.yLabel;
+            return label + ' ha';
+          }
+        }
+      },
       scales: {
         xAxes: [{
           gridLines: {
@@ -38,12 +52,10 @@ class gg extends Component {
           },
           ticks: {
             fontColor: "#FFF", // Cambiar color de labels
-            fontSize: 10,
-            minRotation: 2
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Área Total(ha)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Área Total(ha)', fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",
