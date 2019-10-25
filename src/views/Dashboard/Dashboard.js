@@ -191,30 +191,35 @@ export default function Dashboard(props) {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card plain>
             <CardHeader color="info">
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
               {props.lugarfiltrado == 'Cuba' ?
                 (<GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
+                  <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
                     <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
                   </GridItem>
-                </GridContainer>) :
-                (<GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <h4 style={{ textAlign: 'right', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <h4 style={{ textAlign: 'left', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[1].substring(1)}</h4>
-                  </GridItem>
-                </GridContainer>)}
+                </GridContainer>) : (props.lugarfiltrado.toString().includes('Todos')) ?
+                  (<GridContainer>
+                    <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
+                    </GridItem>
+                  </GridContainer>) :
+                  (<GridContainer>
+                    <GridItem xs={6} sm={6} md={6} lg={6} xl={6}>
+                      <h4 style={{ textAlign: 'right', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
+                    </GridItem>
+                    <GridItem xs={6} sm={6} md={6} lg={6} xl={6}>
+                      <h4 style={{ textAlign: 'left', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[1].substring(1)}</h4>
+                    </GridItem>
+                  </GridContainer>)}
             </CardHeader>
           </Card>
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -230,7 +235,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
@@ -246,7 +251,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="rose" stats icon>
               <CardIcon color="rose">
@@ -262,7 +267,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -278,7 +283,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -294,7 +299,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={2}>
+        <GridItem xs={12} sm={6} md={6} lg={4} xl={2}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -312,7 +317,7 @@ export default function Dashboard(props) {
         </GridItem>
       </GridContainer>
       <GridContainer>                      {/*aki otro contenedor de graficos */}
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={12} lg={12} xl={4}>
           <Card chart>
             <CardHeader color="success">
               {props.lugarfiltrado == 'Cuba' ? <Card1Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card1Dash provincias={props.provincias} municipios={props.municipios} /> : <Card1Dashp provincias={props.provincias} municipios={props.municipios} />}
@@ -329,7 +334,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={12} lg={6} xl={4}>
           <Card chart>
             <CardHeader color="warning">
               {props.lugarfiltrado == 'Cuba' ? <Card2Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card2Dash provincias={props.provincias} municipios={props.municipios} /> : <Card2Dashp provincias={props.provincias} municipios={props.municipios} />}
@@ -346,7 +351,7 @@ export default function Dashboard(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={12} lg={6} xl={4}>
           <Card chart>
             <CardHeader color="danger">
               {props.lugarfiltrado == 'Cuba' ? <Card3Dashpais municipios={props.municipios} /> : props.municipios.length == 1 ? <Card3Dash provincias={props.provincias} municipios={props.municipios} /> : <Card3Dashp provincias={props.provincias} municipios={props.municipios} />}
@@ -366,7 +371,7 @@ export default function Dashboard(props) {
       </GridContainer>
       {props.municipios.length == 1 ? '' : (
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={6} lg={6} xl={6}>
             <Card chart>
               <CardHeader color="white">
                 {props.lugarfiltrado == 'Cuba' ? <Card4Dashpais municipios={props.municipios} /> : <Card4Dashp provincias={props.provincias} municipios={props.municipios} />}
@@ -383,7 +388,7 @@ export default function Dashboard(props) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={6} lg={6} xl={6}>
             <Card chart>
               <CardHeader color="rose">
                 {props.lugarfiltrado == 'Cuba' ? <Card5Dashpais municipios={props.municipios} /> : <Card5Dashp provincias={props.provincias} municipios={props.municipios} />}
@@ -403,7 +408,7 @@ export default function Dashboard(props) {
         </GridContainer>
       )}
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card >
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
@@ -412,10 +417,10 @@ export default function Dashboard(props) {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
                   <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
                   <Map1 selectedKeys1={selectedKeys} />
                 </GridItem>
               </GridContainer>
