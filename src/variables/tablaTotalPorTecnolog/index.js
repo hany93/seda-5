@@ -5,6 +5,7 @@ import { Table, Spin, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 import 'antd/dist/antd.css';
+import { async } from 'q';
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -16,6 +17,7 @@ const cubejsApi = cubejs(
 class gg extends Component {
     state = {
         searchText: '',
+        columns: []
     };
 
     placeholderAux = (dataIndex) => {
@@ -136,6 +138,7 @@ class gg extends Component {
                 cubejsApi={cubejsApi}
                 render={({ resultSet, measures, availableMeasures, updateMeasures }) => {
 
+
                     if (resultSet) {
 
                         var tablepivotNew = resultSet.tablePivot();
@@ -149,11 +152,14 @@ class gg extends Component {
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.entidad"]["title"] = "Entidad"
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.productor"]["title"] = "Productor"
                         var array = resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, ...this.getColumnSearchProps(c.key) }));
+
+
+                        //this.setState({ columns: array });
+
                         // rowSelection object indicates the need for row selection
                         const rowSelection = {
                             onChange: (selectedRowKeys, selectedRows) => {
                                 this.props.setSelectedKeys(selectedRowKeys);
-                                console.log(selectedRows)
                             },
                         };
                         return (
