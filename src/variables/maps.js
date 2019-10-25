@@ -31,7 +31,7 @@ class Maps1 extends React.Component {
         if (array.length > 0) {
             array.map(a => {
                 console.log(a['EntidadAgricUrbana.longitud'])
-                //console.log(a['EntidadAgricUrbana.latitud'])
+                console.log(a['EntidadAgricUrbana.latitud'])
                 var x = parseInt(a['EntidadAgricUrbana.longitud']);
                 var y = parseInt(a['EntidadAgricUrbana.latitud']);
                 var iconFeature = new Feature({

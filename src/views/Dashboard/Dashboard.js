@@ -195,7 +195,20 @@ export default function Dashboard(props) {
           <Card plain>
             <CardHeader color="info">
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
-              <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
+              {props.lugarfiltrado == 'Cuba' ?
+                (<GridContainer>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
+                  </GridItem>
+                </GridContainer>) :
+                (<GridContainer>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <h4 style={{ textAlign: 'right', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <h4 style={{ textAlign: 'left', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[1].substring(1)}</h4>
+                  </GridItem>
+                </GridContainer>)}
             </CardHeader>
           </Card>
         </GridItem>
@@ -400,10 +413,10 @@ export default function Dashboard(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys}/>
+                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <Map1 selectedKeys1={selectedKeys}/>
+                  <Map1 selectedKeys1={selectedKeys} />
                 </GridItem>
               </GridContainer>
             </CardBody>

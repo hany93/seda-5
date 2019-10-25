@@ -109,7 +109,7 @@ export default function AdminNavbarLinks(props) {
     setItemSelecDropDownMun("Todos")
 
     var provinciamunicipoio = []
-    provinciamunicipoio.push(event.target.value)
+    provinciamunicipoio.push(event.target.value + ".")
     provinciamunicipoio.push("Todos")
     await props.setLugarfiltrado(provinciamunicipoio)
   };
@@ -122,7 +122,7 @@ export default function AdminNavbarLinks(props) {
       await props.setMunicipios(totalDeMunicipiosSoloMun)
 
       var provinciamunicipoio = []
-      provinciamunicipoio.push(props.provincias)
+      provinciamunicipoio.push(props.provincias + ".")
       provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
     } else {
@@ -133,7 +133,7 @@ export default function AdminNavbarLinks(props) {
       await props.setMunicipios(aux)
 
       var provinciamunicipoio = []
-      provinciamunicipoio.push(props.provincias)
+      provinciamunicipoio.push(props.provincias + ".")
       provinciamunicipoio.push(aux)
       props.setLugarfiltrado(provinciamunicipoio)
     }
@@ -150,10 +150,10 @@ export default function AdminNavbarLinks(props) {
         props.setProvincias(provinciaAntesDePais)
         props.setMunicipios(municipioAntesDePais)
         if (municipioAntesDePais.length > 1) {
-          provinciaYmunicipio.push(provinciaAntesDePais)
+          provinciaYmunicipio.push(provinciaAntesDePais + ".")
           provinciaYmunicipio.push("Todos")
         } else {
-          provinciaYmunicipio.push(provinciaAntesDePais)
+          provinciaYmunicipio.push(provinciaAntesDePais + ".")
           provinciaYmunicipio.push(municipioAntesDePais)
         }
       } else {
