@@ -9,62 +9,47 @@ import nuevoazul from 'assets/img/nuevoazul.png'
 import Point from 'ol/geom/Point';
 import { Style, Icon, Text, Fill, Circle, IconImage } from 'ol/style';
 import VectorSource from 'ol/source/Vector';
-import { Vector as VectorLayer } from 'ol/layer';
-import { fromLonLat } from 'ol/proj.js';
-import { Feature } from 'ol';
+import { fromLonLat } from 'ol/proj';
+import Feature from 'ol/Feature';
+import VectorLayer from 'ol/layer/Vector';
 
 let mapa;
 
-const iconStyle = new Style({
-    image: new Circle({
-        radius: 9,
-        fill: new Fill({ color: 'red' })
+var iconStyle7 = new Style({
+    image: new Icon /** @type {module:ol/style/Icon~Options} */({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: nuevoazul
+    }),
+    text: new Text({
+        text: 'Bienvenido a un organoponico',
+        font: 'bold 15px Open Sans',
+        //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
+        fill: new Fill({
+            color: 'red'
+        }),
+        offsetX: 100,
+        offsetY: 8
     })
 });
+
+var tileLayer = new TileLayer({
+    source: new XYZ({
+        url: 'http://ide.enpa.minag.cu/geoserver/www/tms/2017/sat/{z}/{x}/{-y}.jpg',
+    })
+})
+
 class Maps1 extends React.Component {
-
-    componentWillReceiveProps = nextprops => {
-        //console.log(nextprops.selectedKeys1)
-        var array = nextprops.selectedKeys1;
-        var markerss = [];
-        console.log(array.length)
-        if (array.length > 0) {
-            array.map(a => {
-                console.log(a['EntidadAgricUrbana.longitud'])
-                //console.log(a['EntidadAgricUrbana.latitud'])
-                var x = parseInt(a['EntidadAgricUrbana.longitud']);
-                var y = parseInt(a['EntidadAgricUrbana.latitud']);
-                var iconFeature = new Feature({
-                    geometry: new Point(fromLonLat([x, y]))
-                });
-                iconFeature.setStyle(iconStyle);
-                markerss.push(iconFeature)
-            });
-            var vectorsource = new VectorSource({
-                features: markerss
-            });
-            var vectorLayer = new VectorLayer({
-                source: vectorsource
-            });
-
-            mapa.addLayer(vectorLayer);
-        }
-        console.log('ya salio')
-    }
 
     componentDidMount = () => {
         mapa = new Map({
             target: 'map',
             layers: [
-                new TileLayer({
-                    source: new XYZ({
-                        url: 'http://ide.enpa.minag.cu/geoserver/www/tms/2017/sat/{z}/{x}/{-y}.jpg'
-                    })
-                })
+                tileLayer
             ],
             view: new View({
-                projection: 'EPSG:4326',
-                center: [-79.8125, 22.742],
+                center: fromLonLat([-80.1390444444445, 22.3754027777778]),
                 zoom: 6
             }),
             controls: defaultsControls({
@@ -79,9 +64,44 @@ class Maps1 extends React.Component {
                 mouseWheelZoom: false,
                 pointer: true,
                 select: true
-            })
+            }),
+            // loadTilesWhileAnimating: true
         });
     };
+
+    componentWillReceiveProps = nextprops => {
+        var array = nextprops.selectedKeys1;
+        var arregloDePuntos = [];
+
+        if (!array.length) {
+            var layers = mapa.getLayers()
+            if (layers["array_"].length > 1) {
+                mapa.removeLayer(layers["array_"][1]);
+            }
+        } else {
+            var layers = mapa.getLayers()
+            if (layers["array_"].length > 1) {
+                mapa.removeLayer(layers["array_"][1]);
+            }
+            array.map(a => {
+                var x = parseInt(a['EntidadAgricUrbana.longitud']);
+                var y = parseInt(a['EntidadAgricUrbana.latitud']);
+                var iconFeature = new Feature({
+                    geometry: new Point(fromLonLat([a['EntidadAgricUrbana.longitud'], a['EntidadAgricUrbana.latitud']]))
+                });
+                iconFeature.setStyle(iconStyle7);
+                arregloDePuntos.push(iconFeature)
+            });
+            var vectorsource = new VectorSource({
+                features: arregloDePuntos
+            });
+            var vectorLayer = new VectorLayer({
+                source: vectorsource
+            });
+            mapa.addLayer(vectorLayer);
+        }
+    }
+
     render() {
         return (
             <div>

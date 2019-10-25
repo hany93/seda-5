@@ -109,13 +109,10 @@ class gg extends Component {
     };
 
     // campoInvisible = (campo) => {
-    //     console.log(campo)
     //     if (campo == 'EntidadAgricUrbana.id') {
-    //         console.log('ok\"')
     //         return "className:\"hideCampo\", dataIndex:" + campo;
     //     } else {
     //         return "dataIndex:" + campo;
-    //         console.log('noooooooooook')
     //     }
     // }
 
@@ -169,7 +166,6 @@ class gg extends Component {
                         const rowSelection = {
                             onChange: (selectedRowKeys, selectedRows) => {
                                 this.props.setSelectedKeys(selectedRows);
-                                //console.log(selectedRows)
                             },
                         };
                         return (
