@@ -37,7 +37,7 @@ class gg extends Component {
                         display: true,
                     },
                     ticks: {
-                        fontColor: "#FFF" // Cambiar color de labels
+                        fontColor: "#FFF", // Cambiar color de labels
                     }
                 }],
                 yAxes: [{
