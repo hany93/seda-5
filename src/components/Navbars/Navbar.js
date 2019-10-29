@@ -114,10 +114,10 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          {makeBrand() === undefined ? <Button color="transparent" href="#" className={classes.title}><HomeIcon /><span>Home</span></Button> : <Button color="transparent" href="/admin/dashboard" className={classes.title}><HomeIcon  className={classes.title_link}/><Link to="/admin/dashboard" className={classes.title_link}>Home</Link>&nbsp;/ {makeBrand()}</Button>}
+          {makeBrand() === undefined ? <Button color="transparent" href="#" className={classes.title}><HomeIcon /><span>Home</span></Button> : <Button color="transparent" href="/admin/dashboard" className={classes.title}><HomeIcon className={classes.title_link} /><Link to="/admin/dashboard" className={classes.title_link}>Home</Link>&nbsp;/ {makeBrand()}</Button>}
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} lugarFiltrado={props.lugarFiltrado} setLugarfiltrado={props.setLugarfiltrado} />
+          <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} lugarFiltrado={props.lugarFiltrado} setLugarfiltrado={props.setLugarfiltrado} check={props.check} setCheck={props.setCheck} />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton
