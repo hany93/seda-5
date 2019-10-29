@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
-import { Chart, Axis, Tooltip, Geom, Coord, Legend } from 'bizcharts';
+import { Line, Bubble, Pie, Bar, } from 'react-chartjs-2';
 import { Spin, Table } from 'antd';
-
+const COLORS_SERIES = ['#FF6492', '#141446', '#7A77FF'];
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -66,42 +66,104 @@ class gg extends Component {
     return data;
   }
 
-  barRender = ({ resultSet }) => (
-    <Chart scale={{ x: { tickCount: 8 } }} height={400} data={this.stackedChartData(resultSet)} forceFit>
-      <Axis name="x" />
-      <Axis name="measure" />
-      <Tooltip />
-      <Geom type="intervalStack" position={`x*measure`} color="color" />
-    </Chart>
-  );
+  barRender = ({ resultSet }) => {
+    const data = {
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
+    };
+    const options = {
+      responsive: true,
+      fullWidth: true,
+      legend: { position: 'bottom' },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+            label += ": " + tooltipItem.yLabel;
+            if (data.datasets[tooltipItem.datasetIndex].label=='Cantidad') {
+              return label + ' Unid';              
+            } else {
+              return label + ' ha';              
+            }
+          }
+        }
+      },
+      scales: {
+        xAxes: [{ stacked: true }] ,
+        yAxes: [{
+          scaleLabel: { display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+        }]
+      }
+    };
+    return <Bar data={data} options={options} />;
+  };
 
-  lineRender = ({ resultSet }) => (
-    <Chart scale={{ x: { tickCount: 8 } }} height={400} data={this.stackedChartData(resultSet)} forceFit>
-      <Axis name="x" />
-      <Axis name="measure" />
-      <Tooltip crosshairs={{ type: 'y' }} />
-      <Geom type="line" position={`x*measure`} size={2} color="color" />
-    </Chart>
-  );
+  lineRender = ({ resultSet }) => {
+    const data = {
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
+          data: s.series.map(r => r.value),
+          borderColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
+    };
+    const options = {
+      responsive: true,
+      fullWidth: true,
+      legend: { position: 'bottom' }
+    };
+    return <Line data={data} options={options} />;
+  };
 
-  areaRender = ({ resultSet }) => (
-    <Chart scale={{ x: { tickCount: 8 } }} height={400} data={this.stackedChartData(resultSet)} forceFit>
-      <Axis name="x" />
-      <Axis name="measure" />
-      <Tooltip crosshairs={{ type: 'y' }} />
-      <Geom type="areaStack" position={`x*measure`} size={2} color="color" />
-    </Chart>
-  );
+  areaRender = ({ resultSet }) => {
+    const data = {
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES[index]
+        }
+      )),
+    };
+    const options = {
+      responsive: true,
+      fullWidth: true,
+      legend: { position: 'bottom' },
+      scales: { yAxes: [{ stacked: true }] }
+    };
+    return <Line data={data} options={options} />;
+  };
 
-  pieRender = ({ resultSet }) => (
-    <Chart height={400} data={resultSet.chartPivot()} forceFit>
-      <Coord type='theta' radius={0.75} />
-      {resultSet.seriesNames().map(s => (<Axis name={s.key} />))}
-      <Legend position='right' />
-      <Tooltip />
-      {resultSet.seriesNames().map(s => (<Geom type="intervalStack" position={s.key} color="category" />))}
-    </Chart>
-  );
+  pieRender = ({ resultSet }) => {
+    const data = {
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map(s => (
+        {
+          label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
+          data: s.series.map(r => r.value),
+          backgroundColor: COLORS_SERIES,
+          hoverBackgroundColor: COLORS_SERIES,
+        }
+      ))
+    };
+    const options = {
+      responsive: true,
+      fullWidth: true,
+      legend: { position: 'right' }
+    };
+    return <Pie data={data} options={options} />;
+  };
 
   tableRender = ({ resultSet }) => (
     <Table

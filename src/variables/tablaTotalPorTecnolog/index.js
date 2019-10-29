@@ -170,6 +170,7 @@ class gg extends Component {
                         };
                         return (
                             <Table
+                                className='tableResponsive'
                                 pagination={{ pageSize: 6 }}
                                 columns={array}
                                 rowSelection={rowSelection}

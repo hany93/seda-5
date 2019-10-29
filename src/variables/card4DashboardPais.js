@@ -47,6 +47,8 @@ class gg extends Component {
       ))
     };
     const options = {
+      responsive: true,
+      fullWidth: true,
       legend: {
         display: true,
         position: 'right',

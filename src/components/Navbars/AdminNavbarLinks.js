@@ -164,10 +164,9 @@ export default function AdminNavbarLinks(props) {
       props.setLugarfiltrado(provinciaYmunicipio)
       setInavilitarProvMun(false)
       const a = {
-        content: <span style={{ fontSize: '20px' }}>Seleccione provincia y municipio para observar sus estadísticas.</span>,
-        icon: <InfoIcon style={{ paddingBottom: 0, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} />
+        content: <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 20, opacity: 0.9, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> Seleccione provincia y municipio para observar sus estadísticas.</span>
       }
-      message.info(a);
+      message.open(a);
     } else {
       setCheck(true)
       //cuando se pone por pais

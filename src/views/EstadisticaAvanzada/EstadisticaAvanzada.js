@@ -61,6 +61,7 @@ export default function EstadisticaAvanzadaPage(props) {
       </CardHeader>
       <CardBody>
         <Dropdown showGrafic={showGrafic} camposMeasures={camposMeasures} camposDimensions={camposDimensions} tipoGrafic={tipoGraficFunction} />
+        <br/>
         {showGM && showGD ? <GraficoGeneral camposMeasures={measures} camposDimensions={dimensions} tipoGrafic={tipoGrafic} municipios={props.municipios} /> : ''}
       </CardBody>
     </Card>

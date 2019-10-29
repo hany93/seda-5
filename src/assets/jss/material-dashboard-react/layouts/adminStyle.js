@@ -1,9 +1,9 @@
 import {
   drawerWidth,
   transition,
-  container
+  container,
+  hexToRgb
 } from "assets/jss/material-dashboard-react.js";
-
 const appStyle = theme => ({
   wrapper: {
     position: "relative",
@@ -21,6 +21,15 @@ const appStyle = theme => ({
     maxHeight: "100%",
     width: "100%",
     overflowScrolling: "touch"
+  },
+  info: {
+    backgroundColor: '#26c6da',
+    boxShadow:
+    "0 4px 20px 0 rgba(" +
+    hexToRgb('#000') +
+    ",.14), 0 7px 10px -5px rgba(" +
+    hexToRgb('#00acc1') +
+    ",.4)"
   },
   content: {
     marginTop: "60px",

@@ -162,14 +162,18 @@ import Dashboard from "views/Dashboard/Dashboard.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Cuba0 from 'assets/img/cuba0.png'
+import InfoIcon from '@material-ui/icons/Info';
 
+import Snackbar from '@material-ui/core/Snackbar';
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-1.jpg";
 import logo from "assets/img/reactlogo.png";
-
 import cubejs from '@cubejs-client/core';
 let ps;
 
@@ -196,7 +200,7 @@ export default function Admin({ ...rest }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [municipios, setMunicipios] = React.useState(['']);
   const [provincias, setProvincias] = React.useState(['']);
-
+  const [open, setOpen] = React.useState(true);
   const [lugarFiltrado, setLugarfiltrado] = React.useState(["Cuba"]);
 
 
@@ -240,7 +244,6 @@ export default function Admin({ ...rest }) {
       }
       window.removeEventListener("resize", resizeFunction);
     };
-
   }, [mainPanel]);
 
   React.useEffect(() => {
@@ -290,8 +293,31 @@ export default function Admin({ ...rest }) {
 
   );
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={classes.wrapper}>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={open}
+        onClose={handleClose}
+        ContentProps={{
+          'aria-describedby': 'message-id',
+          'className': classes.info
+        }}
+        message={<span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 30, opacity: 0.9, marginRight: '10px' }} /> Deseleccione &nbsp;<img alt='País' title='País' src={Cuba0} />&nbsp; para elegir provincia y municipio.</span>}
+        action={[
+          <IconButton
+            aria-label="close"
+            color="inherit"
+            className={classes.close}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
       <Sidebar
         routes={routes}
         logoText={"\u00a0\u00a0\u00a0SedA"}
