@@ -202,6 +202,7 @@ export default function Admin({ ...rest }) {
   const [provincias, setProvincias] = React.useState(['']);
   const [open, setOpen] = React.useState(true);
   const [lugarFiltrado, setLugarfiltrado] = React.useState(["Cuba"]);
+  const [check, setCheck] = React.useState(true);
 
 
 
@@ -332,6 +333,8 @@ export default function Admin({ ...rest }) {
         provincias={provincias}
         setLugarfiltrado={setLugarfiltrado}
         lugarFiltrado={lugarFiltrado}
+        check={check}
+        setCheck={setCheck}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -345,6 +348,8 @@ export default function Admin({ ...rest }) {
           provincias={provincias}
           setLugarfiltrado={setLugarfiltrado}
           lugarFiltrado={lugarFiltrado}
+          check={check}
+          setCheck={setCheck}
           {...rest}
         />
         <div className={classes.content}>
