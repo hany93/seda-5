@@ -54,19 +54,8 @@ class gg extends Component {
     }
   }
 
-  stackedChartData = (resultSet) => {
-    const data = resultSet.pivot().map(
-      ({ xValues, yValuesArray }) =>
-        yValuesArray.map(([yValues, m]) => ({
-          x: resultSet.axisValuesString(xValues, ', '),
-          color: resultSet.axisValuesString(yValues, ', '),
-          measure: m && Number.parseFloat(m)
-        }))
-    ).reduce((a, b) => a.concat(b));
-    return data;
-  }
-
   barRender = ({ resultSet }) => {
+    console.log(resultSet)
     const data = {
       labels: resultSet.categories().map(c => c.category),
       datasets: resultSet.series().map((s, index) => (
@@ -96,7 +85,6 @@ class gg extends Component {
         }
       },
       scales: {
-        xAxes: [{ stacked: true }] ,
         yAxes: [{
           scaleLabel: { display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
         }]
