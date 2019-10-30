@@ -5,9 +5,9 @@ import XYZ from 'ol/source/XYZ';
 import React from 'react';
 import { defaults } from 'ol/interaction';
 import { defaults as defaultsControls, FullScreen } from 'ol/control';
-import nuevoazul from 'assets/img/nuevoazul.png'
+import nuevoazul from 'assets/img/location.png'
 import Point from 'ol/geom/Point';
-import { Style, Icon, Text, Fill, Circle, IconImage } from 'ol/style';
+import { Style, Icon, Text, Fill } from 'ol/style';
 import VectorSource from 'ol/source/Vector';
 import { fromLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
@@ -17,7 +17,7 @@ let mapa;
 
 var iconStyle7 = new Style({
     image: new Icon /** @type {module:ol/style/Icon~Options} */({
-        anchor: [0.5, 46],
+        anchor: [0.5, 35],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         src: nuevoazul
@@ -27,10 +27,10 @@ var iconStyle7 = new Style({
         font: 'bold 15px Open Sans',
         //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
         fill: new Fill({
-            color: 'red'
+            color: '#fff'
         }),
         offsetX: 100,
-        offsetY: 8
+        offsetY: 0
     })
 });
 
