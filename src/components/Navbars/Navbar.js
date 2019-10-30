@@ -117,7 +117,25 @@ export default function Header(props) {
           {makeBrand() === undefined ? <Button color="transparent" href="#" className={classes.title}><HomeIcon /><span>Home</span></Button> : <Button color="transparent" href="/admin/dashboard" className={classes.title}><HomeIcon className={classes.title_link} /><Link to="/admin/dashboard" className={classes.title_link}>Home</Link>&nbsp;/ {makeBrand()}</Button>}
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} lugarFiltrado={props.lugarFiltrado} setLugarfiltrado={props.setLugarfiltrado} check={props.check} setCheck={props.setCheck} />
+          <AdminNavbarLinks
+            color={color}
+            municipios={props.municipios}
+            setMunicipios={props.setMunicipios}
+            setProvincias={props.setProvincias}
+            provincias={props.provincias}
+            lugarFiltrado={props.lugarFiltrado}
+            setLugarfiltrado={props.setLugarfiltrado}
+            check={props.check}
+            setCheck={props.setCheck}
+            inavilitarProvMun={props.inavilitarProvMun}
+            setInavilitarProvMun={props.setInavilitarProvMun}
+            provinciaAntesDePais={props.provinciaAntesDePais}
+            setProvinciaAntesDePais={props.setProvinciaAntesDePais}
+            municipioAntesDePais={props.municipioAntesDePais}
+            setMunicipioAntesDePais={props.setMunicipioAntesDePais}
+            itemSelecDropDownMun={props.itemSelecDropDownMun}
+            setItemSelecDropDownMun={props.setItemSelecDropDownMun}
+          />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

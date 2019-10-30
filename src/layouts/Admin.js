@@ -205,6 +205,11 @@ export default function Admin({ ...rest }) {
   const [check, setCheck] = React.useState(true);
 
 
+  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
+  const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
+  const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
+  const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
+
 
   const handleImageClick = image => {
     setImage(image);
@@ -335,6 +340,14 @@ export default function Admin({ ...rest }) {
         lugarFiltrado={lugarFiltrado}
         check={check}
         setCheck={setCheck}
+        inavilitarProvMun={inavilitarProvMun}
+        setInavilitarProvMun={setInavilitarProvMun}
+        provinciaAntesDePais={provinciaAntesDePais}
+        setProvinciaAntesDePais={setProvinciaAntesDePais}
+        municipioAntesDePais={municipioAntesDePais}
+        setMunicipioAntesDePais={setMunicipioAntesDePais}
+        itemSelecDropDownMun={itemSelecDropDownMun}
+        setItemSelecDropDownMun={setItemSelecDropDownMun}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -350,6 +363,14 @@ export default function Admin({ ...rest }) {
           lugarFiltrado={lugarFiltrado}
           check={check}
           setCheck={setCheck}
+          inavilitarProvMun={inavilitarProvMun}
+          setInavilitarProvMun={setInavilitarProvMun}
+          provinciaAntesDePais={provinciaAntesDePais}
+          setProvinciaAntesDePais={setProvinciaAntesDePais}
+          municipioAntesDePais={municipioAntesDePais}
+          setMunicipioAntesDePais={setMunicipioAntesDePais}
+          itemSelecDropDownMun={itemSelecDropDownMun}
+          setItemSelecDropDownMun={setItemSelecDropDownMun}
           {...rest}
         />
         <div className={classes.content}>

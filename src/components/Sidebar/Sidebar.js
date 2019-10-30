@@ -175,7 +175,25 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>
-            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks color={color} municipios={props.municipios} setMunicipios={props.setMunicipios} setProvincias={props.setProvincias} provincias={props.provincias} lugarFiltrado={props.lugarFiltrado} setLugarfiltrado={props.setLugarfiltrado} check={props.check} setCheck={props.setCheck} />}
+            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks
+              color={color}
+              municipios={props.municipios}
+              setMunicipios={props.setMunicipios}
+              setProvincias={props.setProvincias}
+              provincias={props.provincias}
+              lugarFiltrado={props.lugarFiltrado}
+              setLugarfiltrado={props.setLugarfiltrado}
+              check={props.check}
+              setCheck={props.setCheck}
+              inavilitarProvMun={props.inavilitarProvMun}
+              setInavilitarProvMun={props.setInavilitarProvMun}
+              provinciaAntesDePais={props.provinciaAntesDePais}
+              setProvinciaAntesDePais={props.setProvinciaAntesDePais}
+              municipioAntesDePais={props.municipioAntesDePais}
+              setMunicipioAntesDePais={props.setMunicipioAntesDePais}
+              itemSelecDropDownMun={props.itemSelecDropDownMun}
+              setItemSelecDropDownMun={props.setItemSelecDropDownMun}
+            />}
             {links}
           </div>
           {image !== undefined ? (

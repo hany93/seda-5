@@ -35,11 +35,11 @@ export default function AdminNavbarLinks(props) {
   const [totalDeProvincias, settotalDeProvincias] = React.useState([]);
   //const [check, setCheck] = React.useState(true);
   const [totalDeMunicipiosSoloMun, settotalDeMunicipiosSoloMun] = React.useState([]);
-  const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
-  const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
-  const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
 
-  const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
+  // const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
+  // const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
+  // const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
+  // const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
 
   useEffect(
 
@@ -106,7 +106,7 @@ export default function AdminNavbarLinks(props) {
   const handleChangeP = async event => {
     await props.setProvincias([event.target.value])
     await props.setMunicipios(totalDeMunicipiosSoloMun)
-    setItemSelecDropDownMun("Todos")
+    props.setItemSelecDropDownMun("Todos")
 
     var provinciamunicipoio = []
     provinciamunicipoio.push(event.target.value + ".")
@@ -117,7 +117,7 @@ export default function AdminNavbarLinks(props) {
   const handleChangeM = async event => {
 
     if (event.target.value === "Todos") {
-      setItemSelecDropDownMun("Todos")
+      props.setItemSelecDropDownMun("Todos")
 
       await props.setMunicipios(totalDeMunicipiosSoloMun)
 
@@ -126,7 +126,7 @@ export default function AdminNavbarLinks(props) {
       provinciamunicipoio.push("Todos")
       props.setLugarfiltrado(provinciamunicipoio)
     } else {
-      setItemSelecDropDownMun(event.target.value)
+      props.setItemSelecDropDownMun(event.target.value)
 
       var aux = [];
       await aux.push(event.target["value"])
@@ -144,17 +144,15 @@ export default function AdminNavbarLinks(props) {
     if (props.check) {
       props.setCheck(false)
       var provinciaYmunicipio = [];
-      console.log(provinciaAntesDePais)
-      console.log(municipioAntesDePais)
-      if ((provinciaAntesDePais.length == 1 && municipioAntesDePais.length == 1) || (provinciaAntesDePais.length == 1 && municipioAntesDePais.length > 1)) {
-        props.setProvincias(provinciaAntesDePais)
-        props.setMunicipios(municipioAntesDePais)
-        if (municipioAntesDePais.length > 1) {
-          provinciaYmunicipio.push(provinciaAntesDePais + ".")
+      if ((props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length == 1) || (props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length > 1)) {
+        props.setProvincias(props.provinciaAntesDePais)
+        props.setMunicipios(props.municipioAntesDePais)
+        if (props.municipioAntesDePais.length > 1) {
+          provinciaYmunicipio.push(props.provinciaAntesDePais + ".")
           provinciaYmunicipio.push("Todos")
         } else {
-          provinciaYmunicipio.push(provinciaAntesDePais + ".")
-          provinciaYmunicipio.push(municipioAntesDePais)
+          provinciaYmunicipio.push(props.provinciaAntesDePais + ".")
+          provinciaYmunicipio.push(props.municipioAntesDePais)
         }
       } else {
         props.setProvincias(totalDeProvincias)
@@ -162,7 +160,7 @@ export default function AdminNavbarLinks(props) {
         provinciaYmunicipio.push("Cuba")
       }
       props.setLugarfiltrado(provinciaYmunicipio)
-      setInavilitarProvMun(false)
+      props.setInavilitarProvMun(false)
       const a = {
         content: <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 20, opacity: 0.9, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> Seleccione provincia y municipio para observar sus estadísticas.</span>
       }
@@ -170,12 +168,12 @@ export default function AdminNavbarLinks(props) {
     } else {
       props.setCheck(true)
       //cuando se pone por pais
-      setProvinciaAntesDePais(props.provincias)
-      setMunicipioAntesDePais(props.municipios)
+      props.setProvinciaAntesDePais(props.provincias)
+      props.setMunicipioAntesDePais(props.municipios)
       props.setProvincias(totalDeProvincias)
       props.setMunicipios(totalDeMunicipiosSoloMun)
       props.setLugarfiltrado("Cuba")
-      setInavilitarProvMun(true)
+      props.setInavilitarProvMun(true)
     }
   };
 
@@ -186,7 +184,7 @@ export default function AdminNavbarLinks(props) {
           <img alt='País' title='País' src={props.check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : window.innerWidth > 959 ? Cuba1 : Cuba0} />&nbsp; {window.innerWidth > 959 ? '' : 'País'}
         </IconButton>
         <Select
-          disabled={inavilitarProvMun}
+          disabled={props.inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
           value={props.provincias}
@@ -207,10 +205,10 @@ export default function AdminNavbarLinks(props) {
           ))}
         </Select>
         <Select
-          disabled={inavilitarProvMun}
+          disabled={props.inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
-          value={itemSelecDropDownMun}
+          value={props.itemSelecDropDownMun}
           onChange={handleChangeM}
           displayEmpty
           input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: window.innerWidth > 959 ? "black" : "white", marginLeft: window.innerWidth > 959 ? "40px" : "none" }} />}
