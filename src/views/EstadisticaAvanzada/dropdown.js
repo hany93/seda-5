@@ -4,8 +4,73 @@ import { Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
+const hexToRgb = input => {
+    input = input + "";
+    input = input.replace("#", "");
+    let hexRegex = /[0-9A-Fa-f]/g;
+    if (!hexRegex.test(input) || (input.length !== 3 && input.length !== 6)) {
+        throw new Error("input is not a valid hex color.");
+    }
+    if (input.length === 3) {
+        let first = input[0];
+        let second = input[1];
+        let last = input[2];
+        input = first + first + second + second + last + last;
+    }
+    input = input.toUpperCase(input);
+    let first = input[0] + input[1];
+    let second = input[2] + input[3];
+    let last = input[4] + input[5];
+    return (
+        parseInt(first, 16) +
+        ", " +
+        parseInt(second, 16) +
+        ", " +
+        parseInt(last, 16)
+    );
+};
+const useStyles = makeStyles(theme => ({
+    button: {
+        margin: theme.spacing(1),
+    },
+    buttonClass: {
+        color: '#fff',
+        boxShadow: (props) => props.color === 'primary' ? "0 4px 20px 0 rgba(" +
+            hexToRgb('#000') +
+            ",.14), 0 7px 10px -5px rgba(" +
+            hexToRgb('#9c27b0') +
+            ",.4)" : props.color === "info" ? "0 4px 20px 0 rgba(" +
+                hexToRgb('#000') +
+                ",.14), 0 7px 10px -5px rgba(" +
+                hexToRgb('#00acc1') +
+                ",.4)" : props.color === "success" ? "0 4px 20px 0 rgba(" +
+                    hexToRgb('#000') +
+                    ",.14), 0 7px 10px -5px rgba(" +
+                    hexToRgb('#4caf50') +
+                    ",.4)" : props.color === "warning" ? "0 4px 20px 0 rgba(" +
+                        hexToRgb('#000') +
+                        ",.14), 0 7px 10px -5px rgba(" +
+                        hexToRgb('#ff9800') +
+                        ",.4)" : "0 4px 20px 0 rgba(" +
+                        hexToRgb('#000') +
+                        ",.14), 0 7px 10px -5px rgba(" +
+                        hexToRgb('#f44336') +
+                        ",.4)",
+        backgroundColor: (props) => props.color === 'primary' ? '#AB47BC' : props.color === "info" ? '#26C6DA' : props.color === "success" ? '#66BB6A' : props.color === "warning" ? '#FFA726' : '#EF5350',
+        '&:hover': {
+            backgroundColor: (props) => props.color === 'primary' ? '#af2cc5' : props.color === "info" ? '#00d3ee' : props.color === "success" ? '#5cb860' : props.color === "warning" ? '#ffa21a' : '#f55a4e',
+        }
+    }
+}));
 
 export default function Dropdown(props) {
+    console.log(props.color)
+    const classes = useStyles(props);
 
     const [showGM, setShowGM] = React.useState(true);
     const [showGD, setShowGD] = React.useState(true);
@@ -51,62 +116,65 @@ export default function Dropdown(props) {
 
     return (
         <div>
-            <Row>
-                <InputLabel htmlFor="select-multiple">Valores (eje Y):</InputLabel>
-                <Select
-                    multiple
-                    value={mesure}
-                    style={{ width: '50%' }}
-                    onChange={handleChangeMeasures}
-                    input={<Input id="select-multiple" />}
-                    defaultValue="EntidadAgricUrbana.count"
-                >
-                    <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
-                </Select>
-            </Row>
-            <Row>
-                <br />
-                <InputLabel htmlFor="select-multiple1">Categorías (eje X):</InputLabel>
-                <Select
-                    multiple
-                    value={dimension}
-                    style={{ width: '50%' }}
-                    onChange={handleChangeDimensions}
-                    input={<Input id="select-multiple1" />}
-                    defaultValue="EntidadAgricUrbana.nombre"
-                >
-                    <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
-                </Select>
-            </Row>
-            <Row>
-            </Row>
-            <Row>
-                <br />
-                <InputLabel htmlFor="select-multiple2">Tipo de Gráfico:</InputLabel>
-                <Select
-                    value={grafico}
-                    style={{ width: '50%' }}
-                    onChange={handleChangeGrafic}
-                    input={<Input id="select-multiple2" />}
-                    defaultValue='bar'
-                >
-                    <MenuItem value="bar">Gráfico de Barras</MenuItem>
-                    <MenuItem value="pie">Gráfico de Pastel</MenuItem>
-                    <MenuItem value="line">Gráfico de Líneas</MenuItem>
-                    <MenuItem value="area">Gráfico de Área</MenuItem>
-                    <MenuItem value="table">Tabla</MenuItem>
-                </Select>
-            </Row>
-            <Row>
-            </Row>
+            <GridContainer spacing={5}>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple">Valores (eje Y):</InputLabel>
+                    <Select
+                        multiple
+                        value={mesure}
+                        style={{ width: '100%' }}
+                        onChange={handleChangeMeasures}
+                        input={<Input id="select-multiple" />}
+                        defaultValue="EntidadAgricUrbana.count"
+                    >
+                        <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
+                    </Select>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple1">Categorías (eje X):</InputLabel>
+                    <Select
+                        multiple
+                        value={dimension}
+                        style={{ width: '100%' }}
+                        onChange={handleChangeDimensions}
+                        input={<Input id="select-multiple1" />}
+                        defaultValue="EntidadAgricUrbana.nombre"
+                    >
+                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                    </Select>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple2">Tipo de Gráfico:</InputLabel>
+                    <Select
+                        value={grafico}
+                        style={{ width: '100%' }}
+                        onChange={handleChangeGrafic}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='bar'
+                    >
+                        <MenuItem value="bar">Gráfico de Barras</MenuItem>
+                        <MenuItem value="pie">Gráfico de Pastel</MenuItem>
+                        <MenuItem value="line">Gráfico de Líneas</MenuItem>
+                        <MenuItem value="area">Gráfico de Área</MenuItem>
+                        <MenuItem value="table">Tabla</MenuItem>
+                    </Select>
+                </GridItem>
+            </GridContainer>
+            <GridContainer spacing={5}>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Button variant="contained" className={classes.buttonClass}>
+                        <span style={{ fontSize: '15px', display: 'flex', alignItems: 'center' }}><AddIcon style={{ fontSize: 25}}/>Filtro</span>
+                    </Button>
+                </GridItem>
+            </GridContainer>
             <Row>
                 <br />
                 <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
