@@ -72,7 +72,7 @@ class Maps1 extends React.Component {
                 });
                 iconFeature.setStyle(new Style({
                     image: new Icon /** @type {module:ol/style/Icon~Options} */({
-                        anchor: [0.5, 10],
+                        anchor: [0.5, 35],
                         anchorXUnits: 'fraction',
                         anchorYUnits: 'pixels',
                         src: nuevoazul
@@ -84,8 +84,10 @@ class Maps1 extends React.Component {
                         fill: new Fill({
                             color: '#fff'
                         }),
-                        offsetX: 80,
-                        offsetY: 0
+                        offsetX: 0,
+                        offsetY: 4,
+                        maxAngle: 90,
+                        placement: 400
                     })
                 }));
                 arregloDePuntos.push(iconFeature)

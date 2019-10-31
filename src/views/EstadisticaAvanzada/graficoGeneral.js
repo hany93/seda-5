@@ -247,7 +247,7 @@ class gg extends Component {
               "dimension": this.props.filtro,
               "operator": this.props.operador,
               "values": [
-                "uno"
+                "Villa Clara"
               ]
             }
           ]
