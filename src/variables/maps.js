@@ -84,10 +84,11 @@ class Maps1 extends React.Component {
                         fill: new Fill({
                             color: '#fff'
                         }),
-                        offsetX: 0,
-                        offsetY: 4,
-                        maxAngle: 90,
-                        placement: 400
+                        // offsetX: 50,
+                        // offsetY: 4,
+                        // maxAngle: 90,
+                        // placement: 400
+                        textAlign: 'end'
                     })
                 }));
                 arregloDePuntos.push(iconFeature)
