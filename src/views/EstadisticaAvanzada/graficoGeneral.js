@@ -11,7 +11,22 @@ const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
+function aleatorio(inferior, superior) {
+  var numPosibilidades = superior - inferior
+  var aleat = Math.random() * numPosibilidades
+  aleat = Math.floor(aleat)
+  return parseInt(inferior) + aleat
+}
 
+function dame_color_aleatorio() {
+  var hexadecimal = new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+  var color_aleatorio = "#";
+  for (let i = 0; i < 6; i++) {
+    var posarray = aleatorio(0, hexadecimal.length)
+    color_aleatorio += hexadecimal[posarray]
+  }
+  return color_aleatorio
+}
 class gg extends Component {
 
   state = {
@@ -76,10 +91,10 @@ class gg extends Component {
           label: function (tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
             label += ": " + tooltipItem.yLabel;
-            if (data.datasets[tooltipItem.datasetIndex].label=='Cantidad') {
-              return label + ' Unid';              
+            if (data.datasets[tooltipItem.datasetIndex].label == 'Cantidad') {
+              return label + ' Unid';
             } else {
-              return label + ' ha';              
+              return label + ' ha';
             }
           }
         }
@@ -134,6 +149,9 @@ class gg extends Component {
   };
 
   pieRender = ({ resultSet }) => {
+    var cantColores = resultSet['loadResponse']['data'];
+    var COLORS_SERIES = [];
+    cantColores.map(cc => COLORS_SERIES.push(dame_color_aleatorio()))
     const data = {
       labels: resultSet.categories().map(c => c.category),
       datasets: resultSet.series().map(s => (
@@ -142,13 +160,56 @@ class gg extends Component {
           data: s.series.map(r => r.value),
           backgroundColor: COLORS_SERIES,
           hoverBackgroundColor: COLORS_SERIES,
+          pointStyle: 'circle'
         }
       ))
     };
     const options = {
       responsive: true,
       fullWidth: true,
-      legend: { position: 'right' }
+      legend: {
+        display: true,
+        position: 'right',
+        labels: {
+          padding: 20,
+          usePointStyle: true,
+          generateLabels: function (chart) {
+            var data = chart.data;
+            //console.log(data)
+            if (data.labels.length && data.datasets.length) {
+              return data.labels.map(function (label, i) {
+                //console.log(i+"..."+label)
+                return {
+                  text: label,
+                  fillStyle: '#fff',
+                  strokeStyle: data.datasets[0].backgroundColor[i],
+                  lineWidth: 3,
+                  // Extra data used for toggling the correct item
+                  index: i
+                };
+              });
+            }
+            return [];
+          }
+        }
+      },
+      tooltips: {
+        displayColors: true,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            // if (label) {
+            //     label += ': ';
+            // }
+            // console.log(tooltipItem)
+            // console.log(data)            
+            console.log(data)
+            label += ": " + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            return (data.datasets[0].label == 'Cantidad') ? label + ' Unid' : label + ' ha';
+          }
+        }
+      },
     };
     return <Pie data={data} options={options} />;
   };

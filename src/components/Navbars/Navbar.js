@@ -119,6 +119,7 @@ export default function Header(props) {
         <Hidden smDown implementation="css">
           <AdminNavbarLinks
             color={color}
+            colorItem={false}
             municipios={props.municipios}
             setMunicipios={props.setMunicipios}
             setProvincias={props.setProvincias}

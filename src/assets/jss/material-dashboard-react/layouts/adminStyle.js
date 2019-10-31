@@ -22,6 +22,9 @@ const appStyle = theme => ({
     width: "100%",
     overflowScrolling: "touch"
   },
+  close: {
+    padding: '10px'
+  },
   info: {
     backgroundColor: '#26c6da',
     boxShadow:
