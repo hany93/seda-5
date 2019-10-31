@@ -55,7 +55,7 @@ class gg extends Component {
   }
 
   barRender = ({ resultSet }) => {
-    console.log(resultSet)
+    //console.log(resultSet)
     const data = {
       labels: resultSet.categories().map(c => c.category),
       datasets: resultSet.series().map((s, index) => (
@@ -76,10 +76,10 @@ class gg extends Component {
           label: function (tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
             label += ": " + tooltipItem.yLabel;
-            if (data.datasets[tooltipItem.datasetIndex].label=='Cantidad') {
-              return label + ' Unid';              
+            if (data.datasets[tooltipItem.datasetIndex].label == 'Cantidad') {
+              return label + ' Unid';
             } else {
-              return label + ' ha';              
+              return label + ' ha';
             }
           }
         }
@@ -169,8 +169,7 @@ class gg extends Component {
   )
 
   render() {
-
-
+    //console.log(this.props.filtro)
     return (
       <QueryRenderer
         query={{
@@ -182,6 +181,13 @@ class gg extends Component {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
+            },
+            {
+              "dimension": this.props.filtro,
+              "operator": this.props.operador,
+              "values": [
+                "uno"
+              ]
             }
           ]
         }}

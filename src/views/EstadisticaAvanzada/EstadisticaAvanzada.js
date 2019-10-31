@@ -35,6 +35,8 @@ export default function EstadisticaAvanzadaPage(props) {
   const [measures, setMeasures] = React.useState(["EntidadAgricUrbana.count"]);
   const [dimensions, setDimensions] = React.useState(["EntidadAgricUrbana.tecnologia"]);
   const [tipoGrafic, setTipoGrafic] = React.useState('bar');
+  const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
+  const [operador, setOperador] = React.useState('contains');
   const [showGM, setShowGM] = React.useState(true);
   const [showGD, setShowGD] = React.useState(true);
 
@@ -54,15 +56,38 @@ export default function EstadisticaAvanzadaPage(props) {
   const tipoGraficFunction = async grafic => {
     await setTipoGrafic(grafic)
   }
+
+  const dimensionDelFiltro = async filtro => {
+    await setFiltro(filtro)
+  }
+
+  const operadorDelFiltro = async operador => {
+    await setOperador(operador)
+  }
+
   return (
     <Card>
       <CardHeader color={props.color1}>
         <h4 className={classes.cardTitleWhite}>Estadística Avanzada</h4>
       </CardHeader>
       <CardBody>
-        <Dropdown showGrafic={showGrafic} camposMeasures={camposMeasures} camposDimensions={camposDimensions} tipoGrafic={tipoGraficFunction} />
-        <br/>
-        {showGM && showGD ? <GraficoGeneral camposMeasures={measures} camposDimensions={dimensions} tipoGrafic={tipoGrafic} municipios={props.municipios} /> : ''}
+        <Dropdown
+          showGrafic={showGrafic}
+          camposMeasures={camposMeasures}
+          camposDimensions={camposDimensions}
+          tipoGrafic={tipoGraficFunction}
+          dimensionDelFiltro={dimensionDelFiltro}
+          operadorDelFiltro={operadorDelFiltro} />
+        <br />
+        {showGM && showGD ? <GraficoGeneral
+          camposMeasures={measures}
+          camposDimensions={dimensions}
+          tipoGrafic={tipoGrafic}
+          provincias={props.provincias}
+          municipios={props.municipios}
+          filtro={filtro}
+          operador={operador}
+        /> : ''}
       </CardBody>
     </Card>
   );
