@@ -383,7 +383,7 @@ export default function Admin({ ...rest }) {
                   return (
                     <Route
                       path={prop.layout + prop.path}
-                      render={() => <prop.component municipios={municipios} color1={color === "blue" ? 'info' : color === "purple" ? 'primary' : color === "green" ? 'success' : color === "orange" ? 'warning' : 'danger'} />}
+                      render={() => <prop.component provincias={provincias} municipios={municipios} color1={color === "blue" ? 'info' : color === "purple" ? 'primary' : color === "green" ? 'success' : color === "orange" ? 'warning' : 'danger'} />}
                       key={key}
                     />
                   );

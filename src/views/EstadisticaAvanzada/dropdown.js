@@ -12,6 +12,8 @@ export default function Dropdown(props) {
     const [mesure, setMesure] = React.useState(['EntidadAgricUrbana.count']);
     const [dimension, setDimension] = React.useState(['EntidadAgricUrbana.tecnologia']);
     const [grafico, setGrafico] = React.useState('bar');
+    const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
+    const [operador, setOperador] = React.useState('equals');
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
@@ -33,6 +35,18 @@ export default function Dropdown(props) {
         var value = event.target.value;
         await setGrafico(value)
         props.tipoGrafic(value)
+    }
+
+    const handleChangeFiltro = async event => {
+        var value = event.target.value;
+        await setFiltro(value)
+        props.dimensionDelFiltro(value)
+    }
+
+    const handleChangeOperador = async event => {
+        var value = event.target.value;
+        await setOperador(value)
+        props.operadorDelFiltro(value)
     }
 
     return (
@@ -92,6 +106,46 @@ export default function Dropdown(props) {
                 </Select>
             </Row>
             <Row>
+            </Row>
+            <Row>
+                <br />
+                <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
+                <Select
+                    value={filtro}
+                    style={{ width: '50%' }}
+                    onChange={handleChangeFiltro}
+                    input={<Input id="select-multiple2" />}
+                    defaultValue='EntidadAgricUrbana.tecnologia'
+                >
+                    <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                    <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                </Select>
+            </Row>
+            <Row>
+            </Row>
+            <Row>
+                <br />
+                <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
+                <Select
+                    value={operador}
+                    style={{ width: '50%' }}
+                    onChange={handleChangeOperador}
+                    input={<Input id="select-multiple2" />}
+                    defaultValue='equals'
+                >
+                    <MenuItem value="contains">Contiene</MenuItem>
+                    <MenuItem value="notContains">No contiene</MenuItem>
+                    <MenuItem value="equals">Igual</MenuItem>
+                    <MenuItem value="notEquals">No es igual</MenuItem>
+                    <MenuItem value="set">Está establecido</MenuItem>
+                    <MenuItem value="notSet">No está establecido</MenuItem>
+                </Select>
             </Row>
         </div>
     );
