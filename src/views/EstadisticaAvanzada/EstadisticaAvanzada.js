@@ -72,6 +72,7 @@ export default function EstadisticaAvanzadaPage(props) {
       </CardHeader>
       <CardBody>
         <Dropdown
+          color={props.color1}
           showGrafic={showGrafic}
           camposMeasures={camposMeasures}
           camposDimensions={camposDimensions}
