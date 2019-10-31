@@ -177,6 +177,7 @@ export default function Sidebar(props) {
           <div className={classes.sidebarWrapper}>
             {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks
               color={color}
+              colorItem={true}
               municipios={props.municipios}
               setMunicipios={props.setMunicipios}
               setProvincias={props.setProvincias}

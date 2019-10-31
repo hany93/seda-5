@@ -42,6 +42,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import cubejs from '@cubejs-client/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DonutSmallRoundedIcon from '@material-ui/icons/DonutSmallRounded';
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(styles);
 
@@ -192,29 +193,31 @@ export default function Dashboard(props) {
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Card plain>
-            <CardHeader color="info">
+          <Card>
+            <CardHeader color="info" className='infoTitle'>
               <h2 style={{ textAlign: 'center', color: '#fff' }}>Estadísticas de Agricultura Urbana y Suburbana</h2>
-              {props.lugarfiltrado == 'Cuba' ?
-                (<GridContainer>
-                  <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado}</h4>
-                  </GridItem>
-                </GridContainer>) : (props.lugarfiltrado.toString().includes('Todos')) ?
-                  (<GridContainer>
-                    <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-                      <h4 style={{ textAlign: 'center', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
-                    </GridItem>
-                  </GridContainer>) :
-                  (<GridContainer>
-                    <GridItem xs={6} sm={6} md={6} lg={6} xl={6}>
-                      <h4 style={{ textAlign: 'right', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
-                    </GridItem>
-                    <GridItem xs={6} sm={6} md={6} lg={6} xl={6}>
-                      <h4 style={{ textAlign: 'left', color: '#fff' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, marginRight: 5 }} /> {props.lugarfiltrado.toString().split(".")[1].substring(1)}</h4>
-                    </GridItem>
-                  </GridContainer>)}
             </CardHeader>
+            <CardBody>
+              {props.lugarfiltrado == 'Cuba' ?
+                (<Grid container>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <h4 style={{ color: '#26c6da', fontSize: '20px', fontWeight: 400, marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> {props.lugarfiltrado}</h4>
+                  </Grid>
+                </Grid>) : (props.lugarfiltrado.toString().includes('Todos')) ?
+                  (<Grid container>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <h4 style={{ color: '#26c6da', fontSize: '20px', fontWeight: 400, marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
+                    </Grid>
+                  </Grid>) :
+                  (<Grid container spacing={10}>
+                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                      <h4 style={{ color: '#26c6da', fontSize: '20px', fontWeight: 400, marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> {props.lugarfiltrado.toString().split(".")[0]}</h4>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                      <h4 style={{ color: '#26c6da', fontSize: '20px', fontWeight: 400, marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> {props.lugarfiltrado.toString().split(".")[1].substring(1)}</h4>
+                    </Grid>
+                  </Grid>)}
+            </CardBody>
           </Card>
         </GridItem>
       </GridContainer>

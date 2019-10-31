@@ -166,6 +166,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Cuba0 from 'assets/img/cuba0.png'
 import InfoIcon from '@material-ui/icons/Info';
+import Grid from '@material-ui/core/Grid';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import routes from "routes.js";
@@ -228,7 +229,7 @@ export default function Admin({ ...rest }) {
     setMobileOpen(!mobileOpen);
   };
   const resizeFunction = () => {
-    if (window.innerWidth >= 960) {
+    if (window.innerWidth >= 959) {
       setMobileOpen(false);
     }
   };
@@ -312,9 +313,10 @@ export default function Admin({ ...rest }) {
           'aria-describedby': 'message-id',
           'className': classes.info
         }}
-        message={<span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 30, opacity: 0.9, marginRight: '10px' }} /> Deseleccione &nbsp;<img alt='País' title='País' src={Cuba0} />&nbsp; para elegir provincia y municipio.</span>}
+        message={<Grid container spacing={3} style={{ fontSize: '20px', alignItems: 'center' }}><Grid item xs={1} sm={1} md={1} lg={1} xl={1}><InfoIcon style={{ fontSize: 30, opacity: 0.9, marginRight: '10px',display: 'flex' }} /></Grid><Grid item xs={5} sm={5} md={5} lg={3} xl={3}>Deseleccione&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Grid><Grid item xs={6} sm={6} md={6} lg={1} xl={1}><img alt='País' title='País' src={Cuba0} /></Grid><Grid item xs={12} sm={12} md={12} lg={7} xl={7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;para elegir provincia y municipio.</Grid></Grid>}
         action={[
           <IconButton
+            key="close"
             aria-label="close"
             color="inherit"
             className={classes.close}
