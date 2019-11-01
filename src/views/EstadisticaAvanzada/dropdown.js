@@ -7,8 +7,8 @@ import Input from '@material-ui/core/Input';
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
+
 const hexToRgb = input => {
     input = input + "";
     input = input.replace("#", "");
@@ -35,10 +35,8 @@ const hexToRgb = input => {
     );
 };
 const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1),
-    },
     buttonClass: {
+        margin: theme.spacing(1),
         color: '#fff',
         boxShadow: (props) => props.color === 'primary' ? "0 4px 20px 0 rgba(" +
             hexToRgb('#000') +
@@ -69,7 +67,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dropdown(props) {
-    console.log(props.color)
     const classes = useStyles(props);
 
     const [showGM, setShowGM] = React.useState(true);
@@ -79,6 +76,7 @@ export default function Dropdown(props) {
     const [grafico, setGrafico] = React.useState('bar');
     const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
     const [operador, setOperador] = React.useState('equals');
+    const [addFiltro, setAddFiltro] = React.useState([]);
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
@@ -112,8 +110,129 @@ export default function Dropdown(props) {
         var value = event.target.value;
         await setOperador(value)
         props.operadorDelFiltro(value)
-    }
+    } 
 
+    const handleAddFiltro = async () => {
+        var a = addFiltro;
+        a.push(
+            <GridContainer spacing={5}>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
+                    <Select
+                        value={filtro}
+                        style={{ width: '50%' }}
+                        onChange={handleChangeFiltro}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='EntidadAgricUrbana.tecnologia'
+                    >
+                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                    </Select>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
+                    <Select
+                        value={operador}
+                        style={{ width: '50%' }}
+                        onChange={handleChangeOperador}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='equals'
+                    >
+                        <MenuItem value="contains">Contiene</MenuItem>
+                        <MenuItem value="notContains">No contiene</MenuItem>
+                        <MenuItem value="equals">Igual</MenuItem>
+                        <MenuItem value="notEquals">No es igual</MenuItem>
+                        <MenuItem value="set">Está establecido</MenuItem>
+                        <MenuItem value="notSet">No está establecido</MenuItem>
+                    </Select>
+                </GridItem>
+            </GridContainer>
+        );
+        setAddFiltro(a)
+        console.log(addFiltro)
+    }
+   const d=[<GridContainer spacing={5} >
+    <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+        <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
+        <Select
+            value={filtro}
+            style={{ width: '50%' }}
+            onChange={handleChangeFiltro}
+            input={<Input id="select-multiple2" />}
+            defaultValue='EntidadAgricUrbana.tecnologia'
+        >
+            <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+            <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+        </Select>
+    </GridItem>
+    <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+        <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
+        <Select
+            value={operador}
+            style={{ width: '50%' }}
+            onChange={handleChangeOperador}
+            input={<Input id="select-multiple2" />}
+            defaultValue='equals'
+        >
+            <MenuItem value="contains">Contiene</MenuItem>
+            <MenuItem value="notContains">No contiene</MenuItem>
+            <MenuItem value="equals">Igual</MenuItem>
+            <MenuItem value="notEquals">No es igual</MenuItem>
+            <MenuItem value="set">Está establecido</MenuItem>
+            <MenuItem value="notSet">No está establecido</MenuItem>
+        </Select>
+    </GridItem>
+</GridContainer>,
+<GridContainer spacing={5} >
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
+                    <Select
+                        value={filtro}
+                        style={{ width: '50%' }}
+                        onChange={handleChangeFiltro}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='EntidadAgricUrbana.tecnologia'
+                    >
+                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                    </Select>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
+                    <Select
+                        value={operador}
+                        style={{ width: '50%' }}
+                        onChange={handleChangeOperador}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='equals'
+                    >
+                        <MenuItem value="contains">Contiene</MenuItem>
+                        <MenuItem value="notContains">No contiene</MenuItem>
+                        <MenuItem value="equals">Igual</MenuItem>
+                        <MenuItem value="notEquals">No es igual</MenuItem>
+                        <MenuItem value="set">Está establecido</MenuItem>
+                        <MenuItem value="notSet">No está establecido</MenuItem>
+                    </Select>
+                </GridItem>
+            </GridContainer>]
     return (
         <div>
             <GridContainer spacing={5}>
@@ -170,51 +289,14 @@ export default function Dropdown(props) {
             </GridContainer>
             <GridContainer spacing={5}>
                 <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Button variant="contained" className={classes.buttonClass}>
-                        <span style={{ fontSize: '15px', display: 'flex', alignItems: 'center' }}><AddIcon style={{ fontSize: 25}}/>Filtro</span>
+                    <Button variant="contained" className={classes.buttonClass} onClick={handleAddFiltro}>
+                        Añadir Filtro
                     </Button>
                 </GridItem>
             </GridContainer>
-            <Row>
-                <br />
-                <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
-                <Select
-                    value={filtro}
-                    style={{ width: '50%' }}
-                    onChange={handleChangeFiltro}
-                    input={<Input id="select-multiple2" />}
-                    defaultValue='EntidadAgricUrbana.tecnologia'
-                >
-                    <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
-                    <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
-                </Select>
-            </Row>
-            <Row>
-            </Row>
-            <Row>
-                <br />
-                <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
-                <Select
-                    value={operador}
-                    style={{ width: '50%' }}
-                    onChange={handleChangeOperador}
-                    input={<Input id="select-multiple2" />}
-                    defaultValue='equals'
-                >
-                    <MenuItem value="contains">Contiene</MenuItem>
-                    <MenuItem value="notContains">No contiene</MenuItem>
-                    <MenuItem value="equals">Igual</MenuItem>
-                    <MenuItem value="notEquals">No es igual</MenuItem>
-                    <MenuItem value="set">Está establecido</MenuItem>
-                    <MenuItem value="notSet">No está establecido</MenuItem>
-                </Select>
-            </Row>
+            <div>
+                {addFiltro.map}
+            </div>
         </div>
     );
 }
