@@ -40,6 +40,9 @@ export default function EstadisticaAvanzadaPage(props) {
   const [showGM, setShowGM] = React.useState(true);
   const [showGD, setShowGD] = React.useState(true);
 
+  //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
+  const [valorFiltro, setValorFiltro] = React.useState(true);
+
   const camposMeasures = async measures => {
     await setMeasures(measures)
   }
@@ -78,7 +81,12 @@ export default function EstadisticaAvanzadaPage(props) {
           camposDimensions={camposDimensions}
           tipoGrafic={tipoGraficFunction}
           dimensionDelFiltro={dimensionDelFiltro}
-          operadorDelFiltro={operadorDelFiltro} />
+          operadorDelFiltro={operadorDelFiltro}
+          provincias={props.provincias}
+          municipios={props.municipios}
+          //setDimensionFiltrada={setDimensionFiltrada}
+          setValorFiltro={setValorFiltro}
+        />
         <br />
         {showGM && showGD ? <GraficoGeneral
           camposMeasures={measures}
@@ -88,6 +96,8 @@ export default function EstadisticaAvanzadaPage(props) {
           municipios={props.municipios}
           filtro={filtro}
           operador={operador}
+          //dimensionFiltrada={dimensionFiltrada}
+          valorFiltro={valorFiltro}
         /> : ''}
       </CardBody>
     </Card>

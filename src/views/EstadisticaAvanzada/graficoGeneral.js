@@ -230,7 +230,7 @@ class gg extends Component {
   )
 
   render() {
-    //console.log(this.props.filtro)
+    console.log(this.props.valorFiltro)
     return (
       <QueryRenderer
         query={{
@@ -247,7 +247,7 @@ class gg extends Component {
               "dimension": this.props.filtro,
               "operator": this.props.operador,
               "values": [
-                "Villa Clara"
+                this.props.valorFiltro
               ]
             }
           ]

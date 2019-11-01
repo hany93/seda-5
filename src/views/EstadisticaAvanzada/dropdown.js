@@ -9,6 +9,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
+import cubejs from '@cubejs-client/core';
+
 const hexToRgb = input => {
     input = input + "";
     input = input.replace("#", "");
@@ -69,6 +71,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
+
+const cubejsApi = cubejs(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
+    { apiUrl: API_URL + "/cubejs-api/v1" }
+);
+
 export default function Dropdown(props) {
     const classes = useStyles(props);
 
@@ -79,7 +88,10 @@ export default function Dropdown(props) {
     const [grafico, setGrafico] = React.useState('bar');
     const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
     const [operador, setOperador] = React.useState('equals');
-    const [addFiltro, setAddFiltro] = React.useState([]);
+    //const [addFiltro, setAddFiltro] = React.useState([]);
+    const [valoresDimensionFiltro, setvaloresDimensionFiltro] = React.useState([]);
+    //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
+    const [valorDelFiltro, setValorDelFiltro] = React.useState();
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
@@ -107,12 +119,47 @@ export default function Dropdown(props) {
         var value = event.target.value;
         await setFiltro(value)
         props.dimensionDelFiltro(value)
+
+        const valoresDimensionFiltro = await cubejsApi.load({
+            "dimensions": [
+                value
+            ],
+            "filters": [
+                {
+                    "dimension": "EntidadAgricUrbana.provincia",
+                    "operator": "equals",
+                    "values": props.provincias
+                },
+                {
+                    "dimension": "EntidadAgricUrbana.municipio",
+                    "operator": "equals",
+                    "values": props.municipios
+                }
+            ]
+        })
+
+
+        var auxdim = []
+        valoresDimensionFiltro["loadResponse"]["data"].map((dim) =>
+            auxdim.push(dim[value])
+        )
+        await setvaloresDimensionFiltro(auxdim);
+        //await setDimensionFiltrada(value);
+
     }
 
     const handleChangeOperador = async event => {
         var value = event.target.value;
         await setOperador(value)
         props.operadorDelFiltro(value)
+    }
+
+    const handleChangeValor = async event => {
+        var value = event.target.value;
+        //props.setDimensionFiltrada(dimensionFiltrada)
+        props.setValorFiltro(value)
+        setValorDelFiltro(value)
+
     }
 
     // const handleAddFiltro = async () => {
@@ -338,14 +385,28 @@ export default function Dropdown(props) {
                     </Select>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <Input
+                    <InputLabel htmlFor="select-multiple2">Valor filtrado:</InputLabel>
+                    <Select
+                        value={valorDelFiltro}
+                        style={{ width: '100%' }}
+                        onChange={handleChangeValor}
+                        input={<Input id="select-multiple2" />}
+                        defaultValue='equals'
+                    >
+
+                        {valoresDimensionFiltro.map(name => (
+                            <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+                        ))}
+
+                    </Select>
+                    {/* <Input
                         placeholder="Valor del Filtro"
                         className={classes.input}                        
                         style={{ width: '100%' }}
                         inputProps={{
                             'aria-label': 'description',
                         }}
-                    />
+                    /> */}
                 </GridItem>
             </GridContainer>
             {/* <GridContainer spacing={5}>
