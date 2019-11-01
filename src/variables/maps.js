@@ -12,13 +12,14 @@ import VectorSource from 'ol/source/Vector';
 import { fromLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 import VectorLayer from 'ol/layer/Vector';
-
+import OSM from 'ol/source/OSM';
 let mapa;
 
 var tileLayer = new TileLayer({
-    source: new XYZ({
-        url: 'http://ide.enpa.minag.cu/geoserver/www/tms/2017/sat/{z}/{x}/{-y}.jpg',
-    })
+    source: new OSM()
+    // source: new XYZ({
+    //     url: 'http://seda.enpa.vcl.minag.cu/var/www/seda/resource/osmmapMapnik/{z}/{x}/{-y}.png'
+    // })
 })
 
 class Maps1 extends React.Component {
