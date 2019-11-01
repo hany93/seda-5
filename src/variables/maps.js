@@ -36,6 +36,7 @@ class Maps1 extends React.Component {
             }),
             controls: defaultsControls({
                 rotate: false,
+                attribution:false,
                 fullScreen: true
             }).extend([new FullScreen()]),
             interactions: defaults({
@@ -83,7 +84,7 @@ class Maps1 extends React.Component {
                         font: 'bold 15px Open Sans',
                         //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
                         fill: new Fill({
-                            color: '#fff'
+                            color: '#ab47bc'
                         }),
                         // offsetX: 50,
                         // offsetY: 4,
