@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from "@material-ui/core/Grid";
 
+import cubejs from '@cubejs-client/core';
+
 const hexToRgb = input => {
     input = input + "";
     input = input.replace("#", "");
@@ -73,6 +75,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
+
+const cubejsApi = cubejs(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
+    { apiUrl: API_URL + "/cubejs-api/v1" }
+);
+
 export default function Dropdown(props) {
     const classes = useStyles(props);
 
@@ -84,9 +93,12 @@ export default function Dropdown(props) {
     const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
     const [operador, setOperador] = React.useState('equals');
     //const [addFiltro, setAddFiltro] = React.useState([]);
+    const [valoresDimensionFiltro, setvaloresDimensionFiltro] = React.useState([]);
+    //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
+    const [valorDelFiltro, setValorDelFiltro] = React.useState();
     const [checkedA, setCheckedA] = React.useState(false);
     const [classDisable, setClassDisable] = React.useState(true);
-
+    
     const handleChangeMeasures = async event => {
         var value = event.target.value;
         await setMesure(value)
@@ -113,12 +125,47 @@ export default function Dropdown(props) {
         var value = event.target.value;
         await setFiltro(value)
         props.dimensionDelFiltro(value)
+
+        const valoresDimensionFiltro = await cubejsApi.load({
+            "dimensions": [
+                value
+            ],
+            "filters": [
+                {
+                    "dimension": "EntidadAgricUrbana.provincia",
+                    "operator": "equals",
+                    "values": props.provincias
+                },
+                {
+                    "dimension": "EntidadAgricUrbana.municipio",
+                    "operator": "equals",
+                    "values": props.municipios
+                }
+            ]
+        })
+
+
+        var auxdim = []
+        valoresDimensionFiltro["loadResponse"]["data"].map((dim) =>
+            auxdim.push(dim[value])
+        )
+        await setvaloresDimensionFiltro(auxdim);
+        //await setDimensionFiltrada(value);
+
     }
 
     const handleChangeOperador = async event => {
         var value = event.target.value;
         await setOperador(value)
         props.operadorDelFiltro(value)
+    }
+
+    const handleChangeValor = async event => {
+        var value = event.target.value;
+        //props.setDimensionFiltrada(dimensionFiltrada)
+        props.setValorFiltro(value)
+        setValorDelFiltro(value)
+
     }
 
     // const handleAddFiltro = async () => {
@@ -256,9 +303,9 @@ export default function Dropdown(props) {
         console.log(event.target.checked);
         setCheckedA(event.target.checked);
         if (classDisable) {
-            setClassDisable(false);            
+            setClassDisable(false);
         } else {
-            setClassDisable(true);            
+            setClassDisable(true);
         }
         console.log(classDisable);
     };
@@ -385,15 +432,21 @@ export default function Dropdown(props) {
                                     </Select>
                                 </GridItem>
                                 <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <Input
+                                    <InputLabel htmlFor="select-multiple2">Valor filtrado:</InputLabel>
+                                    <Select
                                         disabled={classDisable}
-                                        placeholder="Valor del Filtro"
-                                        className={classes.input}
-                                        style={{ width: '100%', paddingTop: 50 }}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
+                                        value={valorDelFiltro}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeValor}
+                                        input={<Input id="select-multiple2" />}
+                                        defaultValue='equals'
+                                    >
+
+                                        {valoresDimensionFiltro.map(name => (
+                                            <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>
+                                        ))}
+
+                                    </Select>
                                 </GridItem>
                             </GridContainer>
                         </CardBody>
