@@ -98,7 +98,7 @@ export default function Dropdown(props) {
     const [valorDelFiltro, setValorDelFiltro] = React.useState();
     const [checkedA, setCheckedA] = React.useState(false);
     const [classDisable, setClassDisable] = React.useState(true);
-    
+
     const handleChangeMeasures = async event => {
         var value = event.target.value;
         await setMesure(value)
@@ -432,7 +432,7 @@ export default function Dropdown(props) {
                                     </Select>
                                 </GridItem>
                                 <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <InputLabel htmlFor="select-multiple2">Valor filtrado:</InputLabel>
+                                    <InputLabel htmlFor="select-multiple2" style={{ paddingTop: 50 }}>Valor filtrado:</InputLabel>
                                     <Select
                                         disabled={classDisable}
                                         value={valorDelFiltro}

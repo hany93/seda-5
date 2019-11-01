@@ -82,7 +82,6 @@ export default function EstadisticaAvanzadaPage(props) {
         //setDimensionFiltrada={setDimensionFiltrada}
         setValorFiltro={setValorFiltro}
       />
-      <br />
       <Card>
         <CardBody>
           {showGM && showGD ? <GraficoGeneral
