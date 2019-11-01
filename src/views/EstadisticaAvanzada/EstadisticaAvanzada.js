@@ -3,7 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import GraficoGeneral from './graficoGeneral';
 import Dropdown from './dropdown'
@@ -66,30 +65,29 @@ export default function EstadisticaAvanzadaPage(props) {
   }
 
   return (
-    <Card>
-      <CardHeader color={props.color1}>
-        <h4 className={classes.cardTitleWhite}>Estadística Avanzada</h4>
-      </CardHeader>
-      <CardBody>
-        <Dropdown
-          color={props.color1}
-          showGrafic={showGrafic}
-          camposMeasures={camposMeasures}
-          camposDimensions={camposDimensions}
-          tipoGrafic={tipoGraficFunction}
-          dimensionDelFiltro={dimensionDelFiltro}
-          operadorDelFiltro={operadorDelFiltro} />
-        <br />
-        {showGM && showGD ? <GraficoGeneral
-          camposMeasures={measures}
-          camposDimensions={dimensions}
-          tipoGrafic={tipoGrafic}
-          provincias={props.provincias}
-          municipios={props.municipios}
-          filtro={filtro}
-          operador={operador}
-        /> : ''}
-      </CardBody>
-    </Card>
+    <div>
+      <Dropdown
+        color={props.color1}
+        showGrafic={showGrafic}
+        camposMeasures={camposMeasures}
+        camposDimensions={camposDimensions}
+        tipoGrafic={tipoGraficFunction}
+        dimensionDelFiltro={dimensionDelFiltro}
+        operadorDelFiltro={operadorDelFiltro} />
+      <Card>
+        <CardBody>
+          <br />
+          {showGM && showGD ? <GraficoGeneral
+            camposMeasures={measures}
+            camposDimensions={dimensions}
+            tipoGrafic={tipoGrafic}
+            provincias={props.provincias}
+            municipios={props.municipios}
+            filtro={filtro}
+            operador={operador}
+          /> : ''}
+        </CardBody>
+      </Card>
+    </div>
   );
 }

@@ -1,13 +1,17 @@
 import React from 'react';
-import { Row } from 'antd';
 import { Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import Button from '@material-ui/core/Button';
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardBody from "components/Card/CardBody.js";
+//import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
+import Grid from "@material-ui/core/Grid";
 
 const hexToRgb = input => {
     input = input + "";
@@ -79,7 +83,9 @@ export default function Dropdown(props) {
     const [grafico, setGrafico] = React.useState('bar');
     const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
     const [operador, setOperador] = React.useState('equals');
-    const [addFiltro, setAddFiltro] = React.useState([]);
+    //const [addFiltro, setAddFiltro] = React.useState([]);
+    const [checkedA, setCheckedA] = React.useState(false);
+    const [classDisable, setClassDisable] = React.useState(true);
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
@@ -246,106 +252,152 @@ export default function Dropdown(props) {
     //                     </Select>
     //                 </GridItem>
     //             </GridContainer>]
+    const handleChange = event => {
+        console.log(event.target.checked);
+        setCheckedA(event.target.checked);
+        if (classDisable) {
+            setClassDisable(false);            
+        } else {
+            setClassDisable(true);            
+        }
+        console.log(classDisable);
+    };
     return (
         <div>
             <GridContainer spacing={5}>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <InputLabel htmlFor="select-multiple">Valores (eje Y):</InputLabel>
-                    <Select
-                        multiple
-                        value={mesure}
-                        style={{ width: '100%' }}
-                        onChange={handleChangeMeasures}
-                        input={<Input id="select-multiple" />}
-                        defaultValue="EntidadAgricUrbana.count"
-                    >
-                        <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
-                    </Select>
+                <GridItem xs={12} sm={12} md={12} lg={6} xl={6}>
+                    <Card>
+                        <CardHeader color={props.color}>
+                            <h2 style={{ textAlign: 'center', color: '#fff' }}>Valores Estadísticos</h2>
+                        </CardHeader>
+                        <CardBody>
+                            <GridContainer spacing={5}>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <InputLabel htmlFor="select-multiple">Valores (eje Y):</InputLabel>
+                                    <Select
+                                        multiple
+                                        value={mesure}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeMeasures}
+                                        input={<Input id="select-multiple" />}
+                                        defaultValue="EntidadAgricUrbana.count"
+                                    >
+                                        <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
+                                    </Select>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <InputLabel htmlFor="select-multiple1" style={{ paddingTop: 50 }}>Categorías (eje X):</InputLabel>
+                                    <Select
+                                        multiple
+                                        value={dimension}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeDimensions}
+                                        input={<Input id="select-multiple1" />}
+                                        defaultValue="EntidadAgricUrbana.nombre"
+                                    >
+                                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                                    </Select>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <InputLabel htmlFor="select-multiple2" style={{ paddingTop: 50 }}>Tipo de Gráfico:</InputLabel>
+                                    <Select
+                                        value={grafico}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeGrafic}
+                                        input={<Input id="select-multiple2" />}
+                                        defaultValue='bar'
+                                    >
+                                        <MenuItem value="bar">Gráfico de Barras</MenuItem>
+                                        <MenuItem value="pie">Gráfico de Pastel</MenuItem>
+                                        <MenuItem value="line">Gráfico de Líneas</MenuItem>
+                                        <MenuItem value="area">Gráfico de Área</MenuItem>
+                                        <MenuItem value="table">Tabla</MenuItem>
+                                    </Select>
+                                </GridItem>
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <InputLabel htmlFor="select-multiple1">Categorías (eje X):</InputLabel>
-                    <Select
-                        multiple
-                        value={dimension}
-                        style={{ width: '100%' }}
-                        onChange={handleChangeDimensions}
-                        input={<Input id="select-multiple1" />}
-                        defaultValue="EntidadAgricUrbana.nombre"
-                    >
-                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
-                    </Select>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <InputLabel htmlFor="select-multiple2">Tipo de Gráfico:</InputLabel>
-                    <Select
-                        value={grafico}
-                        style={{ width: '100%' }}
-                        onChange={handleChangeGrafic}
-                        input={<Input id="select-multiple2" />}
-                        defaultValue='bar'
-                    >
-                        <MenuItem value="bar">Gráfico de Barras</MenuItem>
-                        <MenuItem value="pie">Gráfico de Pastel</MenuItem>
-                        <MenuItem value="line">Gráfico de Líneas</MenuItem>
-                        <MenuItem value="area">Gráfico de Área</MenuItem>
-                        <MenuItem value="table">Tabla</MenuItem>
-                    </Select>
-                </GridItem>
-            </GridContainer>
-            <GridContainer spacing={5}>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
-                    <Select
-                        value={filtro}
-                        style={{ width: '100%' }}
-                        onChange={handleChangeFiltro}
-                        input={<Input id="select-multiple2" />}
-                        defaultValue='EntidadAgricUrbana.tecnologia'
-                    >
-                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
-                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
-                    </Select>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <InputLabel htmlFor="select-multiple2">Operador:</InputLabel>
-                    <Select
-                        value={operador}
-                        style={{ width: '100%' }}
-                        onChange={handleChangeOperador}
-                        input={<Input id="select-multiple2" />}
-                        defaultValue='equals'
-                    >
-                        <MenuItem value="contains">Contiene</MenuItem>
-                        <MenuItem value="notContains">No contiene</MenuItem>
-                        <MenuItem value="equals">Igual</MenuItem>
-                        <MenuItem value="notEquals">No es igual</MenuItem>
-                        <MenuItem value="set">Está establecido</MenuItem>
-                        <MenuItem value="notSet">No está establecido</MenuItem>
-                    </Select>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <Input
-                        placeholder="Valor del Filtro"
-                        className={classes.input}                        
-                        style={{ width: '100%' }}
-                        inputProps={{
-                            'aria-label': 'description',
-                        }}
-                    />
+                <GridItem xs={12} sm={12} md={12} lg={6} xl={6}>
+                    <Card>
+                        <CardHeader color={props.color}>
+                            <Grid container>
+                                <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+                                    Off<Switch
+                                        checked={checkedA}
+                                        onChange={handleChange}
+                                        value="checkedA"
+                                        color="default"
+                                        inputProps={{ 'aria-label': 'checkbox' }}
+                                    />On
+                                </Grid>
+                                <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+                                    <h2 style={{ textAlign: 'left', color: '#fff' }}>Filtros</h2>
+                                </Grid>
+                            </Grid>
+                        </CardHeader>
+                        <CardBody>
+                            <GridContainer spacing={5}>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <InputLabel htmlFor="select-multiple2">Filtro:</InputLabel>
+                                    <Select
+                                        disabled={classDisable}
+                                        value={filtro}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeFiltro}
+                                        input={<Input id="select-multiple2" />}
+                                        defaultValue='EntidadAgricUrbana.tecnologia'
+                                    >
+                                        <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
+                                    </Select>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <InputLabel htmlFor="select-multiple2" style={{ paddingTop: 50 }}>Operador:</InputLabel>
+                                    <Select
+                                        disabled={classDisable}
+                                        value={operador}
+                                        style={{ width: '100%' }}
+                                        onChange={handleChangeOperador}
+                                        input={<Input id="select-multiple2" />}
+                                        defaultValue='equals'
+                                    >
+                                        <MenuItem value="contains">Contiene</MenuItem>
+                                        <MenuItem value="notContains">No contiene</MenuItem>
+                                        <MenuItem value="equals">Igual</MenuItem>
+                                        <MenuItem value="notEquals">No es igual</MenuItem>
+                                        <MenuItem value="set">Está establecido</MenuItem>
+                                        <MenuItem value="notSet">No está establecido</MenuItem>
+                                    </Select>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Input
+                                        disabled={classDisable}
+                                        placeholder="Valor del Filtro"
+                                        className={classes.input}
+                                        style={{ width: '100%', paddingTop: 50 }}
+                                        inputProps={{
+                                            'aria-label': 'description',
+                                        }}
+                                    />
+                                </GridItem>
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
                 </GridItem>
             </GridContainer>
             {/* <GridContainer spacing={5}>
