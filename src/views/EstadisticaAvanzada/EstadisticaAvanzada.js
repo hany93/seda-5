@@ -38,6 +38,7 @@ export default function EstadisticaAvanzadaPage(props) {
   const [operador, setOperador] = React.useState('contains');
   const [showGM, setShowGM] = React.useState(true);
   const [showGD, setShowGD] = React.useState(true);
+  const [checkedA, setCheckedA] = React.useState(false);
 
   //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
   const [valorFiltro, setValorFiltro] = React.useState(true);
@@ -81,6 +82,8 @@ export default function EstadisticaAvanzadaPage(props) {
         municipios={props.municipios}
         //setDimensionFiltrada={setDimensionFiltrada}
         setValorFiltro={setValorFiltro}
+        setCheckedA={setCheckedA}
+        checkedA={checkedA}
       />
       <Card>
         <CardBody>
@@ -94,6 +97,7 @@ export default function EstadisticaAvanzadaPage(props) {
             operador={operador}
             //dimensionFiltrada={dimensionFiltrada}
             valorFiltro={valorFiltro}
+            checkedA={checkedA}
           /> : ''}
         </CardBody>
       </Card>

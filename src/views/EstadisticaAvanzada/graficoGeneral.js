@@ -70,7 +70,6 @@ class gg extends Component {
   }
 
   barRender = ({ resultSet }) => {
-    //console.log(resultSet)
     const data = {
       labels: resultSet.categories().map(c => c.category),
       datasets: resultSet.series().map((s, index) => (
@@ -175,10 +174,8 @@ class gg extends Component {
           usePointStyle: true,
           generateLabels: function (chart) {
             var data = chart.data;
-            //console.log(data)
             if (data.labels.length && data.datasets.length) {
               return data.labels.map(function (label, i) {
-                //console.log(i+"..."+label)
                 return {
                   text: label,
                   fillStyle: '#fff',
@@ -198,13 +195,6 @@ class gg extends Component {
         callbacks: {
           label: function (tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-            // if (label) {
-            //     label += ': ';
-            // }
-            // console.log(tooltipItem)
-            // console.log(data)            
-            console.log(data)
             label += ": " + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
             return (data.datasets[0].label == 'Cantidad') ? label + ' Unid' : label + ' ha';
           }
@@ -230,14 +220,13 @@ class gg extends Component {
   )
 
   render() {
-    console.log(this.props.valorFiltro)
     return (
       <QueryRenderer
         query={{
           "measures": this.props.camposMeasures,
           "timeDimensions": [],
           "dimensions": this.props.camposDimensions,
-          "filters": [
+          "filters": (this.props.checkedA) ? [
             {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
@@ -250,7 +239,13 @@ class gg extends Component {
                 this.props.valorFiltro
               ]
             }
-          ]
+          ] : [
+              {
+                "dimension": "EntidadAgricUrbana.municipio",
+                "operator": "equals",
+                "values": this.props.municipios
+              }
+            ]
         }}
         cubejsApi={cubejsApi}
         render={this.renderChart(this.state.tipoGraficFunction)}

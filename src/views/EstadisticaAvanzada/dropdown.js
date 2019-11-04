@@ -90,13 +90,13 @@ export default function Dropdown(props) {
     const [mesure, setMesure] = React.useState(['EntidadAgricUrbana.count']);
     const [dimension, setDimension] = React.useState(['EntidadAgricUrbana.tecnologia']);
     const [grafico, setGrafico] = React.useState('bar');
-    const [filtro, setFiltro] = React.useState('EntidadAgricUrbana.tecnologia');
+    const [filtro, setFiltro] = React.useState();
     const [operador, setOperador] = React.useState('equals');
     //const [addFiltro, setAddFiltro] = React.useState([]);
     const [valoresDimensionFiltro, setvaloresDimensionFiltro] = React.useState([]);
     //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
     const [valorDelFiltro, setValorDelFiltro] = React.useState();
-    const [checkedA, setCheckedA] = React.useState(false);
+    // const [checkedA, setCheckedA] = React.useState(false);
     const [classDisable, setClassDisable] = React.useState(true);
 
     const handleChangeMeasures = async event => {
@@ -165,7 +165,6 @@ export default function Dropdown(props) {
         //props.setDimensionFiltrada(dimensionFiltrada)
         props.setValorFiltro(value)
         setValorDelFiltro(value)
-
     }
 
     // const handleAddFiltro = async () => {
@@ -221,7 +220,6 @@ export default function Dropdown(props) {
     //         </GridContainer>
     //     );
     //     setAddFiltro(a)
-    //     console.log(addFiltro)
     // }
     //    const d=[<GridContainer spacing={5} >
     //     <GridItem xs={12} sm={12} md={6} lg={4} xl={4}>
@@ -300,14 +298,13 @@ export default function Dropdown(props) {
     //                 </GridItem>
     //             </GridContainer>]
     const handleChange = event => {
-        console.log(event.target.checked);
-        setCheckedA(event.target.checked);
+        props.setCheckedA(event.target.checked)
+        // setCheckedA(event.target.checked);
         if (classDisable) {
             setClassDisable(false);
         } else {
             setClassDisable(true);
         }
-        console.log(classDisable);
     };
     return (
         <div>
@@ -379,7 +376,7 @@ export default function Dropdown(props) {
                             <Grid container>
                                 <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
                                     Off<Switch
-                                        checked={checkedA}
+                                        checked={props.checkedA}
                                         onChange={handleChange}
                                         value="checkedA"
                                         color="default"
@@ -401,7 +398,7 @@ export default function Dropdown(props) {
                                         style={{ width: '100%' }}
                                         onChange={handleChangeFiltro}
                                         input={<Input id="select-multiple2" />}
-                                        defaultValue='EntidadAgricUrbana.tecnologia'
+                                    //defaultValue='EntidadAgricUrbana.tecnologia'
                                     >
                                         <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
@@ -439,7 +436,7 @@ export default function Dropdown(props) {
                                         style={{ width: '100%' }}
                                         onChange={handleChangeValor}
                                         input={<Input id="select-multiple2" />}
-                                        defaultValue='equals'
+                                    //defaultValue='equals'
                                     >
 
                                         {valoresDimensionFiltro.map(name => (

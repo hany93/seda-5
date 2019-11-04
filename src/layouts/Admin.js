@@ -287,7 +287,6 @@ export default function Admin({ ...rest }) {
     }
 
     if (rest.match.params.provincia && rest.match.params.municipio) {
-      console.log("entraron los dos")
       setProvincias([rest.match.params.provincia])
       setMunicipios([rest.match.params.municipio])
     } else {
