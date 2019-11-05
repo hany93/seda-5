@@ -4,16 +4,17 @@ import React from "react";
 import Card from "components/Card/Card.js";
 import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
-
 import avatar from "assets/img/reactlogo.png";
+import { Link } from "react-router-dom";
+
 export default function AcercaDe() {
   return (
     <div>
       <Card profile>
         <CardAvatar profile>
-          <a href="/admin/dashboard">
-            <img src={avatar} alt="..." />
-          </a>
+          <Link to="/admin/Dashboard">
+            <img src={avatar} alt="Inicio" title='Inicio'/>
+          </Link>
         </CardAvatar>
         <CardBody profile>
           <h6>Versión 1.0</h6>

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Line, Bubble, Pie, Bar, } from 'react-chartjs-2';
-import { Spin, Table } from 'antd';
+import { Spin, Table, Input, Button, Icon } from 'antd';
+import Highlighter from 'react-highlight-words';
 const COLORS_SERIES = ['#FF6492', '#141446', '#7A77FF'];
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
@@ -32,7 +33,8 @@ class gg extends Component {
   state = {
     tipoGraficFunction: "",
     camposMeasures: "",
-    camposDimensions: ""
+    camposDimensions: "",
+    searchText: ''
   };
 
   componentWillMount() {
@@ -122,7 +124,25 @@ class gg extends Component {
     const options = {
       responsive: true,
       fullWidth: true,
-      legend: { position: 'bottom' }
+      legend: { position: 'bottom' },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+            label += ": " + tooltipItem.yLabel;
+            if (data.datasets[tooltipItem.datasetIndex].label == 'Cantidad') {
+              return label + ' Unid';
+            } else {
+              return label + ' ha';
+            }
+          }
+        }
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: { display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+        }]
+      }
     };
     return <Line data={data} options={options} />;
   };
@@ -142,7 +162,24 @@ class gg extends Component {
       responsive: true,
       fullWidth: true,
       legend: { position: 'bottom' },
-      scales: { yAxes: [{ stacked: true }] }
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+            label += ": " + tooltipItem.yLabel;
+            if (data.datasets[tooltipItem.datasetIndex].label == 'Cantidad') {
+              return label + ' Unid';
+            } else {
+              return label + ' ha';
+            }
+          }
+        }
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: { stacked: true, display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+        }]
+      }
     };
     return <Line data={data} options={options} />;
   };
@@ -204,14 +241,154 @@ class gg extends Component {
     return <Pie data={data} options={options} />;
   };
 
-  tableRender = ({ resultSet }) => (
-    <Table
-      pagination={false}
-      columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key }))}
-      dataSource={resultSet.tablePivot()}
-    />
+  placeholderAux = (dataIndex) => {
+    switch (dataIndex) {
+      case 'EntidadAgricUrbana.nombre':
+        return 'Nombre';
+      case 'EntidadAgricUrbana.tecnologia':
+        return 'Tecnología';
+      case 'EntidadAgricUrbana.consejoPopular':
+        return 'Consejo Popular';
+      case 'EntidadAgricUrbana.ministerio':
+        return 'Ministerio';
+      case 'EntidadAgricUrbana.entidad':
+        return 'Entidad';
+      case 'EntidadAgricUrbana.productor':
+        return 'Productor';
+      default:
+        break;
+    }
+  }
 
-  );
+  aux = (data) => {
+    if (data == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Buscar ` + this.placeholderAux(dataIndex)}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+          style={{ width: 210, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type="primary"
+          onClick={() => this.handleSearch(selectedKeys, confirm)}
+          icon="search"
+          size="small"
+          style={{ width: 100, marginRight: 8 }}
+        >
+          Buscar
+        </Button>
+        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 100 }}>
+          Eliminar Filtro
+        </Button>
+      </div>
+    ),
+    filterIcon: filtered => (
+      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      (this.aux(record[dataIndex])) ?
+        false
+        :
+        record[dataIndex]
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text => (
+      <Highlighter
+        highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+        searchWords={[this.state.searchText]}
+        autoEscape
+        textToHighlight={text.toString()}
+      />
+    ),
+  });
+
+  handleSearch = (selectedKeys, confirm) => {
+    confirm();
+    this.setState({ searchText: selectedKeys[0] });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
+
+  tableRender = ({ resultSet }) => {
+    var tablepivotNew = resultSet.tablePivot();
+    tablepivotNew.map((r, index) => {
+      r['key'] = index;
+    })
+    Object.keys(resultSet["loadResponse"]["annotation"]["dimensions"]).map((r, index) => {
+      switch (r) {
+        case 'EntidadAgricUrbana.nombre':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.nombre"]["title"] = "Nombre";
+          break;
+        case 'EntidadAgricUrbana.tecnologia':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.tecnologia"]["title"] = "Tecnología";
+          break;
+        case 'EntidadAgricUrbana.consejoPopular':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.consejoPopular"]["title"] = "Consejo Popular";
+          break;
+        case 'EntidadAgricUrbana.ministerio':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.ministerio"]["title"] = "Ministerio";
+          break;
+        case 'EntidadAgricUrbana.entidad':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.entidad"]["title"] = "Entidad";
+          break;
+        case 'EntidadAgricUrbana.productor':
+          resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.productor"]["title"] = "Productor";
+          break;
+        default:
+          break;
+      }
+    })
+    Object.keys(resultSet["loadResponse"]["annotation"]["measures"]).map((r, index) => {
+      switch (r) {
+        case 'EntidadAgricUrbana.areaTotal':
+          resultSet["loadResponse"]["annotation"]["measures"]["EntidadAgricUrbana.areaTotal"]["title"] = "Área Total (ha)";
+          break;
+        case 'EntidadAgricUrbana.count':
+          resultSet["loadResponse"]["annotation"]["measures"]["EntidadAgricUrbana.count"]["title"] = "Cantidad (Unid)";
+          break;
+        default:
+          break;
+      }
+    })
+    return (
+      <Table
+        className='tableResponsive'
+        pagination={{ pageSize: 6 }}
+        columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, ...this.getColumnSearchProps(c.key) }))}
+        dataSource={tablepivotNew}
+      />
+    )
+  }
+  // tableRender = ({ resultSet }) => (
+  //   <Table
+  //     pagination={{ pageSize: 6 }}
+  //     columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key }))}
+  //     dataSource={resultSet.tablePivot()}
+  //   />
+
+  // );
 
   renderChart = (Component) => ({ resultSet, error }) => (
     (resultSet && <Component resultSet={resultSet} />) ||
