@@ -65,7 +65,7 @@ export default function Dashboard(props) {
   const [loading2, setLoading2] = React.useState(true);
   const [loading3, setLoading3] = React.useState(true);
   const [selectedKeys, setSelectedKeys] = React.useState([]);
-  
+
 
   useEffect(
 
@@ -422,7 +422,7 @@ export default function Dashboard(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
-                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} setReiniciarPuntos={props.setReiniciarPuntos} />
+                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
                   <Map1 selectedKeys1={selectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />

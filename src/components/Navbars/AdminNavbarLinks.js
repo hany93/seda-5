@@ -142,6 +142,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChange = () => {
+    //props.setReiniciarPuntos(false)
     if (props.check) {
       props.setCheck(false)
       var provinciaYmunicipio = [];
