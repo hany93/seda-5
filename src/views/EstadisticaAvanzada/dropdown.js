@@ -90,12 +90,12 @@ export default function Dropdown(props) {
     const [mesure, setMesure] = React.useState(['EntidadAgricUrbana.count']);
     const [dimension, setDimension] = React.useState(['EntidadAgricUrbana.tecnologia']);
     const [grafico, setGrafico] = React.useState('bar');
-    const [filtro, setFiltro] = React.useState();
+    const [filtro, setFiltro] = React.useState('');
     const [operador, setOperador] = React.useState('equals');
     //const [addFiltro, setAddFiltro] = React.useState([]);
     const [valoresDimensionFiltro, setvaloresDimensionFiltro] = React.useState([]);
     //const [dimensionFiltrada, setDimensionFiltrada] = React.useState([]);
-    const [valorDelFiltro, setValorDelFiltro] = React.useState();
+    const [valorDelFiltro, setValorDelFiltro] = React.useState('');
     // const [checkedA, setCheckedA] = React.useState(false);
     const [classDisable, setClassDisable] = React.useState(true);
 
@@ -323,9 +323,7 @@ export default function Dropdown(props) {
                                         value={mesure}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeMeasures}
-                                        input={<Input id="select-multiple" />}
-                                        defaultValue="EntidadAgricUrbana.count"
-                                    >
+                                        input={<Input id="select-multiple" />}>
                                         <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.areaTotal">Área Total</MenuItem>
                                     </Select>
@@ -337,9 +335,7 @@ export default function Dropdown(props) {
                                         value={dimension}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeDimensions}
-                                        input={<Input id="select-multiple1" />}
-                                        defaultValue="EntidadAgricUrbana.nombre"
-                                    >
+                                        input={<Input id="select-multiple1" />}>
                                         <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
@@ -356,9 +352,7 @@ export default function Dropdown(props) {
                                         value={grafico}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeGrafic}
-                                        input={<Input id="select-multiple2" />}
-                                        defaultValue='bar'
-                                    >
+                                        input={<Input id="select-multiple2" />}>
                                         <MenuItem value="bar">Gráfico de Barras</MenuItem>
                                         <MenuItem value="pie">Gráfico de Pastel</MenuItem>
                                         <MenuItem value="line">Gráfico de Líneas</MenuItem>
@@ -397,9 +391,7 @@ export default function Dropdown(props) {
                                         value={filtro}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeFiltro}
-                                        input={<Input id="select-multiple2" />}
-                                    //defaultValue='EntidadAgricUrbana.tecnologia'
-                                    >
+                                        input={<Input id="select-multiple2" />}>
                                         <MenuItem value="EntidadAgricUrbana.nombre">Nombre</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
@@ -417,9 +409,7 @@ export default function Dropdown(props) {
                                         value={operador}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeOperador}
-                                        input={<Input id="select-multiple2" />}
-                                        defaultValue='equals'
-                                    >
+                                        input={<Input id="select-multiple2" />}>
                                         <MenuItem value="contains">Contiene</MenuItem>
                                         <MenuItem value="notContains">No contiene</MenuItem>
                                         <MenuItem value="equals">Igual</MenuItem>
@@ -435,9 +425,7 @@ export default function Dropdown(props) {
                                         value={valorDelFiltro}
                                         style={{ width: '100%' }}
                                         onChange={handleChangeValor}
-                                        input={<Input id="select-multiple2" />}
-                                    //defaultValue='equals'
-                                    >
+                                        input={<Input id="select-multiple2" />}>
 
                                         {valoresDimensionFiltro.map(name => (
                                             <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>

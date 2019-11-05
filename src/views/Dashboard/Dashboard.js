@@ -332,7 +332,7 @@ export default function Dashboard(props) {
             </CardBody>
             <CardFooter chart>
               <p className={classes.cardCategory}>
-                increase in today sales.
+                Detalles >>
               </p>
             </CardFooter>
           </Card>
@@ -349,7 +349,7 @@ export default function Dashboard(props) {
             </CardBody>
             <CardFooter chart>
               <p className={classes.cardCategory}>
-                increase in today sales.
+                Detalles >>
               </p>
             </CardFooter>
           </Card>
@@ -366,7 +366,7 @@ export default function Dashboard(props) {
             </CardBody>
             <CardFooter chart>
               <p className={classes.cardCategory}>
-                increase in today sales.
+                Detalles >>
               </p>
             </CardFooter>
           </Card>
@@ -386,7 +386,7 @@ export default function Dashboard(props) {
               </CardBody>
               <CardFooter chart>
                 <p className={classes.cardCategory}>
-                  increase in today sales.
+                  Detalles >>
               </p>
               </CardFooter>
             </Card>
@@ -403,7 +403,7 @@ export default function Dashboard(props) {
               </CardBody>
               <CardFooter chart>
                 <p className={classes.cardCategory}>
-                  increase in today sales.
+                  Detalles >>
               </p>
               </CardFooter>
             </Card>
