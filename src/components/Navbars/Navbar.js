@@ -114,7 +114,7 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          {makeBrand() === undefined ? <span className={classes.title} style={{ fontSize: '20px', display: 'flex', alignItems: 'center', marginLeft:10 }}><HomeIcon /> Inicio</span> : <span className={classes.title} style={{ fontSize: '20px', display: 'flex', alignItems: 'center', marginLeft:10 }}><HomeIcon className={classes.title_link} /><Link to="/admin/dashboard" className={classes.title_link}> Inicio</Link>&nbsp;/ {makeBrand()}</span>}
+          {makeBrand() === undefined ? <span className={classes.title} style={{ fontSize: '20px', display: 'flex', alignItems: 'center', marginLeft: 10 }}><HomeIcon /> Inicio</span> : <span className={classes.title} style={{ fontSize: '20px', display: 'flex', alignItems: 'center', marginLeft: 10 }}><HomeIcon className={classes.title_link} /><Link to="/admin/dashboard" className={classes.title_link}> Inicio</Link>&nbsp;/ {makeBrand()}</span>}
         </div>
         <Hidden smDown implementation="css">
           <AdminNavbarLinks
@@ -136,6 +136,8 @@ export default function Header(props) {
             setMunicipioAntesDePais={props.setMunicipioAntesDePais}
             itemSelecDropDownMun={props.itemSelecDropDownMun}
             setItemSelecDropDownMun={props.setItemSelecDropDownMun}
+            reiniciarPuntos={props.reiniciarPuntos}
+            setReiniciarPuntos={props.setReiniciarPuntos}
           />
         </Hidden>
         <Hidden mdUp implementation="css">

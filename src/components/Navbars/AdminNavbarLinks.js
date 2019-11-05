@@ -104,6 +104,7 @@ export default function AdminNavbarLinks(props) {
   )
 
   const handleChangeP = async event => {
+    props.setReiniciarPuntos(false)
     await props.setProvincias([event.target.value])
     await props.setMunicipios(totalDeMunicipiosSoloMun)
     props.setItemSelecDropDownMun("Todos")
@@ -115,7 +116,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChangeM = async event => {
-
+    props.setReiniciarPuntos(false)
     if (event.target.value === "Todos") {
       props.setItemSelecDropDownMun("Todos")
 

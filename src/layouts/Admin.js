@@ -211,6 +211,8 @@ export default function Admin({ ...rest }) {
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
   const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
 
+  const [reiniciarPuntos, setReiniciarPuntos] = React.useState(true);
+
 
   const handleImageClick = image => {
     setImage(image);
@@ -312,7 +314,7 @@ export default function Admin({ ...rest }) {
           'aria-describedby': 'message-id',
           'className': classes.info
         }}
-        message={<Grid container spacing={3} style={{ fontSize: '20px', alignItems: 'center' }}><Grid item xs={1} sm={1} md={1} lg={1} xl={1}><InfoIcon style={{ fontSize: 30, opacity: 0.9, marginRight: '10px',display: 'flex' }} /></Grid><Grid item xs={5} sm={5} md={5} lg={3} xl={3}>Deseleccione&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Grid><Grid item xs={6} sm={6} md={6} lg={1} xl={1}><img alt='País' title='País' src={Cuba0} /></Grid><Grid item xs={12} sm={12} md={12} lg={7} xl={7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;para elegir provincia y municipio.</Grid></Grid>}
+        message={<Grid container spacing={3} style={{ fontSize: '20px', alignItems: 'center' }}><Grid item xs={1} sm={1} md={1} lg={1} xl={1}><InfoIcon style={{ fontSize: 30, opacity: 0.9, marginRight: '10px', display: 'flex' }} /></Grid><Grid item xs={5} sm={5} md={5} lg={3} xl={3}>Deseleccione&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Grid><Grid item xs={6} sm={6} md={6} lg={1} xl={1}><img alt='País' title='País' src={Cuba0} /></Grid><Grid item xs={12} sm={12} md={12} lg={7} xl={7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;para elegir provincia y municipio.</Grid></Grid>}
         action={[
           <IconButton
             key="close"
@@ -349,6 +351,8 @@ export default function Admin({ ...rest }) {
         setMunicipioAntesDePais={setMunicipioAntesDePais}
         itemSelecDropDownMun={itemSelecDropDownMun}
         setItemSelecDropDownMun={setItemSelecDropDownMun}
+        reiniciarPuntos={reiniciarPuntos}
+        setReiniciarPuntos={setReiniciarPuntos}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -372,6 +376,8 @@ export default function Admin({ ...rest }) {
           setMunicipioAntesDePais={setMunicipioAntesDePais}
           itemSelecDropDownMun={itemSelecDropDownMun}
           setItemSelecDropDownMun={setItemSelecDropDownMun}
+          reiniciarPuntos={reiniciarPuntos}
+          setReiniciarPuntos={setReiniciarPuntos}
           {...rest}
         />
         <div className={classes.content}>
@@ -390,7 +396,15 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard" render={() => <Dashboard rest={{ ...rest }} municipios={municipios} provincias={provincias} lugarfiltrado={lugarFiltrado} />} />
+              <Route path="/admin/dashboard" render={() => <Dashboard
+                rest={{ ...rest }}
+                municipios={municipios}
+                provincias={provincias}
+                lugarfiltrado={lugarFiltrado}
+                reiniciarPuntos={reiniciarPuntos}
+                setReiniciarPuntos={setReiniciarPuntos}
+              />}
+              />
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}</div>
         </div>

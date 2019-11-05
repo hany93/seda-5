@@ -20,6 +20,8 @@ class gg extends Component {
         columns: []
     };
 
+
+
     placeholderAux = (dataIndex) => {
         switch (dataIndex) {
             case 'EntidadAgricUrbana.nombre':
@@ -116,7 +118,10 @@ class gg extends Component {
     //     }
     // }
 
+
+
     render() {
+        //this.props.setSelectedKeys([]);
         return (
             <QueryRenderer
                 query={{
@@ -166,8 +171,12 @@ class gg extends Component {
                         const rowSelection = {
                             onChange: (selectedRowKeys, selectedRows) => {
                                 this.props.setSelectedKeys(selectedRows);
+                                this.props.setReiniciarPuntos(true);
                             },
                         };
+
+
+
                         return (
                             <Table
                                 className='tableResponsive'
@@ -175,6 +184,7 @@ class gg extends Component {
                                 columns={array}
                                 rowSelection={rowSelection}
                                 dataSource={tablepivotNew}
+                            //onChange={this.changeTable}
                             />
                         )
                     } else {
