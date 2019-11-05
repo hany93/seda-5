@@ -327,7 +327,7 @@ export default function Dropdown(props) {
                                         defaultValue="EntidadAgricUrbana.count"
                                     >
                                         <MenuItem value="EntidadAgricUrbana.count">Cantidad</MenuItem>
-                                        <MenuItem value="EntidadAgricUrbana.areaTotal">Área</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.areaTotal">Área Total</MenuItem>
                                     </Select>
                                 </GridItem>
                                 <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -344,8 +344,8 @@ export default function Dropdown(props) {
                                         <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                                        {/* <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem> */}
                                         <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
                                     </Select>
@@ -404,8 +404,8 @@ export default function Dropdown(props) {
                                         <MenuItem value="EntidadAgricUrbana.tecnologia">Tecnología</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.ministerio">Ministerio</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.consejoPopular">Consejo Popular</MenuItem>
-                                        <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
-                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem>
+                                        {/* <MenuItem value="EntidadAgricUrbana.municipio">Municipio</MenuItem>
+                                        <MenuItem value="EntidadAgricUrbana.provincia">Provincia</MenuItem> */}
                                         <MenuItem value="EntidadAgricUrbana.entidad">Entidad</MenuItem>
                                         <MenuItem value="EntidadAgricUrbana.productor">Productor</MenuItem>
                                     </Select>
