@@ -128,10 +128,11 @@ export default function Sidebar(props) {
   );
   var brand = (
     <div className={classes.logo}>
-      <Link to="/admin/dashboard"
+      <Link to="/admin/Dashboard"
         className={classNames(classes.logoLink, {
           [classes.logoLinkRTL]: props.rtlActive
         })}
+        title='Inicio'
       >
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
