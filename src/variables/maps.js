@@ -36,7 +36,7 @@ class Maps1 extends React.Component {
             }),
             controls: defaultsControls({
                 rotate: false,
-                attribution:false,
+                attribution: false,
                 fullScreen: true
             }).extend([new FullScreen()]),
             interactions: defaults({
@@ -66,42 +66,46 @@ class Maps1 extends React.Component {
             if (layers["array_"].length > 1) {
                 mapa.removeLayer(layers["array_"][1]);
             }
-            array.map(a => {
-                var x = parseInt(a['EntidadAgricUrbana.longitud']);
-                var y = parseInt(a['EntidadAgricUrbana.latitud']);
-                var iconFeature = new Feature({
-                    geometry: new Point(fromLonLat([a['EntidadAgricUrbana.longitud'], a['EntidadAgricUrbana.latitud']]))
-                });
-                iconFeature.setStyle(new Style({
-                    image: new Icon /** @type {module:ol/style/Icon~Options} */({
-                        anchor: [0.5, 35],
-                        anchorXUnits: 'fraction',
-                        anchorYUnits: 'pixels',
-                        src: nuevoazul
-                    }),
-                    text: new Text({
-                        text: a['EntidadAgricUrbana.nombre'].toString().trim(),
-                        font: 'bold 15px Open Sans',
-                        //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
-                        fill: new Fill({
-                            color: '#ab47bc'
+            if (nextprops.reiniciarPuntos) {
+
+
+                array.map(a => {
+                    var x = parseInt(a['EntidadAgricUrbana.longitud']);
+                    var y = parseInt(a['EntidadAgricUrbana.latitud']);
+                    var iconFeature = new Feature({
+                        geometry: new Point(fromLonLat([a['EntidadAgricUrbana.longitud'], a['EntidadAgricUrbana.latitud']]))
+                    });
+                    iconFeature.setStyle(new Style({
+                        image: new Icon /** @type {module:ol/style/Icon~Options} */({
+                            anchor: [0.5, 35],
+                            anchorXUnits: 'fraction',
+                            anchorYUnits: 'pixels',
+                            src: nuevoazul
                         }),
-                        // offsetX: 50,
-                        // offsetY: 4,
-                        // maxAngle: 90,
-                        // placement: 400
-                        textAlign: 'end'
-                    })
-                }));
-                arregloDePuntos.push(iconFeature)
-            });
-            var vectorsource = new VectorSource({
-                features: arregloDePuntos
-            });
-            var vectorLayer = new VectorLayer({
-                source: vectorsource
-            });
-            mapa.addLayer(vectorLayer);
+                        text: new Text({
+                            text: a['EntidadAgricUrbana.nombre'].toString().trim(),
+                            font: 'bold 15px Open Sans',
+                            //font: 'bold 20px "Open Sans", "Arial Unicode MS", "sans-serif"',
+                            fill: new Fill({
+                                color: '#ab47bc'
+                            }),
+                            // offsetX: 50,
+                            // offsetY: 4,
+                            // maxAngle: 90,
+                            // placement: 400
+                            textAlign: 'end'
+                        })
+                    }));
+                    arregloDePuntos.push(iconFeature)
+                });
+                var vectorsource = new VectorSource({
+                    features: arregloDePuntos
+                });
+                var vectorLayer = new VectorLayer({
+                    source: vectorsource
+                });
+                mapa.addLayer(vectorLayer);
+            }
         }
     }
 

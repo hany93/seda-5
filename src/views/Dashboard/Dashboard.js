@@ -57,6 +57,8 @@ export default function Dashboard(props) {
   const classes = useStyles();
 
   const [organoponico, setOrganoponico] = React.useState([]);
+  const [semiprotegido, setSemiprotegido] = React.useState([]);
+  const [centrodeMateriaOrganica, setcentrodeMateriaOrganica] = React.useState([]);
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
@@ -65,6 +67,7 @@ export default function Dashboard(props) {
   const [loading2, setLoading2] = React.useState(true);
   const [loading3, setLoading3] = React.useState(true);
   const [selectedKeys, setSelectedKeys] = React.useState([]);
+
 
   useEffect(
 
@@ -98,6 +101,66 @@ export default function Dashboard(props) {
         })
         var auxo = organoponicos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         await setOrganoponico(auxo);
+        setLoading(false);
+
+        const semiprotegidos = await cubejsApi.load({
+          "measures": ["EntidadAgricUrbana.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"EntidadAgricUrbana.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "EntidadAgricUrbana.tecnologia",
+              "operator": "equals",
+              "values": [
+                "semiprotegidos"
+              ]
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
+            },
+            {
+              "dimension": "EntidadAgricUrbana.municipio",
+              "operator": "equals",
+              "values": props.municipios
+            }
+          ]
+        })
+        var auxs = semiprotegidos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        await setSemiprotegido(auxs);
+        setLoading(false);
+
+        const centrodeMateriaOrganica = await cubejsApi.load({
+          "measures": ["EntidadAgricUrbana.count"],
+          "timeDimensions": [],
+          "dimensions": [
+            //"EntidadAgricUrbana.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "EntidadAgricUrbana.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Centro de Materia Orgánica"
+              ]
+            },
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": await props.provincias
+            },
+            {
+              "dimension": "EntidadAgricUrbana.municipio",
+              "operator": "equals",
+              "values": props.municipios
+            }
+          ]
+        })
+        var auxc = centrodeMateriaOrganica["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        await setcentrodeMateriaOrganica(auxc);
         setLoading(false);
 
         const huertos = await cubejsApi.load({
@@ -245,7 +308,7 @@ export default function Dashboard(props) {
                 <img src={Invernadero} alt="Semiprotegidos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{semiprotegido}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -261,7 +324,7 @@ export default function Dashboard(props) {
                 <img src={Materia} alt="Centro de Materia Orgánica" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{centrodeMateriaOrganica}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -421,10 +484,10 @@ export default function Dashboard(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
-                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} />
+                  <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
-                  <Map1 selectedKeys1={selectedKeys} />
+                  <Map1 selectedKeys1={selectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />
                 </GridItem>
               </GridContainer>
             </CardBody>

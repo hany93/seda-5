@@ -209,6 +209,8 @@ export default function Admin({ ...rest }) {
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
   const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
 
+  const [reiniciarPuntos, setReiniciarPuntos] = React.useState(true);
+
 
   const handleImageClick = image => {
     setImage(image);
@@ -347,6 +349,8 @@ export default function Admin({ ...rest }) {
         setMunicipioAntesDePais={setMunicipioAntesDePais}
         itemSelecDropDownMun={itemSelecDropDownMun}
         setItemSelecDropDownMun={setItemSelecDropDownMun}
+        reiniciarPuntos={reiniciarPuntos}
+        setReiniciarPuntos={setReiniciarPuntos}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel} id='cap'>
@@ -370,6 +374,8 @@ export default function Admin({ ...rest }) {
           setMunicipioAntesDePais={setMunicipioAntesDePais}
           itemSelecDropDownMun={itemSelecDropDownMun}
           setItemSelecDropDownMun={setItemSelecDropDownMun}
+          reiniciarPuntos={reiniciarPuntos}
+          setReiniciarPuntos={setReiniciarPuntos}
           {...rest}
         />
         <div className={classes.content}>
@@ -388,7 +394,15 @@ export default function Admin({ ...rest }) {
                 return null;
               })
               }
-              <Route path="/admin/dashboard" render={() => <Dashboard rest={{ ...rest }} municipios={municipios} provincias={provincias} lugarfiltrado={lugarFiltrado} />} />
+              <Route path="/admin/dashboard" render={() => <Dashboard
+                rest={{ ...rest }}
+                municipios={municipios}
+                provincias={provincias}
+                lugarfiltrado={lugarFiltrado}
+                reiniciarPuntos={reiniciarPuntos}
+                setReiniciarPuntos={setReiniciarPuntos}
+              />}
+              />
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>}
           </div>
