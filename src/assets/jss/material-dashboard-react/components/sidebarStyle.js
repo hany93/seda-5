@@ -86,7 +86,7 @@ const sidebarStyle = theme => ({
     lineHeight: "30px",
     textDecoration: "none",
     backgroundColor: "transparent",
-    color:whiteColor,
+    color: whiteColor,
     "&,&:hover": {
       color: whiteColor
     },
@@ -217,6 +217,13 @@ const sidebarStyle = theme => ({
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(infoColor[0]) +
         ",.2)"
+    }
+  },
+  buttonSide: {
+    color: '#FFF',
+    backgroundColor: (props) => props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350',
+    '&:hover': {
+      backgroundColor: (props) => props.color == 'purple' ? '#af2cc5' : props.color === "blue" ? '#00d3ee' : props.color === "green" ? '#5cb860' : props.color === "orange" ? '#ffa21a' : '#f55a4e',
     }
   },
   green: {

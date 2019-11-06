@@ -4,7 +4,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { NavLink, Link } from "react-router-dom";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
@@ -14,13 +14,17 @@ import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
-
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+import Button from '@material-ui/core/Button';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
-
 export default function Sidebar(props) {
-  const classes = useStyles();
+  const classes = useStyles(props);
+  const [icon, setIcon] = React.useState(false);
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
@@ -141,22 +145,18 @@ export default function Sidebar(props) {
       </Link>
     </div>
   );
-  // var brand = (
-  //   <div className={classes.logo}>
-  //     <a
-  //       href="https://www.creative-tim.com?ref=mdr-sidebar"
-  //       className={classNames(classes.logoLink, {
-  //         [classes.logoLinkRTL]: props.rtlActive
-  //       })}
-  //       target="_blank"
-  //     >
-  //       <div className={classes.logoImage}>
-  //         <img src={logo} alt="logo" className={classes.img} />
-  //       </div>
-  //       {logoText}
-  //     </a>
-  //   </div>
-  // );
+  const clicko = () => {
+    setIcon(true);
+    domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: { borderStyle: 'solid', borderWidth: '5px', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)' } })
+      .then((blob) => {
+        saveAs(blob, 'ScreenShot.jpg');
+        setIcon(false);
+        var w = window.open(URL.createObjectURL(blob), '_blank');
+        w.onload = function () {
+          w.document.title = 'Estadística Agricultura Urbana y Suburbana';
+        };
+      });
+  }
   return (
     <div>
       <Hidden mdUp implementation="css">
@@ -197,6 +197,15 @@ export default function Sidebar(props) {
               setItemSelecDropDownMun={props.setItemSelecDropDownMun}
             />}
             {links}
+            <div style={{ marginTop: 700, textAlign: 'center' }}>
+              <Button
+                size='large'
+                onClick={clicko}
+                className={classes.buttonSide}
+              >
+              {icon ? (<CircularProgress size={20} style={{color:'#fff', marginRight:10}}/>) : (<PhotoCameraIcon style={{color:'#fff', marginRight:10}}/>)}Descargar
+            </Button>
+            </div>
           </div>
           {image !== undefined ? (
             <div
@@ -218,7 +227,18 @@ export default function Sidebar(props) {
           }}
         >
           {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
+          <div className={classes.sidebarWrapper}>
+            {links}
+            <div style={{ marginTop: 700, textAlign: 'center' }}>
+              <Button
+                size='large'
+                onClick={clicko}
+                className={classes.buttonSide}
+              >
+                {icon ? (<CircularProgress size={20} style={{color:'#fff', marginRight:10}}/>) : (<PhotoCameraIcon style={{color:'#fff', marginRight:10}}/>)}Descargar
+            </Button>
+            </div>
+          </div>
           {image !== undefined ? (
             <div
               className={classes.background}
