@@ -205,7 +205,7 @@ export default function Sidebar(props) {
                 onClick={clicko}
                 className={classes.buttonSide}
               >
-              {icon ? (<CircularProgress size={20} style={{color:'#fff', marginRight:10}}/>) : (<PhotoCameraIcon style={{color:'#fff', marginRight:10}}/>)}Descargar
+                {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
             </Button>
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function Sidebar(props) {
                 onClick={clicko}
                 className={classes.buttonSide}
               >
-                {icon ? (<CircularProgress size={20} style={{color:'#fff', marginRight:10}}/>) : (<PhotoCameraIcon style={{color:'#fff', marginRight:10}}/>)}Descargar
+                {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
             </Button>
             </div>
           </div>
