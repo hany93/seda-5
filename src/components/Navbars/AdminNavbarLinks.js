@@ -144,19 +144,26 @@ export default function AdminNavbarLinks(props) {
   const handleChange = () => {
     //props.setReiniciarPuntos(false)
     if (props.check) {
+      //props.setReiniciarPuntos(false)
       props.setCheck(false)
       var provinciaYmunicipio = [];
       if ((props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length == 1) || (props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length > 1)) {
+        props.setReiniciarPuntos(false)
         props.setProvincias(props.provinciaAntesDePais)
         props.setMunicipios(props.municipioAntesDePais)
         if (props.municipioAntesDePais.length > 1) {
+          //este esta dusoso
+          //props.setReiniciarPuntos(false)
           provinciaYmunicipio.push(props.provinciaAntesDePais + ".")
           provinciaYmunicipio.push("Todos")
         } else {
+          //este tambien esta dudoso
+          // props.setReiniciarPuntos(false)
           provinciaYmunicipio.push(props.provinciaAntesDePais + ".")
           provinciaYmunicipio.push(props.municipioAntesDePais)
         }
       } else {
+        //props.setReiniciarPuntos(false)
         props.setProvincias(totalDeProvincias)
         props.setMunicipios(totalDeMunicipiosSoloMun)
         provinciaYmunicipio.push("Cuba")
@@ -168,6 +175,7 @@ export default function AdminNavbarLinks(props) {
       }
       message.open(a);
     } else {
+      props.setReiniciarPuntos(false)
       props.setCheck(true)
       //cuando se pone por pais
       props.setProvinciaAntesDePais(props.provincias)
