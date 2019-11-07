@@ -21,7 +21,7 @@ class gg extends Component {
       datasets: resultSet.series().map((s, index) => (
         {
           label: 'Área en Uso',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           backgroundColor: COLORS_SERIES[index],
           fill: false
         }
@@ -40,7 +40,8 @@ class gg extends Component {
             // if (label) {
             //     label += ': ';
             // }
-            label += ": " + tooltipItem.yLabel;
+            let num = tooltipItem.yLabel;
+            label += ": " + num;
             return label + ' %';
           }
         }

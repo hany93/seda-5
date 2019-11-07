@@ -21,7 +21,7 @@ class gg extends Component {
           datasets: resultSet.series().map((s, index) => (
             {
               label: 'Área Total',
-              data: s.series.map(r => r.value),
+              data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
               borderColor: COLORS_SERIES[index],
               fill: false
             }

@@ -17,15 +17,15 @@ class gg extends Component {
 
   barRender = ({ resultSet }) => {
     const data = {
-        labels: resultSet.categories().map(c => c.category),
-        datasets: resultSet.series().map((s, index) => (
-            {
-                label: 'Área en Uso',
-                data: s.series.map(r => r.value),
-                backgroundColor: COLORS_SERIES[index],
-                fill: false
-            }
-        )),
+      labels: resultSet.categories().map(c => c.category),
+      datasets: resultSet.series().map((s, index) => (
+        {
+          label: 'Área en Uso',
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
+          backgroundColor: COLORS_SERIES[index],
+          fill: false
+        }
+      )),
     };
     const options = {
       responsive: true,
@@ -40,7 +40,8 @@ class gg extends Component {
             // if (label) {
             //     label += ': ';
             // }
-            label += ": " + tooltipItem.yLabel;
+            let num = tooltipItem.yLabel;
+            label += ": " + num;
             return label + ' %';
           }
         }
@@ -57,7 +58,7 @@ class gg extends Component {
           }
         }],
         yAxes: [{
-          scaleLabel: { display: true, labelString: 'Área en Uso(%)',fontColor: "#FFF" },
+          scaleLabel: { display: true, labelString: 'Área en Uso(%)', fontColor: "#FFF" },
           gridLines: {
             color: "rgba(255, 255, 255, 0.2)", // Eje y color rojo
             zeroLineColor: "rgba(255, 255, 255, 0.2)",

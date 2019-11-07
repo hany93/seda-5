@@ -77,7 +77,7 @@ class gg extends Component {
       datasets: resultSet.series().map((s, index) => (
         {
           label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           backgroundColor: COLORS_SERIES[index],
           fill: false
         }
@@ -115,7 +115,7 @@ class gg extends Component {
       datasets: resultSet.series().map((s, index) => (
         {
           label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           borderColor: COLORS_SERIES[index],
           fill: false
         }
@@ -153,7 +153,7 @@ class gg extends Component {
       datasets: resultSet.series().map((s, index) => (
         {
           label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           backgroundColor: COLORS_SERIES[index]
         }
       )),
@@ -193,7 +193,7 @@ class gg extends Component {
       datasets: resultSet.series().map(s => (
         {
           label: (s.title === 'Entidad Agric Urbana Area Total') ? 'Área Total' : 'Cantidad',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           backgroundColor: COLORS_SERIES,
           hoverBackgroundColor: COLORS_SERIES,
           pointStyle: 'circle'
@@ -335,6 +335,10 @@ class gg extends Component {
     var tablepivotNew = resultSet.tablePivot();
     tablepivotNew.map((r, index) => {
       r['key'] = index;
+      if (r['EntidadAgricUrbana.areaTotal']) {
+        let num = r['EntidadAgricUrbana.areaTotal'];
+        r['EntidadAgricUrbana.areaTotal'] = ((num % 1) === 0) ? num : parseFloat(num).toFixed(2);
+      }
     })
     Object.keys(resultSet["loadResponse"]["annotation"]["dimensions"]).map((r, index) => {
       switch (r) {

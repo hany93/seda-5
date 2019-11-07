@@ -42,7 +42,7 @@ class gg extends Component {
       datasets: resultSet.series().map(s => (
         {
           label: 'Área en Uso',
-          data: s.series.map(r => r.value),
+          data: s.series.map(r => ((r.value % 1) === 0) ? r.value : parseFloat(r.value).toFixed(2)),
           backgroundColor: COLORS_SERIES,
           hoverBackgroundColor: COLORS_SERIES,
           pointStyle: 'circle',
@@ -56,7 +56,7 @@ class gg extends Component {
         display: true,
         position: 'right',
         labels: {
-          padding:20,
+          padding: 20,
           usePointStyle: true,
           generateLabels: function (chart) {
             var data = chart.data;
@@ -68,7 +68,7 @@ class gg extends Component {
                   text: label + " (" + data.datasets[0].data[i] + "%)",
                   fillStyle: '#fff',
                   strokeStyle: data.datasets[0].backgroundColor[i],
-                  lineWidth:3,
+                  lineWidth: 3,
                   // Extra data used for toggling the correct item
                   index: i
                 };
@@ -89,7 +89,8 @@ class gg extends Component {
             // }
             // console.log(tooltipItem)
             // console.log(data)
-            label += ": " + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            let num = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            label += ": " + num;
             return label + ' %';
           }
         }
