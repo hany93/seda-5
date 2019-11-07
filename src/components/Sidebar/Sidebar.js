@@ -149,7 +149,7 @@ export default function Sidebar(props) {
     setIcon(true);
     domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: { borderStyle: 'solid', borderWidth: '5px', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)' } })
       .then((blob) => {
-        saveAs(blob, 'ScreenShot.jpg');
+        saveAs(blob, 'ScreenShot.jpg')
         setIcon(false);
         var w = window.open(URL.createObjectURL(blob), '_blank');
         w.onload = function () {
