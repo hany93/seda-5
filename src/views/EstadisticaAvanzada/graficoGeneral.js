@@ -6,7 +6,7 @@ import { Spin, Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { async } from 'q';
-const COLORS_SERIES = ['#FF6492', '#141446', '#7A77FF'];
+const COLORS_SERIES = ['#FF6492', '#7A77FF', '#141446'];
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
