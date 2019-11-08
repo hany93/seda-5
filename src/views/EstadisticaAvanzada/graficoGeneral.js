@@ -39,8 +39,6 @@ class gg extends Component {
     searchText: ''
   };
 
-
-
   componentDidMount() {
     this.setState({ tipoGraficFunction: this.barRender })
   }
@@ -98,32 +96,6 @@ class gg extends Component {
     }
   }
 
-  getMaxGrafico = (value) => {
-    if (value.datasets.length > 1) {
-
-      console.log((typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
-        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
-        :
-        1000)
-
-      return (typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
-        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
-        :
-        1000;
-    } else {
-
-      console.log((typeof value.datasets[0] !== "undefined") ?
-        this.maxGrafico(Math.max(value.datasets[0].data))
-        :
-        1000)
-
-      return (typeof value.datasets[0] !== "undefined") ?
-        this.maxGrafico(Math.max(value.datasets[0].data))
-        :
-        1000;
-    }
-  }
-
   barRender = ({ resultSet }) => {
     const data = {
       labels: resultSet.categories().map(c => c.category),
@@ -136,7 +108,6 @@ class gg extends Component {
         }
       )),
     };
-    //(typeof data.datasets[0] !== "undefined") ? console.log(data) : console.log('jjj');
     const options = {
       plugins: {
         datalabels: {
@@ -174,7 +145,13 @@ class gg extends Component {
           },
           ticks: {
             stepSize: 50,
-            max: this.getMaxGrafico(data),
+            max: (data.datasets.length > 1) ?
+              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+                : 1000
+              : (typeof data.datasets[0] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data))
+                : 1000,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
           }
@@ -197,6 +174,17 @@ class gg extends Component {
       )),
     };
     const options = {
+      plugins: {
+        datalabels: {
+          color: '#000',
+          anchor: 'end',
+          align: 'top',
+          offset: 5,
+          formatter: function (value, context) {
+            return value;
+          }
+        }
+      },
       responsive: true,
       fullWidth: true,
       legend: { position: 'bottom' },
@@ -215,11 +203,27 @@ class gg extends Component {
       },
       scales: {
         yAxes: [{
-          scaleLabel: { display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+          scaleLabel: {
+            display: true,
+            labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)',
+            fontColor: "#000"
+          },
+          ticks: {
+            stepSize: 50,
+            max: (data.datasets.length > 1) ?
+              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+                : 1000
+              : (typeof data.datasets[0] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data))
+                : 1000,
+            fontColor: "#000", // Cambiar color de labels
+            beginAtZero: true
+          }
         }]
       }
     };
-    return <Line data={data} options={options} />;
+    return <Line data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   areaRender = ({ resultSet }) => {
@@ -234,6 +238,17 @@ class gg extends Component {
       )),
     };
     const options = {
+      plugins: {
+        datalabels: {
+          color: '#000',
+          anchor: 'end',
+          align: 'top',
+          offset: 5,
+          formatter: function (value, context) {
+            return value;
+          }
+        }
+      },
       responsive: true,
       fullWidth: true,
       legend: { position: 'bottom' },
@@ -252,11 +267,28 @@ class gg extends Component {
       },
       scales: {
         yAxes: [{
-          scaleLabel: { stacked: true, display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+          scaleLabel: {
+            stacked: true,
+            display: true,
+            labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)',
+            fontColor: "#000"
+          },
+          ticks: {
+            stepSize: 50,
+            max: (data.datasets.length > 1) ?
+              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+                : 1000
+              : (typeof data.datasets[0] !== "undefined") ?
+                this.maxGrafico(Math.max(...data.datasets[0].data))
+                : 1000,
+            fontColor: "#000", // Cambiar color de labels
+            beginAtZero: true
+          }
         }]
       }
     };
-    return <Line data={data} options={options} />;
+    return <Line data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   pieRender = ({ resultSet }) => {
@@ -276,6 +308,17 @@ class gg extends Component {
       ))
     };
     const options = {
+      plugins: {
+        datalabels: {
+          color: '#FFF',
+          anchor: 'center',
+          align: 'center',
+          formatter: function (value, context) {
+            //console.log(context.dataset.label)
+            return (context.dataset.label === 'Cantidad') ? value + ' Unid' : value + ' ha';
+          }
+        }
+      },
       responsive: true,
       fullWidth: true,
       legend: {
@@ -313,7 +356,7 @@ class gg extends Component {
         }
       },
     };
-    return <Pie data={data} options={options} />;
+    return <Pie data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   placeholderAux = (dataIndex) => {
