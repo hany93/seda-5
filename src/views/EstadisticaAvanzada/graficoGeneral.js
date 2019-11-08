@@ -39,42 +39,8 @@ class gg extends Component {
     searchText: ''
   };
 
-  maxGrafico = (value) => {
-    if (Number.isInteger(value)) {
-      var numLenght = value.toString().length;
-      var num = value.toString().charAt(0);
-      var aux = '1';
-      for (let index = 1; index < numLenght; index++) {
-        num += 0;
-        aux += 0;
-      }
-      return parseInt(num) + parseInt(aux) + 50;
-    } else {
-      var value1 = Math.trunc(value);
-      var numLenght = value1.toString().length;
-      var num = value1.toString().charAt(0);
-      var aux = '1';
-      for (let index = 1; index < numLenght; index++) {
-        num += 0;
-        aux += 0;
-      }
-      return parseInt(num) + parseInt(aux) + 50;
-    }
-  }
-  getMaxGrafico = (value) => {
-    if (value.datasets.length > 1) {
-      return (typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
-        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
-        :
-        1000;
-    } else {
-      console.log('fffff')
-      return (typeof value.datasets[0] !== "undefined") ?
-        this.maxGrafico(Math.max(value.datasets[0].data))
-        :
-        1000;
-    }
-  }
+
+
   componentDidMount() {
     this.setState({ tipoGraficFunction: this.barRender })
   }
@@ -109,6 +75,55 @@ class gg extends Component {
     }
   }
 
+  maxGrafico = (value) => {
+    if (Number.isInteger(value)) {
+      var numLenght = value.toString().length;
+      var num = value.toString().charAt(0);
+      var aux = '1';
+      for (let index = 1; index < numLenght; index++) {
+        num += 0;
+        aux += 0;
+      }
+      return parseInt(num) + parseInt(aux) + 50;
+    } else {
+      var value1 = Math.trunc(value);
+      var numLenght = value1.toString().length;
+      var num = value1.toString().charAt(0);
+      var aux = '1';
+      for (let index = 1; index < numLenght; index++) {
+        num += 0;
+        aux += 0;
+      }
+      return parseInt(num) + parseInt(aux) + 50;
+    }
+  }
+
+  getMaxGrafico = (value) => {
+    if (value.datasets.length > 1) {
+
+      console.log((typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
+        :
+        1000)
+
+      return (typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
+        :
+        1000;
+    } else {
+
+      console.log((typeof value.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(value.datasets[0].data))
+        :
+        1000)
+
+      return (typeof value.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(value.datasets[0].data))
+        :
+        1000;
+    }
+  }
+
   barRender = ({ resultSet }) => {
     const data = {
       labels: resultSet.categories().map(c => c.category),
@@ -121,7 +136,7 @@ class gg extends Component {
         }
       )),
     };
-    (typeof data.datasets[0] !== "undefined") ? console.log(data) : console.log('jjj');
+    //(typeof data.datasets[0] !== "undefined") ? console.log(data) : console.log('jjj');
     const options = {
       plugins: {
         datalabels: {
