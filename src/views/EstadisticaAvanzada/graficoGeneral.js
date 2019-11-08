@@ -61,7 +61,20 @@ class gg extends Component {
       return parseInt(num) + parseInt(aux) + 50;
     }
   }
-
+  getMaxGrafico = (value) => {
+    if (value.datasets.length > 1) {
+      return (typeof value.datasets[0] !== "undefined" && typeof value.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max([].concat(value.datasets[0].data, value.datasets[1].data)))
+        :
+        1000;
+    } else {
+      console.log('fffff')
+      return (typeof value.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(value.datasets[0].data))
+        :
+        1000;
+    }
+  }
   componentDidMount() {
     this.setState({ tipoGraficFunction: this.barRender })
   }
@@ -108,13 +121,14 @@ class gg extends Component {
         }
       )),
     };
+    (typeof data.datasets[0] !== "undefined") ? console.log(data) : console.log('jjj');
     const options = {
       plugins: {
         datalabels: {
-          color: '#FFF',
+          color: '#000',
           anchor: 'end',
           align: 'top',
-          offset: -5,
+          offset: 5,
           formatter: function (value, context) {
             return value;
           }
@@ -145,8 +159,8 @@ class gg extends Component {
           },
           ticks: {
             stepSize: 50,
-            max: (typeof data.datasets[0] !== "undefined") ? this.maxGrafico(Math.max(...data.datasets[0].data)) : 1000,
-            fontColor: "#FFF", // Cambiar color de labels
+            max: this.getMaxGrafico(data),
+            fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
           }
         }]
