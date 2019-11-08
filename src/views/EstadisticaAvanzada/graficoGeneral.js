@@ -314,7 +314,6 @@ class gg extends Component {
           anchor: 'center',
           align: 'center',
           formatter: function (value, context) {
-            //console.log(context.dataset.label)
             return (context.dataset.label === 'Cantidad') ? value + ' Unid' : value + ' ha';
           }
         }
@@ -527,6 +526,11 @@ class gg extends Component {
           "dimensions": this.props.camposDimensions,
           "filters": (this.props.checkedA) ? [
             {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": this.props.provincias
+            },
+            {
               "dimension": "EntidadAgricUrbana.municipio",
               "operator": "equals",
               "values": this.props.municipios
@@ -539,6 +543,11 @@ class gg extends Component {
               ]
             }
           ] : [
+              {
+                "dimension": "EntidadAgricUrbana.provincia",
+                "operator": "equals",
+                "values": this.props.provincias
+              },
               {
                 "dimension": "EntidadAgricUrbana.municipio",
                 "operator": "equals",
