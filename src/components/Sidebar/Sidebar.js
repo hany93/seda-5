@@ -24,8 +24,8 @@ import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.
 import { sync } from "read-file";
 
 const styles1 = {
-  borderStyle: 'solid', 
-  borderWidth: '2px', 
+  borderStyle: 'solid',
+  borderWidth: '2px',
   boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)'
 };
 const useStyles = makeStyles(styles);
@@ -153,7 +153,7 @@ export default function Sidebar(props) {
       </Link>
     </div>
   );
-  const clicko = async() => {
+  const clicko = async () => {
     setIcon(true);
     domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: styles1 })
       .then((blob) => {
@@ -207,15 +207,15 @@ export default function Sidebar(props) {
               setReiniciarPuntos={props.setReiniciarPuntos}
             />}
             {links}
-            <div style={{ marginTop: 700, textAlign: 'center' }}>
-              <Button
-                size='large'
-                onClick={clicko}
-                className={classes.buttonSide}
-              >
-                {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
+          </div>
+          <div style={{ paddingBottom: 30, textAlign: 'center', zIndex: 5, position: 'absolute', bottom: '10px', margin: 'auto', left: 0, right: 0 }}>
+            <Button
+              size='large'
+              onClick={clicko}
+              className={classes.buttonSide}
+            >
+              {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
             </Button>
-            </div>
           </div>
           {image !== undefined ? (
             <div
@@ -239,15 +239,15 @@ export default function Sidebar(props) {
           {brand}
           <div className={classes.sidebarWrapper}>
             {links}
-            <div style={{ marginTop: 700, textAlign: 'center' }}>
-              <Button
-                size='large'
-                onClick={clicko}
-                className={classes.buttonSide}
-              >
-                {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
+          </div>
+          <div style={{ paddingBottom: 30, textAlign: 'center', zIndex: 5, position: 'absolute', bottom: '10px', margin: 'auto', left: 0, right: 0 }}>
+            <Button
+              size='large'
+              onClick={clicko}
+              className={classes.buttonSide}
+            >
+              {icon ? (<CircularProgress size={20} style={{ color: '#fff', marginRight: 10 }} />) : (<PhotoCameraIcon style={{ color: '#fff', marginRight: 10 }} />)}Descargar
             </Button>
-            </div>
           </div>
           {image !== undefined ? (
             <div
