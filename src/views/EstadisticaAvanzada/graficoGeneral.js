@@ -4,6 +4,8 @@ import { QueryRenderer } from '@cubejs-client/react';
 import { Line, Bubble, Pie, Bar, } from 'react-chartjs-2';
 import { Spin, Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { async } from 'q';
 const COLORS_SERIES = ['#FF6492', '#141446', '#7A77FF'];
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
@@ -37,7 +39,30 @@ class gg extends Component {
     searchText: ''
   };
 
-  componentWillMount() {
+  maxGrafico = (value) => {
+    if (Number.isInteger(value)) {
+      var numLenght = value.toString().length;
+      var num = value.toString().charAt(0);
+      var aux = '1';
+      for (let index = 1; index < numLenght; index++) {
+        num += 0;
+        aux += 0;
+      }
+      return parseInt(num) + parseInt(aux) + 50;
+    } else {
+      var value1 = Math.trunc(value);
+      var numLenght = value1.toString().length;
+      var num = value1.toString().charAt(0);
+      var aux = '1';
+      for (let index = 1; index < numLenght; index++) {
+        num += 0;
+        aux += 0;
+      }
+      return parseInt(num) + parseInt(aux) + 50;
+    }
+  }
+
+  componentDidMount() {
     this.setState({ tipoGraficFunction: this.barRender })
   }
 
@@ -84,6 +109,17 @@ class gg extends Component {
       )),
     };
     const options = {
+      plugins: {
+        datalabels: {
+          color: '#FFF',
+          anchor: 'end',
+          align: 'top',
+          offset: -5,
+          formatter: function (value, context) {
+            return value;
+          }
+        }
+      },
       responsive: true,
       fullWidth: true,
       legend: { position: 'bottom' },
@@ -102,11 +138,21 @@ class gg extends Component {
       },
       scales: {
         yAxes: [{
-          scaleLabel: { display: true, labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)', fontColor: "#000" },
+          scaleLabel: {
+            display: true,
+            labelString: (this.props.camposMeasures.length > 1) ? 'Cantidad(Unid) / Área Total(ha)' : (this.props.camposMeasures[0] == 'EntidadAgricUrbana.count') ? 'Cantidad(Unid)' : 'Área Total(ha)',
+            fontColor: "#000"
+          },
+          ticks: {
+            stepSize: 50,
+            max: (typeof data.datasets[0] !== "undefined") ? this.maxGrafico(Math.max(...data.datasets[0].data)) : 1000,
+            fontColor: "#FFF", // Cambiar color de labels
+            beginAtZero: true
+          }
         }]
       }
     };
-    return <Bar data={data} options={options} />;
+    return <Bar data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   lineRender = ({ resultSet }) => {

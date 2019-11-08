@@ -53,7 +53,6 @@ const cubejsApi = cubejs(
   { apiUrl: API_URL + "/cubejs-api/v1" }
 );
 export default function Dashboard(props) {
-
   const classes = useStyles();
 
   const [organoponico, setOrganoponico] = React.useState([]);

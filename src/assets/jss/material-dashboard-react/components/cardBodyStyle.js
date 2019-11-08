@@ -1,6 +1,9 @@
 const cardBodyStyle = {
   cardBody: {
-    padding: "0.9375rem 20px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    paddingBottom: "15px",
+    paddingTop: "15px",
     flex: "1 1 auto",
     WebkitBoxFlex: "1",
     position: "relative"

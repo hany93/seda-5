@@ -18,6 +18,7 @@ const dashboardStyle = {
     display: "inline-flex",
     fontSize: "20px",
     lineHeight: "22px",
+    width:'100%',
     "& svg": {
       top: "4px",
       width: "16px",
@@ -40,7 +41,8 @@ const dashboardStyle = {
     fontSize: "17px",
     marginTop: "0",
     paddingTop: "10px",
-    marginBottom: "0"
+    marginBottom: "0",
+    width:'100%'
   },
   cardCategoryWhite: {
     color: "rgba(" + hexToRgb(whiteColor) + ",.62)",

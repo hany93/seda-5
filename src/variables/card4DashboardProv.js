@@ -3,8 +3,7 @@ import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import { Doughnut } from 'react-chartjs-2';
-
-const COLORS_SERIES = ['#ec407a', '#66bb6a', '#ab47bc', '#26c6da'];
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
@@ -50,6 +49,16 @@ class gg extends Component {
       ))
     };
     const options = {
+      plugins: {
+        datalabels: {
+          color: '#FFF',
+          anchor: 'center',
+          align: 'center',
+          formatter: function (value, context) {
+            return value + " %";
+          }
+        }
+      },
       responsive: true,
       fullWidth: true,
       legend: {
@@ -65,7 +74,7 @@ class gg extends Component {
               return data.labels.map(function (label, i) {
                 //console.log(i+"..."+label)
                 return {
-                  text: label + " (" + data.datasets[0].data[i] + "%)",
+                  text: label,
                   fillStyle: '#fff',
                   strokeStyle: data.datasets[0].backgroundColor[i],
                   lineWidth: 3,
@@ -96,7 +105,7 @@ class gg extends Component {
         }
       },
     };
-    return <Doughnut data={data} options={options} />;
+    return <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (

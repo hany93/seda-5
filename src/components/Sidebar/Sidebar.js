@@ -19,9 +19,17 @@ import { saveAs } from 'file-saver';
 import Button from '@material-ui/core/Button';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
+import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
+import { sync } from "read-file";
+
+const styles1 = {
+  borderStyle: 'solid', 
+  borderWidth: '2px', 
+  boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)'
+};
 const useStyles = makeStyles(styles);
+
 export default function Sidebar(props) {
   const classes = useStyles(props);
   const [icon, setIcon] = React.useState(false);
@@ -145,9 +153,9 @@ export default function Sidebar(props) {
       </Link>
     </div>
   );
-  const clicko = () => {
+  const clicko = async() => {
     setIcon(true);
-    domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: { borderStyle: 'solid', borderWidth: '5px', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)' } })
+    domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: styles1 })
       .then((blob) => {
         saveAs(blob, 'ScreenShot.jpg')
         setIcon(false);

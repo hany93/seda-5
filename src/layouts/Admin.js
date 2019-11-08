@@ -208,7 +208,6 @@ export default function Admin({ ...rest }) {
   const [provinciaAntesDePais, setProvinciaAntesDePais] = React.useState([]);
   const [municipioAntesDePais, setMunicipioAntesDePais] = React.useState([]);
   const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
-
   const [reiniciarPuntos, setReiniciarPuntos] = React.useState(true);
 
 
