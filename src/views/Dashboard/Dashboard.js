@@ -83,7 +83,7 @@ export default function Dashboard(props) {
               "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
-                "organoponico"
+                "Organoponico"
               ]
             },
             {
@@ -113,7 +113,7 @@ export default function Dashboard(props) {
               "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
-                "semiprotegidos"
+                "Semiprotegido"
               ]
             },
             {
