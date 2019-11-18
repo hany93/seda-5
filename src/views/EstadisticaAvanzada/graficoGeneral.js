@@ -108,6 +108,13 @@ class gg extends Component {
         }
       )),
     };
+    var a = (data.datasets.length > 1) ?
+      (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+        : 1000
+      : (typeof data.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data))
+        : 1000;
     const options = {
       plugins: {
         datalabels: {
@@ -144,14 +151,8 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: 50,
-            max: (data.datasets.length > 1) ?
-              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
-                : 1000
-              : (typeof data.datasets[0] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data))
-                : 1000,
+            stepSize: (a > 0 && a < 1000) ? 150 : 500,
+            max: a,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
           }
@@ -173,6 +174,13 @@ class gg extends Component {
         }
       )),
     };
+    var b = (data.datasets.length > 1) ?
+      (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+        : 1000
+      : (typeof data.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data))
+        : 1000;
     const options = {
       plugins: {
         datalabels: {
@@ -209,14 +217,8 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: 50,
-            max: (data.datasets.length > 1) ?
-              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
-                : 1000
-              : (typeof data.datasets[0] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data))
-                : 1000,
+            stepSize: (b > 0 && b < 1000) ? 150 : 500,
+            max: b,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
           }
@@ -237,6 +239,13 @@ class gg extends Component {
         }
       )),
     };
+    var c = (data.datasets.length > 1) ?
+      (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
+        : 1000
+      : (typeof data.datasets[0] !== "undefined") ?
+        this.maxGrafico(Math.max(...data.datasets[0].data))
+        : 1000;
     const options = {
       plugins: {
         datalabels: {
@@ -274,14 +283,8 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: 50,
-            max: (data.datasets.length > 1) ?
-              (typeof data.datasets[0] !== "undefined" && typeof data.datasets[1] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data.concat(...data.datasets[1].data)))
-                : 1000
-              : (typeof data.datasets[0] !== "undefined") ?
-                this.maxGrafico(Math.max(...data.datasets[0].data))
-                : 1000,
+            stepSize: (c > 0 && c < 1000) ? 150 : 500,
+            max: c,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
           }

@@ -114,6 +114,18 @@ class gg extends Component {
               "dimension": "EntidadAgricUrbana.provincia",
               "operator": "equals",
               "values": this.props.provincias
+            },
+            {
+              "dimension": "EntidadAgricUrbana.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Huerto",
+                "Organoponico",
+                "Parcela",
+                "Finca",
+                "Centro de abono orgánico",
+                "Semiprotegido"
+              ]
             }
           ]
         }}

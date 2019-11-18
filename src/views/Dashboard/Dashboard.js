@@ -143,7 +143,7 @@ export default function Dashboard(props) {
               "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
-                "Centro de Materia Orgánica"
+                "Centro de abono orgánico"
               ]
             },
             {

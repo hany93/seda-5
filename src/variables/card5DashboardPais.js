@@ -104,7 +104,20 @@ class gg extends Component {
           "dimensions": [
             "EntidadAgricUrbana.tecnologia"
           ],
-          "filters": []
+          "filters": [
+            {
+              "dimension": "EntidadAgricUrbana.tecnologia",
+              "operator": "equals",
+              "values": [
+                "Huerto",
+                "Organoponico",
+                "Parcela",
+                "Finca",
+                "Centro de abono orgánico",
+                "Semiprotegido"
+              ]
+            }
+          ]
         }}
         cubejsApi={cubejsApi}
         render={this.renderChart(this.barRender)}

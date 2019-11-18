@@ -99,7 +99,7 @@ class gg extends Component {
                         display: true
                     },
                     ticks: {
-                        stepSize: 50,
+                        stepSize: (this.maxGrafico(Math.max(...data.datasets[0].data)) > 0 && this.maxGrafico(Math.max(...data.datasets[0].data)) < 1000) ? 150 : 500,
                         max: this.maxGrafico(Math.max(...data.datasets[0].data)),
                         fontColor: "#FFF", // Cambiar color de labels
                         beginAtZero: true
@@ -127,7 +127,20 @@ class gg extends Component {
                     "dimensions": [
                         "EntidadAgricUrbana.tecnologia"
                     ],
-                    "filters": []
+                    "filters": [
+                      {
+                        "dimension": "EntidadAgricUrbana.tecnologia",
+                        "operator": "equals",
+                        "values": [
+                          "Huerto",
+                          "Organoponico",
+                          "Parcela",
+                          "Finca",
+                          "Centro de abono orgánico",
+                          "Semiprotegido"
+                        ]
+                      }
+                    ]
                 }}
                 cubejsApi={cubejsApi}
                 render={this.renderChart(this.lineRender)}
