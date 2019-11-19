@@ -7,7 +7,7 @@ import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import './campo.css'
 
-const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
+const API_URL = "http://localhost:4000"; // change to your actual endpoint
 
 const cubejsApi = cubejs(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
@@ -95,7 +95,7 @@ class gg extends Component {
                 highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
                 searchWords={[this.state.searchText]}
                 autoEscape
-                textToHighlight={(text) ? text.toString() : text}
+                textToHighlight={(text) ? text.toString() : ''}
             />
         ),
     });

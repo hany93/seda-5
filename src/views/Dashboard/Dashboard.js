@@ -61,10 +61,12 @@ export default function Dashboard(props) {
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [loading0, setLoading0] = React.useState(true);
   const [loading1, setLoading1] = React.useState(true);
   const [loading2, setLoading2] = React.useState(true);
   const [loading3, setLoading3] = React.useState(true);
+  const [loading4, setLoading4] = React.useState(true);
+  const [loading5, setLoading5] = React.useState(true);
   const [selectedKeys, setSelectedKeys] = React.useState([]);
 
 
@@ -76,6 +78,7 @@ export default function Dashboard(props) {
           "measures": ["EntidadAgricUrbana.count"],
           "timeDimensions": [],
           "dimensions": [
+            "EntidadAgricUrbana.tecnologia"
             //"EntidadAgricUrbana.municipio"
           ],
           "filters": [
@@ -83,7 +86,12 @@ export default function Dashboard(props) {
               "dimension": "EntidadAgricUrbana.tecnologia",
               "operator": "equals",
               "values": [
-                "Organoponico"
+                "Organoponico",
+                "Huerto",
+                "Parcela",
+                "Finca",
+                "Semiprotegido",
+                "Centro de abono orgánico",
               ]
             },
             {
@@ -98,153 +106,187 @@ export default function Dashboard(props) {
             }
           ]
         })
-        var auxo = organoponicos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setOrganoponico(auxo);
-        setLoading(false);
+        //var auxo = organoponicos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        //await setOrganoponico(auxo);
+        //setLoading(false);
+        var auxo = organoponicos["loadResponse"]["data"]
+        console.log(auxo)
+        auxo.map(async (item, i) => {
+          switch (item['EntidadAgricUrbana.tecnologia']) {
+            case 'Huerto':
+               await setHuerto(item['EntidadAgricUrbana.count']);
+               setLoading3(false);
+              break;
 
-        const semiprotegidos = await cubejsApi.load({
-          "measures": ["EntidadAgricUrbana.count"],
-          "timeDimensions": [],
-          "dimensions": [
-            //"EntidadAgricUrbana.municipio"
-          ],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.tecnologia",
-              "operator": "equals",
-              "values": [
-                "Semiprotegido"
-              ]
-            },
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            },
-            {
-              "dimension": "EntidadAgricUrbana.municipio",
-              "operator": "equals",
-              "values": props.municipios
-            }
-          ]
-        })
-        var auxs = semiprotegidos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setSemiprotegido(auxs);
-        setLoading(false);
+            case 'Parcela':
+              await setParcela(item['EntidadAgricUrbana.count']);
+              setLoading4(false);
+              break;
 
-        const centrodeMateriaOrganica = await cubejsApi.load({
-          "measures": ["EntidadAgricUrbana.count"],
-          "timeDimensions": [],
-          "dimensions": [
-            //"EntidadAgricUrbana.municipio"
-          ],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.tecnologia",
-              "operator": "equals",
-              "values": [
-                "Centro de abono orgánico"
-              ]
-            },
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            },
-            {
-              "dimension": "EntidadAgricUrbana.municipio",
-              "operator": "equals",
-              "values": props.municipios
-            }
-          ]
-        })
-        var auxc = centrodeMateriaOrganica["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setcentrodeMateriaOrganica(auxc);
-        setLoading(false);
+            case 'Organoponico':
+              await setOrganoponico(item['EntidadAgricUrbana.count']);
+              setLoading0(false);
+              break;
 
-        const huertos = await cubejsApi.load({
-          "measures": ["EntidadAgricUrbana.count"],
-          "timeDimensions": [],
-          "dimensions": [],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.tecnologia",
-              "operator": "equals",
-              "values": [
-                "Huerto"
-              ]
-            },
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            },
-            {
-              "dimension": "EntidadAgricUrbana.municipio",
-              "operator": "equals",
-              "values": props.municipios
-            }
-          ]
-        })
-        var auxh = huertos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setHuerto(auxh);
-        setLoading1(false);
+            case 'Finca':
+              await setFinca(item['EntidadAgricUrbana.count']);
+              setLoading5(false);
+              break;
 
-        const parcelas = await cubejsApi.load({
-          "measures": ["EntidadAgricUrbana.count"],
-          "timeDimensions": [],
-          "dimensions": [],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.tecnologia",
-              "operator": "equals",
-              "values": [
-                "Parcela"
-              ]
-            },
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            },
-            {
-              "dimension": "EntidadAgricUrbana.municipio",
-              "operator": "equals",
-              "values": props.municipios
-            }
-          ]
-        })
-        var auxp = parcelas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setParcela(auxp);
-        setLoading2(false);
+            case 'Semiprotegido':
+              await setSemiprotegido(item['EntidadAgricUrbana.count']);
+              setLoading1(false);
+              break;
 
-        const fincas = await cubejsApi.load({
-          "measures": ["EntidadAgricUrbana.count"],
-          "timeDimensions": [],
-          "dimensions": [],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.tecnologia",
-              "operator": "equals",
-              "values": [
-                "Finca"
-              ]
-            },
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            },
-            {
-              "dimension": "EntidadAgricUrbana.municipio",
-              "operator": "equals",
-              "values": props.municipios
-            }
-          ]
-        })
-        var auxf = fincas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
-        await setFinca(auxf);
-        setLoading3(false);
+            default:
+              await setcentrodeMateriaOrganica(item['EntidadAgricUrbana.count']);
+              setLoading2(false);
+              break;
+          }
+        });
+        // const semiprotegidos = await cubejsApi.load({
+        //   "measures": ["EntidadAgricUrbana.count"],
+        //   "timeDimensions": [],
+        //   "dimensions": [
+        //     //"EntidadAgricUrbana.municipio"
+        //   ],
+        //   "filters": [
+        //     {
+        //       "dimension": "EntidadAgricUrbana.tecnologia",
+        //       "operator": "equals",
+        //       "values": [
+        //         "Semiprotegido"
+        //       ]
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.provincia",
+        //       "operator": "equals",
+        //       "values": await props.provincias
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.municipio",
+        //       "operator": "equals",
+        //       "values": props.municipios
+        //     }
+        //   ]
+        // })
+        // var auxs = semiprotegidos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        // await setSemiprotegido(auxs);
+        // setLoading(false);
+
+        // const centrodeMateriaOrganica = await cubejsApi.load({
+        //   "measures": ["EntidadAgricUrbana.count"],
+        //   "timeDimensions": [],
+        //   "dimensions": [
+        //     //"EntidadAgricUrbana.municipio"
+        //   ],
+        //   "filters": [
+        //     {
+        //       "dimension": "EntidadAgricUrbana.tecnologia",
+        //       "operator": "equals",
+        //       "values": [
+        //         "Centro de abono orgánico"
+        //       ]
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.provincia",
+        //       "operator": "equals",
+        //       "values": await props.provincias
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.municipio",
+        //       "operator": "equals",
+        //       "values": props.municipios
+        //     }
+        //   ]
+        // })
+        // var auxc = centrodeMateriaOrganica["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        // await setcentrodeMateriaOrganica(auxc);
+        // setLoading(false);
+
+        // const huertos = await cubejsApi.load({
+        //   "measures": ["EntidadAgricUrbana.count"],
+        //   "timeDimensions": [],
+        //   "dimensions": [],
+        //   "filters": [
+        //     {
+        //       "dimension": "EntidadAgricUrbana.tecnologia",
+        //       "operator": "equals",
+        //       "values": [
+        //         "Huerto"
+        //       ]
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.provincia",
+        //       "operator": "equals",
+        //       "values": await props.provincias
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.municipio",
+        //       "operator": "equals",
+        //       "values": props.municipios
+        //     }
+        //   ]
+        // })
+        // var auxh = huertos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        // await setHuerto(auxh);
+        // setLoading1(false);
+
+        // const parcelas = await cubejsApi.load({
+        //   "measures": ["EntidadAgricUrbana.count"],
+        //   "timeDimensions": [],
+        //   "dimensions": [],
+        //   "filters": [
+        //     {
+        //       "dimension": "EntidadAgricUrbana.tecnologia",
+        //       "operator": "equals",
+        //       "values": [
+        //         "Parcela"
+        //       ]
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.provincia",
+        //       "operator": "equals",
+        //       "values": await props.provincias
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.municipio",
+        //       "operator": "equals",
+        //       "values": props.municipios
+        //     }
+        //   ]
+        // })
+        // var auxp = parcelas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        // await setParcela(auxp);
+        // setLoading2(false);
+
+        // const fincas = await cubejsApi.load({
+        //   "measures": ["EntidadAgricUrbana.count"],
+        //   "timeDimensions": [],
+        //   "dimensions": [],
+        //   "filters": [
+        //     {
+        //       "dimension": "EntidadAgricUrbana.tecnologia",
+        //       "operator": "equals",
+        //       "values": [
+        //         "Finca"
+        //       ]
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.provincia",
+        //       "operator": "equals",
+        //       "values": await props.provincias
+        //     },
+        //     {
+        //       "dimension": "EntidadAgricUrbana.municipio",
+        //       "operator": "equals",
+        //       "values": props.municipios
+        //     }
+        //   ]
+        // })
+        // var auxf = fincas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
+        // await setFinca(auxf);
+        // setLoading3(false);
       }
       asyncrona();
     },
@@ -291,7 +333,7 @@ export default function Dashboard(props) {
                 <img src={Siembra} alt="Organopónicos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+              {loading0 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -307,7 +349,7 @@ export default function Dashboard(props) {
                 <img src={Invernadero} alt="Semiprotegidos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{semiprotegido}</h3>}
+              {loading1 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{semiprotegido}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -323,7 +365,7 @@ export default function Dashboard(props) {
                 <img src={Materia} alt="Centro de Materia Orgánica" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{centrodeMateriaOrganica}</h3>}
+              {loading2 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{centrodeMateriaOrganica}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -339,7 +381,7 @@ export default function Dashboard(props) {
                 <img src={Verduras} alt="Huertos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading1 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
+              {loading3 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -355,7 +397,7 @@ export default function Dashboard(props) {
                 <img src={Aspersor} alt="Parcelas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading2 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
+              {loading4 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -371,7 +413,7 @@ export default function Dashboard(props) {
                 <img src={Campo} alt="Fincas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading3 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
+              {loading5 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
