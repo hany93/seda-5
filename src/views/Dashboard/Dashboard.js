@@ -159,22 +159,22 @@ export default function Dashboard(props) {
           }
         });
         if (!aa.includes('Huerto')) {
-           setHuerto(0);
-        } 
+          setHuerto(0);
+        }
         if (!aa.includes('Organoponico')) {
-           setOrganoponico(0);
-        } 
-         if (!aa.includes('Parcela')) {
-           setParcela(0);
-        } 
-         if (!aa.includes('Finca')) {
-           setFinca(0);
-        } 
-         if (!aa.includes('Semiprotegido')) {
-           setSemiprotegido(0);
-        } 
-         if (!aa.includes('Centro de abono orgánico')) {
-           setcentrodeMateriaOrganica(0);
+          setOrganoponico(0);
+        }
+        if (!aa.includes('Parcela')) {
+          setParcela(0);
+        }
+        if (!aa.includes('Finca')) {
+          setFinca(0);
+        }
+        if (!aa.includes('Semiprotegido')) {
+          setSemiprotegido(0);
+        }
+        if (!aa.includes('Centro de abono orgánico')) {
+          setcentrodeMateriaOrganica(0);
         }
         // const semiprotegidos = await cubejsApi.load({
         //   "measures": ["EntidadAgricUrbana.count"],
