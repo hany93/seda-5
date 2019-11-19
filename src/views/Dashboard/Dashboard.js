@@ -109,41 +109,73 @@ export default function Dashboard(props) {
         //var auxo = organoponicos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         //await setOrganoponico(auxo);
         //setLoading(false);
+        // setHuerto(0);
+        // setOrganoponico(0);
+        // setParcela(0);
+        // setFinca(0);
+        // setSemiprotegido(0);
+        // setcentrodeMateriaOrganica(0);
+
         var auxo = organoponicos["loadResponse"]["data"]
-        console.log(auxo)
-        auxo.map(async (item, i) => {
+        //console.log(auxo)
+        var aa = [];
+        auxo.map((item, i) => {
           switch (item['EntidadAgricUrbana.tecnologia']) {
             case 'Huerto':
-               await setHuerto(item['EntidadAgricUrbana.count']);
-               setLoading3(false);
+              setHuerto(item['EntidadAgricUrbana.count']);
+              aa.push('Huerto');
+              setLoading3(false);
               break;
 
             case 'Parcela':
-              await setParcela(item['EntidadAgricUrbana.count']);
+              setParcela(item['EntidadAgricUrbana.count']);
+              aa.push('Parcela');
               setLoading4(false);
               break;
 
             case 'Organoponico':
-              await setOrganoponico(item['EntidadAgricUrbana.count']);
+              setOrganoponico(item['EntidadAgricUrbana.count']);
+              aa.push('Organoponico');
               setLoading0(false);
               break;
 
             case 'Finca':
-              await setFinca(item['EntidadAgricUrbana.count']);
+              setFinca(item['EntidadAgricUrbana.count']);
+              aa.push('Finca');
               setLoading5(false);
               break;
 
             case 'Semiprotegido':
-              await setSemiprotegido(item['EntidadAgricUrbana.count']);
+              setSemiprotegido(item['EntidadAgricUrbana.count']);
+              aa.push('Semiprotegido');
               setLoading1(false);
               break;
 
             default:
-              await setcentrodeMateriaOrganica(item['EntidadAgricUrbana.count']);
+              setcentrodeMateriaOrganica(item['EntidadAgricUrbana.count']);
+              aa.push('Centro de abono orgánico');
               setLoading2(false);
               break;
           }
         });
+        if (!aa.includes('Huerto')) {
+           setHuerto(0);
+        } 
+        if (!aa.includes('Organoponico')) {
+           setOrganoponico(0);
+        } 
+         if (!aa.includes('Parcela')) {
+           setParcela(0);
+        } 
+         if (!aa.includes('Finca')) {
+           setFinca(0);
+        } 
+         if (!aa.includes('Semiprotegido')) {
+           setSemiprotegido(0);
+        } 
+         if (!aa.includes('Centro de abono orgánico')) {
+           setcentrodeMateriaOrganica(0);
+        }
         // const semiprotegidos = await cubejsApi.load({
         //   "measures": ["EntidadAgricUrbana.count"],
         //   "timeDimensions": [],
