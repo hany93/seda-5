@@ -205,6 +205,7 @@ export default function Sidebar(props) {
               setItemSelecDropDownMun={props.setItemSelecDropDownMun}
               reiniciarPuntos={props.reiniciarPuntos}
               setReiniciarPuntos={props.setReiniciarPuntos}
+              setLoading={props.setLoading}
             />}
             {links}
           </div>

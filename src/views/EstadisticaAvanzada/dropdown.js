@@ -101,9 +101,11 @@ export default function Dropdown(props) {
 
     const handleChangeMeasures = async event => {
         var value = event.target.value;
-        await setMesure(value)
+        setMesure(value)
+        //await setMesure(value)
         props.camposMeasures(value)
-        await setShowGM(true)
+        setShowGM(true)
+        //await setShowGM(true)
         props.showGrafic(showGM, showGD)
     }
 
@@ -111,19 +113,22 @@ export default function Dropdown(props) {
         var value = event.target.value;
         setDimension(value)
         props.camposDimensions(value)
-        await setShowGD(true)
+        setShowGD(true)
+        //await setShowGD(true)
         props.showGrafic(showGM, showGD)
     }
 
     const handleChangeGrafic = async event => {
         var value = event.target.value;
-        await setGrafico(value)
+        setGrafico(value)
+        //await setGrafico(value)
         props.tipoGrafic(value)
     }
 
     const handleChangeFiltro = async event => {
         var value = event.target.value;
-        await setFiltro(value)
+        setFiltro(value)
+        //await setFiltro(value)
         props.dimensionDelFiltro(value)
 
         const valoresDimensionFiltro = await cubejsApi.load({
@@ -149,14 +154,16 @@ export default function Dropdown(props) {
         valoresDimensionFiltro["loadResponse"]["data"].map((dim) =>
             auxdim.push(dim[value])
         )
-        await setvaloresDimensionFiltro(auxdim);
+        setvaloresDimensionFiltro(auxdim);
+        //await setvaloresDimensionFiltro(auxdim);
         //await setDimensionFiltrada(value);
 
     }
 
     const handleChangeOperador = async event => {
         var value = event.target.value;
-        await setOperador(value)
+        setOperador(value)
+        //await setOperador(value)
         props.operadorDelFiltro(value)
     }
 

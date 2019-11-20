@@ -7,7 +7,7 @@ import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import './campo.css'
 
-const API_URL = "http://localhost:4000"; // change to your actual endpoint
+const API_URL = "http://sed.enpa.vcl.minag.cu"; // change to your actual endpoint
 
 const cubejsApi = cubejs(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjUxODE0NjMsImV4cCI6MTU2NTI2Nzg2M30.r3FYOTFyahrqGyE_BWF0HXeXlrDP8YDtWhWTRtehU0I",
@@ -119,16 +119,17 @@ class gg extends Component {
     // }
 
 
-
     render() {
         //this.props.setSelectedKeys([]);
+        //console.log(this.props.municipios)
+        //console.log(this.props.provincias)
         return (
             <QueryRenderer
                 query={{
                     "measures": [],
                     "timeDimensions": [],
-                    "filters": [
-                        {
+                    "filters":
+                        [{
                             "dimension": "EntidadAgricUrbana.municipio",
                             "operator": "equals",
                             "values": this.props.municipios
@@ -137,8 +138,8 @@ class gg extends Component {
                             "dimension": "EntidadAgricUrbana.provincia",
                             "operator": "equals",
                             "values": this.props.provincias
-                        }
-                    ],
+                        }]
+                    ,
                     "dimensions": [
                         "EntidadAgricUrbana.nombre",
                         "EntidadAgricUrbana.tecnologia",

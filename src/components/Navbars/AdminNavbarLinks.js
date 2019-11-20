@@ -42,11 +42,9 @@ export default function AdminNavbarLinks(props) {
   // const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
 
   useEffect(
-
+    
     () => {
-
       async function asyncrona() {
-
         const provincias = await cubejsApi.load({
           "measures": [],
           "timeDimensions": [],
@@ -59,28 +57,10 @@ export default function AdminNavbarLinks(props) {
         provincias["loadResponse"]["data"].map((prov) =>
           auxp.push(prov["EntidadAgricUrbana.provincia"])
         )
-        await settotalDeProvincias(auxp);
 
-        const municipios = await cubejsApi.load({
-          "measures": [],
-          "timeDimensions": [],
-          "dimensions": [
-            "EntidadAgricUrbana.municipio"
-          ],
-          "filters": [
-            {
-              "dimension": "EntidadAgricUrbana.provincia",
-              "operator": "equals",
-              "values": await props.provincias
-            }
-          ]
-        })
-        var auxm = ["Todos"]
-        municipios["loadResponse"]["data"].map((mun) => {
-          auxm.push(mun["EntidadAgricUrbana.municipio"])
-        }
-        )
-        await settotalDeMunicipios(auxm);
+        settotalDeProvincias(auxp);
+        //await settotalDeProvincias(auxp);
+
 
         const auxmSoloMunicipios = await cubejsApi.load({
           "measures": [],
@@ -95,8 +75,31 @@ export default function AdminNavbarLinks(props) {
           auxmSoloMun.push(mun["EntidadAgricUrbana.municipio"])
         }
         )
-        await settotalDeMunicipiosSoloMun(auxmSoloMun);
+        settotalDeMunicipiosSoloMun(auxmSoloMun);
+        //await settotalDeMunicipiosSoloMun(auxmSoloMun);
 
+        const municipios = await cubejsApi.load({
+          "measures": [],
+          "timeDimensions": [],
+          "dimensions": [
+            "EntidadAgricUrbana.municipio"
+          ],
+          "filters": [
+            {
+              "dimension": "EntidadAgricUrbana.provincia",
+              "operator": "equals",
+              "values": props.provincias
+              //"values": await props.provincias
+            }
+          ]
+        })
+        var auxm = ["Todos"]
+        municipios["loadResponse"]["data"].map((mun) => {
+          auxm.push(mun["EntidadAgricUrbana.municipio"])
+        }
+        )
+        settotalDeMunicipios(auxm);
+        //await settotalDeMunicipios(auxm);
       }
       asyncrona();
     },
@@ -104,23 +107,29 @@ export default function AdminNavbarLinks(props) {
   )
 
   const handleChangeP = async event => {
+    props.setLoading(true)
     props.setReiniciarPuntos(false)
-    await props.setProvincias([event.target.value])
-    await props.setMunicipios(totalDeMunicipiosSoloMun)
+    props.setProvincias([event.target.value])
+    props.setMunicipios(totalDeMunicipiosSoloMun)
+    // await props.setProvincias([event.target.value])
+    // await props.setMunicipios(totalDeMunicipiosSoloMun)
     props.setItemSelecDropDownMun("Todos")
 
     var provinciamunicipoio = []
     provinciamunicipoio.push(event.target.value + ".")
     provinciamunicipoio.push("Todos")
-    await props.setLugarfiltrado(provinciamunicipoio)
+    props.setLugarfiltrado(provinciamunicipoio)
+    //await props.setLugarfiltrado(provinciamunicipoio)
   };
 
   const handleChangeM = async event => {
+    props.setLoading(true)
     props.setReiniciarPuntos(false)
     if (event.target.value === "Todos") {
       props.setItemSelecDropDownMun("Todos")
 
-      await props.setMunicipios(totalDeMunicipiosSoloMun)
+      //await props.setMunicipios(totalDeMunicipiosSoloMun)
+      props.setMunicipios(totalDeMunicipiosSoloMun)
 
       var provinciamunicipoio = []
       provinciamunicipoio.push(props.provincias + ".")
@@ -130,8 +139,10 @@ export default function AdminNavbarLinks(props) {
       props.setItemSelecDropDownMun(event.target.value)
 
       var aux = [];
-      await aux.push(event.target["value"])
-      await props.setMunicipios(aux)
+      // await aux.push(event.target["value"])
+      // await props.setMunicipios(aux)
+      aux.push(event.target["value"])
+      props.setMunicipios(aux)
 
       var provinciamunicipoio = []
       provinciamunicipoio.push(props.provincias + ".")
@@ -142,6 +153,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   const handleChange = () => {
+    props.setLoading(true)
     if (props.check) {
       props.setCheck(false)
       var provinciaYmunicipio = [];

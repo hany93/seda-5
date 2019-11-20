@@ -113,7 +113,7 @@ class gg extends Component {
                 "Organoponico",
                 "Parcela",
                 "Finca",
-                "Centro de abono orgánico",
+                "Ctro Materia Orgánica",
                 "Semiprotegido"
               ]
             }

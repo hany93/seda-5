@@ -7,7 +7,12 @@ import CardBody from "components/Card/CardBody.js";
 import avatar from "assets/img/reactlogo.png";
 import { Link } from "react-router-dom";
 
-export default function AcercaDe() {
+export default function AcercaDe(props) {  
+  React.useEffect(() => {
+    props.setLoading(true)
+  },
+    []
+  );
   return (
     <div>
       <Card profile>

@@ -61,12 +61,6 @@ export default function Dashboard(props) {
   const [huerto, setHuerto] = React.useState([]);
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
-  const [loading0, setLoading0] = React.useState(true);
-  const [loading1, setLoading1] = React.useState(true);
-  const [loading2, setLoading2] = React.useState(true);
-  const [loading3, setLoading3] = React.useState(true);
-  const [loading4, setLoading4] = React.useState(true);
-  const [loading5, setLoading5] = React.useState(true);
   const [selectedKeys, setSelectedKeys] = React.useState([]);
 
 
@@ -91,13 +85,13 @@ export default function Dashboard(props) {
                 "Parcela",
                 "Finca",
                 "Semiprotegido",
-                "Centro de abono orgánico",
+                "Ctro Materia Orgánica",
               ]
             },
             {
               "dimension": "EntidadAgricUrbana.provincia",
               "operator": "equals",
-              "values": await props.provincias
+              "values": props.provincias//await props.provincias
             },
             {
               "dimension": "EntidadAgricUrbana.municipio",
@@ -124,37 +118,37 @@ export default function Dashboard(props) {
             case 'Huerto':
               setHuerto(item['EntidadAgricUrbana.count']);
               aa.push('Huerto');
-              setLoading3(false);
+              props.setLoading(false);
               break;
 
             case 'Parcela':
               setParcela(item['EntidadAgricUrbana.count']);
               aa.push('Parcela');
-              setLoading4(false);
+              props.setLoading(false);
               break;
 
             case 'Organoponico':
               setOrganoponico(item['EntidadAgricUrbana.count']);
               aa.push('Organoponico');
-              setLoading0(false);
+              props.setLoading(false);
               break;
 
             case 'Finca':
               setFinca(item['EntidadAgricUrbana.count']);
               aa.push('Finca');
-              setLoading5(false);
+              props.setLoading(false);
               break;
 
             case 'Semiprotegido':
               setSemiprotegido(item['EntidadAgricUrbana.count']);
               aa.push('Semiprotegido');
-              setLoading1(false);
+              props.setLoading(false);
               break;
 
             default:
               setcentrodeMateriaOrganica(item['EntidadAgricUrbana.count']);
-              aa.push('Centro de abono orgánico');
-              setLoading2(false);
+              aa.push('Ctro Materia Orgánica');
+              props.setLoading(false);
               break;
           }
         });
@@ -173,7 +167,7 @@ export default function Dashboard(props) {
         if (!aa.includes('Semiprotegido')) {
           setSemiprotegido(0);
         }
-        if (!aa.includes('Centro de abono orgánico')) {
+        if (!aa.includes('Ctro Materia Orgánica')) {
           setcentrodeMateriaOrganica(0);
         }
         // const semiprotegidos = await cubejsApi.load({
@@ -217,7 +211,7 @@ export default function Dashboard(props) {
         //       "dimension": "EntidadAgricUrbana.tecnologia",
         //       "operator": "equals",
         //       "values": [
-        //         "Centro de abono orgánico"
+        //         "Ctro Materia Orgánica"
         //       ]
         //     },
         //     {
@@ -262,7 +256,7 @@ export default function Dashboard(props) {
         // })
         // var auxh = huertos["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         // await setHuerto(auxh);
-        // setLoading1(false);
+        // setLoading(false);
 
         // const parcelas = await cubejsApi.load({
         //   "measures": ["EntidadAgricUrbana.count"],
@@ -290,7 +284,7 @@ export default function Dashboard(props) {
         // })
         // var auxp = parcelas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         // await setParcela(auxp);
-        // setLoading2(false);
+        // setLoading(false);
 
         // const fincas = await cubejsApi.load({
         //   "measures": ["EntidadAgricUrbana.count"],
@@ -318,7 +312,7 @@ export default function Dashboard(props) {
         // })
         // var auxf = fincas["loadResponse"]["data"][0]["EntidadAgricUrbana.count"]
         // await setFinca(auxf);
-        // setLoading3(false);
+        // setLoading(false);
       }
       asyncrona();
     },
@@ -365,7 +359,7 @@ export default function Dashboard(props) {
                 <img src={Siembra} alt="Organopónicos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading0 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{organoponico}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -381,7 +375,7 @@ export default function Dashboard(props) {
                 <img src={Invernadero} alt="Semiprotegidos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading1 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{semiprotegido}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{semiprotegido}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -397,7 +391,7 @@ export default function Dashboard(props) {
                 <img src={Materia} alt="Centro de Materia Orgánica" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading2 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{centrodeMateriaOrganica}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{centrodeMateriaOrganica}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -413,7 +407,7 @@ export default function Dashboard(props) {
                 <img src={Verduras} alt="Huertos" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading3 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{huerto}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -429,7 +423,7 @@ export default function Dashboard(props) {
                 <img src={Aspersor} alt="Parcelas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading4 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{parcela}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -445,7 +439,7 @@ export default function Dashboard(props) {
                 <img src={Campo} alt="Fincas" />
               </CardIcon>
               <p className={classes.cardCategory}>Cantidad Total</p>
-              {loading5 ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
+              {props.loading ? <Spin size='small' /> : <h3 className={classes.cardTitle}>{finca}</h3>}
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

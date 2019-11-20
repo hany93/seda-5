@@ -138,6 +138,7 @@ export default function Header(props) {
             setItemSelecDropDownMun={props.setItemSelecDropDownMun}
             reiniciarPuntos={props.reiniciarPuntos}
             setReiniciarPuntos={props.setReiniciarPuntos}
+            setLoading={props.setLoading}
           />
         </Hidden>
         <Hidden mdUp implementation="css">

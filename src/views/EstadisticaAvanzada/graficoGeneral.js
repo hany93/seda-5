@@ -44,8 +44,10 @@ class gg extends Component {
   }
 
   async componentWillReceiveProps(nextprops) {
-    await this.setState({ camposMeasures: nextprops.camposMeasures })
-    await this.setState({ camposDimensions: nextprops.camposDimensions })
+    this.setState({ camposMeasures: nextprops.camposMeasures })
+    this.setState({ camposDimensions: nextprops.camposDimensions })
+    // await this.setState({ camposMeasures: nextprops.camposMeasures })
+    // await this.setState({ camposDimensions: nextprops.camposDimensions })
 
     switch (nextprops.tipoGrafic) {
       case "bar":

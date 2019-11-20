@@ -202,6 +202,7 @@ export default function Admin({ ...rest }) {
   const [open, setOpen] = React.useState(true);
   const [lugarFiltrado, setLugarfiltrado] = React.useState(["Cuba"]);
   const [check, setCheck] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
 
 
   const [inavilitarProvMun, setInavilitarProvMun] = React.useState(true);
@@ -253,7 +254,6 @@ export default function Admin({ ...rest }) {
   }, [mainPanel]);
 
   React.useEffect(() => {
-
     async function asyncrona() {
 
       const provincias = await cubejsApi.load({
@@ -268,7 +268,8 @@ export default function Admin({ ...rest }) {
       provincias["loadResponse"]["data"].map((prov) =>
         auxp.push(prov["EntidadAgricUrbana.provincia"])
       )
-      await setProvincias(auxp);
+      setProvincias(auxp);
+      //await setProvincias(auxp);
 
       const municipios = await cubejsApi.load({
         "measures": [],
@@ -282,9 +283,9 @@ export default function Admin({ ...rest }) {
       municipios["loadResponse"]["data"].map((mun) =>
         auxm.push(mun["EntidadAgricUrbana.municipio"])
       )
-      await setMunicipios(auxm);
+      setMunicipios(auxm);
+      //await setMunicipios(auxm);
     }
-
     if (rest.match.params.provincia && rest.match.params.municipio) {
       setProvincias([rest.match.params.provincia])
       setMunicipios([rest.match.params.municipio])
@@ -350,6 +351,7 @@ export default function Admin({ ...rest }) {
         setItemSelecDropDownMun={setItemSelecDropDownMun}
         reiniciarPuntos={reiniciarPuntos}
         setReiniciarPuntos={setReiniciarPuntos}
+        setLoading={setLoading}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel} id='cap'>
@@ -375,6 +377,7 @@ export default function Admin({ ...rest }) {
           setItemSelecDropDownMun={setItemSelecDropDownMun}
           reiniciarPuntos={reiniciarPuntos}
           setReiniciarPuntos={setReiniciarPuntos}
+          setLoading={setLoading}
           {...rest}
         />
         <div className={classes.content}>
@@ -385,7 +388,7 @@ export default function Admin({ ...rest }) {
                   return (
                     <Route
                       path={prop.layout + prop.path}
-                      render={() => <prop.component provincias={provincias} municipios={municipios} color1={color === "blue" ? 'info' : color === "purple" ? 'primary' : color === "green" ? 'success' : color === "orange" ? 'warning' : 'danger'} />}
+                      render={() => <prop.component setLoading={setLoading} provincias={provincias} municipios={municipios} color1={color === "blue" ? 'info' : color === "purple" ? 'primary' : color === "green" ? 'success' : color === "orange" ? 'warning' : 'danger'} />}
                       key={key}
                     />
                   );
@@ -400,6 +403,8 @@ export default function Admin({ ...rest }) {
                 lugarfiltrado={lugarFiltrado}
                 reiniciarPuntos={reiniciarPuntos}
                 setReiniciarPuntos={setReiniciarPuntos}
+                loading={loading}
+                setLoading={setLoading}
               />}
               />
               <Redirect from="/admin" to="/admin/dashboard" />
