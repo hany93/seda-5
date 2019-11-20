@@ -42,7 +42,7 @@ export default function AdminNavbarLinks(props) {
   // const [itemSelecDropDownMun, setItemSelecDropDownMun] = React.useState("Todos");
 
   useEffect(
-    
+
     () => {
       async function asyncrona() {
         const provincias = await cubejsApi.load({
@@ -108,6 +108,9 @@ export default function AdminNavbarLinks(props) {
 
   const handleChangeP = async event => {
     props.setLoading(true)
+    props.setCheck(false)
+    props.setInavilitarProvMun(false)
+    /////aki lo de provincia
     props.setReiniciarPuntos(false)
     props.setProvincias([event.target.value])
     props.setMunicipios(totalDeMunicipiosSoloMun)
@@ -120,6 +123,13 @@ export default function AdminNavbarLinks(props) {
     provinciamunicipoio.push("Todos")
     props.setLugarfiltrado(provinciamunicipoio)
     //await props.setLugarfiltrado(provinciamunicipoio)
+  };
+
+  const handleClickInfo = () => {
+    const a = {
+      content: <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 20, opacity: 0.9, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> Por favor seleccione la provincia.</span>
+    }
+      if(props.inavilitarProvMun) message.open(a);
   };
 
   const handleChangeM = async event => {
@@ -174,12 +184,8 @@ export default function AdminNavbarLinks(props) {
         provinciaYmunicipio.push("Cuba")
       }
       props.setLugarfiltrado(provinciaYmunicipio)
-      props.setInavilitarProvMun(false)
-      const a = {
-        content: <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 20, opacity: 0.9, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> Seleccione provincia y municipio para observar sus estadísticas.</span>
-      }
-      message.open(a);
     } else {
+      props.setInavilitarProvMun(true)
       props.setReiniciarPuntos(false)
       props.setCheck(true)
       props.setProvinciaAntesDePais(props.provincias)
@@ -187,7 +193,6 @@ export default function AdminNavbarLinks(props) {
       props.setProvincias(totalDeProvincias)
       props.setMunicipios(totalDeMunicipiosSoloMun)
       props.setLugarfiltrado("Cuba")
-      props.setInavilitarProvMun(true)
     }
   };
 
@@ -198,7 +203,7 @@ export default function AdminNavbarLinks(props) {
           <img alt='País' title='País' src={props.check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : !props.colorItem ? Cuba1 : Cuba0} />&nbsp; {!props.colorItem ? '' : 'País'}
         </IconButton>
         <Select
-          disabled={props.inavilitarProvMun}
+          //disabled={props.inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'
           value={props.provincias}
@@ -219,6 +224,7 @@ export default function AdminNavbarLinks(props) {
           ))}
         </Select>
         <Select
+          onClick={handleClickInfo}
           disabled={props.inavilitarProvMun}
           className={classes.select_link}
           IconComponent='span'

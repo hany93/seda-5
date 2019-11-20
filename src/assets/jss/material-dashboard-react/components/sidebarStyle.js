@@ -68,7 +68,6 @@ const sidebarStyle = theme => ({
       content: '""',
       position: "absolute",
       bottom: "0",
-
       height: "1px",
       right: "15px",
       width: "calc(100% - 30px)",

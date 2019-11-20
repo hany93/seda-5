@@ -199,7 +199,6 @@ export default function Admin({ ...rest }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [municipios, setMunicipios] = React.useState(['']);
   const [provincias, setProvincias] = React.useState(['']);
-  const [open, setOpen] = React.useState(true);
   const [lugarFiltrado, setLugarfiltrado] = React.useState(["Cuba"]);
   const [check, setCheck] = React.useState(true);
   const [loading, setLoading] = React.useState(true);
@@ -298,13 +297,9 @@ export default function Admin({ ...rest }) {
     []
 
   );
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <div className={classes.wrapper}>
-      <Snackbar
+      {/* <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={open}
         onClose={handleClose}
@@ -324,7 +319,7 @@ export default function Admin({ ...rest }) {
             <CloseIcon />
           </IconButton>
         ]}
-      />
+      /> */}
       <Sidebar
         routes={routes}
         logoText={"\u00a0\u00a0\u00a0SedA"}
