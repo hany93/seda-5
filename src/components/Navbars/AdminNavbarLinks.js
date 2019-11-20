@@ -128,7 +128,7 @@ export default function AdminNavbarLinks(props) {
         )
         //console.log(auxprueba)
         auxp = auxp.filter(Boolean);
-        console.log(auxp)
+        //console.log(auxp)
         settotalDeProvincias(auxp);
         //await settotalDeProvincias(auxp);
 
@@ -200,7 +200,7 @@ export default function AdminNavbarLinks(props) {
     const a = {
       content: <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><InfoIcon style={{ fontSize: 20, opacity: 0.9, marginRight: '10px', color: props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' }} /> Por favor seleccione la provincia.</span>
     }
-      if(props.inavilitarProvMun) message.open(a);
+    if (props.inavilitarProvMun) message.open(a);
   };
 
   const handleChangeM = async event => {
@@ -239,6 +239,7 @@ export default function AdminNavbarLinks(props) {
       props.setCheck(false)
       var provinciaYmunicipio = [];
       if ((props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length == 1) || (props.provinciaAntesDePais.length == 1 && props.municipioAntesDePais.length > 1)) {
+        props.setInavilitarProvMun(false)
         props.setReiniciarPuntos(false)
         props.setProvincias(props.provinciaAntesDePais)
         props.setMunicipios(props.municipioAntesDePais)
@@ -270,7 +271,7 @@ export default function AdminNavbarLinks(props) {
   return (
     <div>
       <div className={classes.manager}>
-        <IconButton size='small' aria-label="add an alarm" onClick={handleChange} style={{ marginLeft: "40px", marginRight: "40px", marginBottom: "20px", marginTop: "10px", color: props.check ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }} >
+        <IconButton size='small' aria-label="add an alarm" onClick={handleChange} style={{ fontSize: '16px', marginLeft: "30px", marginRight: "40px", marginBottom: "20px", marginTop: "10px", color: props.check ? props.color == 'purple' ? '#AB47BC' : props.color === "blue" ? '#26C6DA' : props.color === "green" ? '#66BB6A' : props.color === "orange" ? '#FFA726' : '#EF5350' : '#fff' }} >
           <img alt='País' title='País' src={props.check ? props.color == 'purple' ? Cuba2 : props.color === "blue" ? Cuba3 : props.color === "green" ? Cuba4 : props.color === "orange" ? Cuba6 : Cuba5 : !props.colorItem ? Cuba1 : Cuba0} />&nbsp; {!props.colorItem ? '' : 'País'}
         </IconButton>
         <Select
@@ -280,13 +281,13 @@ export default function AdminNavbarLinks(props) {
           value={props.provincias}
           onChange={handleChangeP}
           displayEmpty
-          input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: !props.colorItem ? "black" : "white", marginLeft: "40px", marginBottom: "20px", marginTop: "10px" }} />}
+          input={<Input id="select-multiple" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: !props.colorItem ? "black" : "white", marginLeft: "30px", marginBottom: "20px", marginTop: "10px" }} />}
           renderValue={() => {
-            return <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> Provincia</span>;
+            return <span style={{ fontSize: '16px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 24, opacity: 0.9, marginRight: '5px' }} /> Provincia</span>;
           }}
         >
           <MenuItem value='' disabled={true} className={classes.dropdownItem} >
-            <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> Provincia</span>
+            <span style={{ fontSize: '16px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 24, opacity: 0.9, marginRight: '5px' }} /> Provincia</span>
           </MenuItem>
           {totalDeProvincias.map(name => (
             <MenuItem key={name} value={name} className={classes.dropdownItem}>
@@ -302,13 +303,13 @@ export default function AdminNavbarLinks(props) {
           value={props.itemSelecDropDownMun}
           onChange={handleChangeM}
           displayEmpty
-          input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: !props.colorItem ? "black" : "white", marginLeft: "40px" }} />}
+          input={<Input id="select-multiple1" style={{ lineHeight: '30px', fontWeight: 300, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', fontSize: '16px', color: !props.colorItem ? "black" : "white", marginLeft: "30px", marginRight: !props.colorItem ? "20px" : "0px"}} />}
           renderValue={() => {
-            return <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> Municipio</span>;
+            return <span style={{ fontSize: '16px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 24, opacity: 0.9, marginRight: '5px' }} /> Municipio</span>;
           }}
         >
           <MenuItem value='' disabled={true} className={classes.dropdownItem}>
-            <span style={{ fontSize: '20px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 20, opacity: 0.9, marginRight: '5px' }} /> Municipio</span>
+            <span style={{ fontSize: '16px', display: 'flex', alignItems: 'center' }}><LocationOnIcon className={classes.icons} style={{ fontSize: 24, opacity: 0.9, marginRight: '5px' }} /> Municipio</span>
           </MenuItem>
           {totalDeMunicipios.map(name => (
             <MenuItem key={name} value={name} className={classes.dropdownItem}>{name}</MenuItem>

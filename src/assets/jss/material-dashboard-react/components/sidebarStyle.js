@@ -155,8 +155,11 @@ const sidebarStyle = theme => ({
     borderRadius: "3px",
     position: "relative",
     display: "block",
-    padding: "10px 15px",
+    padding: "10px 0px 10px 5px",
     backgroundColor: "transparent",
+    "&:hover": {
+      backgroundColor: 'rgb(200, 200, 200, 0.2)'
+    },
     ...defaultFont
   },
   itemIcon: {
@@ -165,7 +168,8 @@ const sidebarStyle = theme => ({
     fontSize: "24px",
     lineHeight: "30px",
     float: "left",
-    marginRight: "15px",
+    marginRight: "5px",
+    marginLeft: "10px",
     textAlign: "center",
     verticalAlign: "middle",
     color: "rgba(" + hexToRgb(whiteColor) + ", 0.8)"
@@ -179,7 +183,7 @@ const sidebarStyle = theme => ({
     ...defaultFont,
     margin: "0",
     lineHeight: "30px",
-    fontSize: "14px",
+    fontSize: "16px",
     color: whiteColor
   },
   itemTextRTL: {

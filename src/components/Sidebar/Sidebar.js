@@ -4,12 +4,13 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { NavLink, Link } from "react-router-dom";
 // @material-ui/core components
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+//import ListSubheader from '@material-ui/core/ListSubheader';
 import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
@@ -21,7 +22,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
-import { sync } from "read-file";
+//import { sync } from "read-file";
 
 const styles1 = {
   borderStyle: 'solid',
@@ -93,7 +94,15 @@ export default function Sidebar(props) {
   //   </List>
   // );
   var links = (
-    <List className={classes.list}>
+    <List
+      className={classes.list}
+      // aria-labelledby="nested-list-subheader"
+      // subheader={
+      //   <ListSubheader component="div" id="nested-list-subheader" className={classes.itemText}>
+      //     Est. Ag. Urbana y suburbana
+      // </ListSubheader>
+      // }
+    >
       {routes.map((prop, key) => {
         var listItemClasses;
         listItemClasses = classNames({
@@ -109,7 +118,10 @@ export default function Sidebar(props) {
             activeClassName="active"
             key={key}
           >
-            <ListItem button className={classes.itemLink + listItemClasses}>
+            <ListItem
+              button
+              className={classes.itemLink + listItemClasses}
+            >
               {typeof prop.icon === "string" ? (
                 <Icon
                   className={classNames(classes.itemIcon, whiteFontClasses, {
