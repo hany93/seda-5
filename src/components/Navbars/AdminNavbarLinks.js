@@ -44,6 +44,7 @@ export default function AdminNavbarLinks(props) {
   useEffect(
 
     () => {
+
       async function asyncrona() {
         const provincias = await cubejsApi.load({
           "measures": [],
@@ -54,10 +55,80 @@ export default function AdminNavbarLinks(props) {
           "filters": []
         })
         var auxp = []
-        provincias["loadResponse"]["data"].map((prov) =>
-          auxp.push(prov["EntidadAgricUrbana.provincia"])
-        )
+        provincias["loadResponse"]["data"].map((prov) => {
+          //auxprueba.push(prov["EntidadAgricUrbana.provincia"])
 
+          switch (prov["EntidadAgricUrbana.provincia"]) {
+
+            case "Pinar del Río":
+              auxp[0] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Artemisa":
+              auxp[1] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "La Habana":
+              auxp[2] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Mayabeque":
+              auxp[3] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Matanzas":
+              auxp[4] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Cienfuegos":
+              auxp[5] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Villa Clara":
+              auxp[6] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Sancti Spíritus":
+              auxp[7] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Ciego de Ávila":
+              auxp[8] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Camagüey":
+              auxp[9] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Las Tunas":
+              auxp[10] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Holguín":
+              auxp[11] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Granma":
+              auxp[12] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Santiago de Cuba":
+              auxp[13] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            case "Guantánamo":
+              auxp[14] = prov["EntidadAgricUrbana.provincia"]
+              break;
+
+            default:
+              break;
+          }
+
+        }
+        )
+        //console.log(auxprueba)
+        auxp = auxp.filter(Boolean);
+        console.log(auxp)
         settotalDeProvincias(auxp);
         //await settotalDeProvincias(auxp);
 
