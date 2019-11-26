@@ -76,7 +76,7 @@ class gg extends Component {
             display: true
           },
           ticks: {
-            stepSize: 20,
+            //stepSize: 20,
             max: 120,
             fontColor: "#FFF", // Cambiar color de labels
             beginAtZero: true

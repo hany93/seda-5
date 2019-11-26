@@ -96,12 +96,12 @@ export default function Sidebar(props) {
   var links = (
     <List
       className={classes.list}
-      // aria-labelledby="nested-list-subheader"
-      // subheader={
-      //   <ListSubheader component="div" id="nested-list-subheader" className={classes.itemText}>
-      //     Est. Ag. Urbana y suburbana
-      // </ListSubheader>
-      // }
+    // aria-labelledby="nested-list-subheader"
+    // subheader={
+    //   <ListSubheader component="div" id="nested-list-subheader" className={classes.itemText}>
+    //     Est. Ag. Urbana y suburbana
+    // </ListSubheader>
+    // }
     >
       {routes.map((prop, key) => {
         var listItemClasses;
@@ -169,9 +169,10 @@ export default function Sidebar(props) {
     setIcon(true);
     domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: styles1 })
       .then((blob) => {
-        saveAs(blob, 'ScreenShot.jpg')
+        saveAs(blob, 'Seda.jpg')
         setIcon(false);
-        var w = window.open(URL.createObjectURL(blob), '_blank');
+        var w = window.open(new URL(URL.createObjectURL(blob)), '_blank');
+        //console.log(blob)
         w.onload = function () {
           w.document.title = 'Estadística Agricultura Urbana y Suburbana';
         };

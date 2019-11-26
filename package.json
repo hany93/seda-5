@@ -19,8 +19,6 @@
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
     "history": "4.9.0",
-    "html-to-image": "^0.1.1",
-    "html2canvas": "^1.0.0-rc.5",
     "ol": "^6.0.1",
     "perfect-scrollbar": "1.4.0",
     "prop-types": "15.7.2",
