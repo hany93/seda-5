@@ -32,6 +32,10 @@ function dame_color_aleatorio() {
 class gg extends Component {
 
   pieRender = ({ resultSet }) => {
+    // var total = resultSet['loadResponse']['data'].map((item) => {
+    //   return parseFloat(parseFloat(item['EntidadAgricUrbana.areaEnUsoPorciento']).toFixed(2))
+    // }).reduce(function (a, b) { return a + b });
+
     var cantColores = resultSet['loadResponse']['data'];
     var COLORS_SERIES = [];
     cantColores.map(cc => COLORS_SERIES.push(dame_color_aleatorio()))
@@ -48,13 +52,18 @@ class gg extends Component {
       ))
     };
     const options = {
+      // title: {
+      //   display: true,
+      //   text: 'De un Total de: ' + total + ' %'
+      // },
       plugins: {
         datalabels: {
           color: '#FFF',
           anchor: 'center',
           align: 'center',
           formatter: function (value, context) {
-            return value + " %";
+            //console.log(context)
+            return (value !== 0) ? value + " %" : '';
           }
         }
       },
@@ -70,13 +79,14 @@ class gg extends Component {
             var data = chart.data;
             //console.log(data)
             if (data.labels.length && data.datasets.length) {
+              //console.log(data.datasets[0].data[0])
               return data.labels.map(function (label, i) {
                 //console.log(i+"..."+label)
                 return {
-                  text: label,
+                  text: (data.datasets[0].data[i] !== 0) ? label : label + ' (0%)',
                   fillStyle: '#fff',
                   strokeStyle: data.datasets[0].backgroundColor[i],
-                  lineWidth: 3,
+                  lineWidth: 5,
                   // Extra data used for toggling the correct item
                   index: i
                 };

@@ -4,6 +4,7 @@ import { QueryRenderer } from '@cubejs-client/react';
 import { Table, Spin, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 import Pdf from 'assets/img/pdf.png'
+import Pdf_Disabled from 'assets/img/pdf_disabled.png'
 
 import 'antd/dist/antd.css';
 import './campo.css'
@@ -173,7 +174,7 @@ class gg extends Component {
                             key: 'x',
                             render: (text, record) => (
                                 <span>
-                                    <a target={(record['EntidadAgricUrbana.expediente'].toString().length > 0) ? '_blank' : ''} href={(record['EntidadAgricUrbana.expediente'].toString().length > 0) ? record['EntidadAgricUrbana.expediente'] : '#'}><img src={Pdf} /></a>
+                                    {(record['EntidadAgricUrbana.expediente'] !== null) && (record['EntidadAgricUrbana.expediente'].toString().length > 0) ? <a target='_blank' href={record['EntidadAgricUrbana.expediente']}><img src={Pdf} /></a> : <img src={Pdf_Disabled} />}
                                 </span>
                             ),
                         })
