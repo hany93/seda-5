@@ -22,6 +22,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
+import { async } from "q";
 //import { sync } from "read-file";
 
 const styles1 = {
@@ -165,17 +166,28 @@ export default function Sidebar(props) {
       </Link>
     </div>
   );
-  const clicko = async () => {
+  const clicko = () => {
     setIcon(true);
     domtoimage.toBlob(document.getElementById('cap'), { quality: 1.0, bgcolor: '#fff', height: document.getElementById('cap').scrollHeight, width: document.getElementById('cap').scrollWidth, style: styles1 })
       .then((blob) => {
-        saveAs(blob, 'Seda.jpg')
+        saveAs(blob, 'Seda.png')
         setIcon(false);
-        var w = window.open(new URL(URL.createObjectURL(blob)), '_blank');
-        //console.log(blob)
-        w.onload = function () {
-          w.document.title = 'Estadística Agricultura Urbana y Suburbana';
-        };
+        var w = window.open(new URL(URL.createObjectURL(blob)))
+        function check() {
+          if (w.document !== null) { // if loaded
+            //console.log('fdxgdg')
+            w.onload = function () {
+              w.document.title = 'Est. Agricultura Urbana y Suburbana';
+            };
+            return;
+          } else { // if not loaded yet
+            setTimeout(check, 1); // check in another 10ms
+          }
+        }
+        check();
+        // w.onload = function () {
+        //   w.document.title = 'Est. Agricultura Urbana y Suburbana';
+        // };
       });
   }
   return (

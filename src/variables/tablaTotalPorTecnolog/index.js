@@ -3,6 +3,7 @@ import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Table, Spin, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
+import Pdf from 'assets/img/pdf.png'
 
 import 'antd/dist/antd.css';
 import './campo.css'
@@ -148,15 +149,13 @@ class gg extends Component {
                         "EntidadAgricUrbana.entidad",
                         "EntidadAgricUrbana.productor",
                         "EntidadAgricUrbana.longitud",
-                        "EntidadAgricUrbana.latitud"
+                        "EntidadAgricUrbana.latitud",
+                        "EntidadAgricUrbana.expediente"
                     ]
                 }}
                 cubejsApi={cubejsApi}
                 render={({ resultSet, measures, availableMeasures, updateMeasures }) => {
-
-
                     if (resultSet) {
-
                         var tablepivotNew = resultSet.tablePivot();
                         tablepivotNew.map((r, index) => {
                             r['key'] = index;
@@ -167,17 +166,25 @@ class gg extends Component {
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.ministerio"]["title"] = "Ministerio"
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.entidad"]["title"] = "Entidad"
                         resultSet["loadResponse"]["annotation"]["dimensions"]["EntidadAgricUrbana.productor"]["title"] = "Productor"
-                        var array = resultSet.tableColumns().map(c => ({ ...c, className: (c.key == 'EntidadAgricUrbana.longitud' || c.key == 'EntidadAgricUrbana.latitud') ? 'campoHidden' : '', dataIndex: c.key, ...this.getColumnSearchProps(c.key) }));
-                        // rowSelection object indicates the need for row selection
+                        var array = resultSet.tableColumns().map(c => ({ ...c, className: (c.key == 'EntidadAgricUrbana.longitud' || c.key == 'EntidadAgricUrbana.latitud' || c.key == 'EntidadAgricUrbana.expediente') ? 'campoHidden' : '', dataIndex: c.key, ...this.getColumnSearchProps(c.key) }));
+                        array.push({
+                            title: 'Expediente',
+                            dataIndex: '',
+                            key: 'x',
+                            render: (text, record) => (
+                                <span>
+                                    <a target={(record['EntidadAgricUrbana.expediente'].toString().length > 0) ? '_blank' : ''} href={(record['EntidadAgricUrbana.expediente'].toString().length > 0) ? record['EntidadAgricUrbana.expediente'] : '#'}><img src={Pdf} /></a>
+                                </span>
+                            ),
+                        })
+                        //console.log(array.length)
+                        // rowSelection object indicates the need for row selection\
                         const rowSelection = {
                             onChange: (selectedRowKeys, selectedRows) => {
                                 this.props.setSelectedKeys(selectedRows);
                                 this.props.setReiniciarPuntos(true);
                             },
                         };
-
-
-
                         return (
                             <Table
                                 className='tableResponsive'

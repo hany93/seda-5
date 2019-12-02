@@ -33,6 +33,7 @@ function dame_color_aleatorio() {
 class gg extends Component {
 
   pieRender = ({ resultSet }) => {
+    console.log(resultSet)
     var cantColores = resultSet['loadResponse']['data'];
     var COLORS_SERIES = [];
     cantColores.map(cc => COLORS_SERIES.push(dame_color_aleatorio()))
@@ -105,7 +106,15 @@ class gg extends Component {
         }
       },
     };
-    return <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />;
+    var a = resultSet['loadResponse']['data'];
+    var sum;
+    a.map((i) => {
+      console.log(i['EntidadAgricUrbana.areaEnUsoPorciento'])
+      let y = i['EntidadAgricUrbana.areaEnUsoPorciento'];
+      sum = sum + y;
+    })
+    console.log(sum)
+    return (sum === 0) ? <p style={{ color: '#000' }}>No existen datos.</p> : <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (

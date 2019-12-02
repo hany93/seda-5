@@ -35,7 +35,7 @@ import TimelineIcon from '@material-ui/icons/Timeline';
 import TableChartIcon from '@material-ui/icons/TableChartOutlined';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import Map1 from 'variables/maps.js';
-import { Spin } from 'antd';
+import { Spin, Modal } from 'antd';
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import CardBody from "components/Card/CardBody.js";
 import LanguageIcon from '@material-ui/icons/Language';
@@ -62,7 +62,6 @@ export default function Dashboard(props) {
   const [parcela, setParcela] = React.useState([]);
   const [finca, setFinca] = React.useState([]);
   const [selectedKeys, setSelectedKeys] = React.useState([]);
-
 
   useEffect(
 
@@ -550,10 +549,10 @@ export default function Dashboard(props) {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={7}>
                   <TablaTotalPorTecnolog provincias={props.provincias} municipios={props.municipios} setSelectedKeys={setSelectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={12} lg={12} xl={6}>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={5}>
                   <Map1 selectedKeys1={selectedKeys} reiniciarPuntos={props.reiniciarPuntos} setReiniciarPuntos={props.setReiniciarPuntos} />
                 </GridItem>
               </GridContainer>
@@ -563,6 +562,20 @@ export default function Dashboard(props) {
       </GridContainer>
       {/* <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
+          <Card >
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <LanguageIcon />
+              </CardIcon>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+          </Card>
           <CustomTabs
             headerColor="primary"
             tabs={[
@@ -581,9 +594,9 @@ export default function Dashboard(props) {
                 )
               }
             ]}
-          />
+          /> 
         </GridItem>
-      </GridContainer> */}
-    </div>
+      </GridContainer > */}
+    </div >
   );
 }
