@@ -33,6 +33,7 @@ function dame_color_aleatorio() {
 class gg extends Component {
 
   pieRender = ({ resultSet }) => {
+    //console.log(resultSet)
     var cantColores = resultSet['loadResponse']['data'];
     var COLORS_SERIES = [];
     cantColores.map(cc => COLORS_SERIES.push(dame_color_aleatorio()))
@@ -55,7 +56,7 @@ class gg extends Component {
           anchor: 'center',
           align: 'center',
           formatter: function (value, context) {
-            return value + " %";
+            return (value !== 0) ? value + " %" : '';
           }
         }
       },
@@ -105,7 +106,15 @@ class gg extends Component {
         }
       },
     };
-    return <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />;
+    var a = resultSet['loadResponse']['data'];
+    var sum = 0;
+    a.map((i) => {
+      //console.log(i['EntidadAgricUrbana.areaEnUsoPorciento'])
+      let y = i['EntidadAgricUrbana.areaEnUsoPorciento'];
+      sum = sum + y;
+    })
+    //console.log(sum)
+    return (sum === 0) ? <p style={{ color: '#ec407a', fontWeight: 10, fontSize: 20 }}>En la provincia o municipio seleccionado el área en uso no está definida.</p> : <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (

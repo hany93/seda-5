@@ -76,7 +76,7 @@ class gg extends Component {
             display: true
           },
           ticks: {
-            stepSize: 20,
+            //stepSize: 20,
             max: 120,
             fontColor: "#FFF", // Cambiar color de labels
             beginAtZero: true
@@ -84,7 +84,15 @@ class gg extends Component {
         }]
       }
     };
-    return <Bar data={data} options={options} plugins={[ChartDataLabels]} />;
+    var a = resultSet['loadResponse']['data'];
+    var sum = 0;
+    a.map((i) => {
+      //console.log(i['EntidadAgricUrbana.areaEnUsoPorciento'])
+      let y = i['EntidadAgricUrbana.areaEnUsoPorciento'];
+      sum = sum + y;
+    })
+    //console.log(sum)
+    return (sum === 0) ? <p style={{ color: '#FFFF', fontWeight: 10, fontSize: 20 }}>En la provincia o municipio seleccionado el área en uso no está definida.</p> : <Bar data={data} options={options} plugins={[ChartDataLabels]} />;
   };
 
   renderChart = (Component) => ({ resultSet, error }) => (

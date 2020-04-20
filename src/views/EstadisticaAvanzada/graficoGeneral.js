@@ -84,7 +84,7 @@ class gg extends Component {
         num += 0;
         aux += 0;
       }
-      return parseInt(num) + parseInt(aux) + 50;
+      return parseInt(num) + (2 * parseInt(aux));
     } else {
       var value1 = Math.trunc(value);
       var numLenght = value1.toString().length;
@@ -94,7 +94,7 @@ class gg extends Component {
         num += 0;
         aux += 0;
       }
-      return parseInt(num) + parseInt(aux) + 50;
+      return parseInt(num) + (2 * parseInt(aux));
     }
   }
 
@@ -153,7 +153,7 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: (a > 0 && a < 1000) ? 150 : 500,
+            //stepSize: (a > 0 && a < 1000) ? 150 : 500,
             max: a,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
@@ -219,7 +219,7 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: (b > 0 && b < 1000) ? 150 : 500,
+            //stepSize: (b > 0 && b < 1000) ? 150 : 500,
             max: b,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true
@@ -285,7 +285,7 @@ class gg extends Component {
             fontColor: "#000"
           },
           ticks: {
-            stepSize: (c > 0 && c < 1000) ? 150 : 500,
+            //stepSize: (c > 0 && c < 1000) ? 150 : 500,
             max: c,
             fontColor: "#000", // Cambiar color de labels
             beginAtZero: true

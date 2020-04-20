@@ -24,7 +24,7 @@ class gg extends Component {
                 num += 0;
                 aux += 0;
             }
-            return parseInt(num) + parseInt(aux) + 50;
+            return parseInt(num) + (2 * parseInt(aux));
         } else {
             var value1 = Math.trunc(value);
             var numLenght = value1.toString().length;
@@ -34,7 +34,7 @@ class gg extends Component {
                 num += 0;
                 aux += 0;
             }
-            return parseInt(num) + parseInt(aux) + 50;
+            return parseInt(num) + (2 * parseInt(aux));
         }
     }
     lineRender = ({ resultSet }) => {
@@ -99,7 +99,7 @@ class gg extends Component {
                         display: true
                     },
                     ticks: {
-                        stepSize: (this.maxGrafico(Math.max(...data.datasets[0].data)) > 0 && this.maxGrafico(Math.max(...data.datasets[0].data)) < 1000) ? 150 : 500,
+                        //stepSize: (this.maxGrafico(Math.max(...data.datasets[0].data)) > 0 && this.maxGrafico(Math.max(...data.datasets[0].data)) < 1000) ? 150 : 500,
                         max: this.maxGrafico(Math.max(...data.datasets[0].data)),
                         fontColor: "#FFF", // Cambiar color de labels
                         beginAtZero: true
