@@ -105,6 +105,7 @@ class Maps1 extends React.Component {
                     source: vectorsource
                 });
                 mapa.addLayer(vectorLayer);
+                console.log(arregloDePuntos)
             }
         }
     }
